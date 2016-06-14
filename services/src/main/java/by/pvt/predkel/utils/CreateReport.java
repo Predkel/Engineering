@@ -1,0 +1,45 @@
+package by.pvt.predkel.utils;
+
+import by.pvt.predkel.entities.Building;
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+
+import java.util.List;
+
+/**
+ * Класс в котором добавляем в список объектов для отчета таблицы и графики
+ */
+public class CreateReport {
+    private Building build;
+    private WordprocessingMLPackage wordMLPackage;
+    private MyChart chart;
+
+    public MyChart getChart() {
+        return chart;
+    }
+
+    public WordprocessingMLPackage getWordMLPackage() {
+        return wordMLPackage;
+    }
+
+    public CreateReport(Building building) {
+        build = building;
+    }
+
+    public void create(String filepath) throws Exception {
+        wordMLPackage = WordprocessingMLPackage.createPackage();
+
+        TableWithMergedCells tables = new TableWithMergedCells();
+        List<Object> t = tables.createTables(build);
+        for (Object temp : t) {
+            wordMLPackage.getMainDocumentPart().addObject(temp);
+        }
+        chart = new MyChart(build);
+        chart.outputChart(wordMLPackage, filepath);
+
+       /* List<Object>ch=chart.imageAdd.getCharts();
+        for (Object temp:ch){
+            wordMLPackage.getMainDocumentPart().addObject(ch);
+        }*/
+        wordMLPackage.save(new java.io.File(filepath + Transliterator.transliterate(build.getNameOfBuilding()) + ".docx"));
+    }
+}
