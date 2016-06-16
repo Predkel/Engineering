@@ -1,4 +1,4 @@
-package by.pvt.predkel.functionalCommand;
+package by.pvt.predkel.navigateCommand;
 
 import by.pvt.predkel.command.AbstractCommand;
 import by.pvt.predkel.parameters.Path;

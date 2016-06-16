@@ -13,8 +13,10 @@ public enum CommandType {
     LOGIN, LOGOUT, REGISTRATION, CALCULATE, SUBSTANCES, BUILDINGS, SAVEREPORT,
     //navigate commands
     TOCALCULATE, TORECALCULATE, TOBUILDINGS, TOSUBSTANCES, TOFUNCTIONS, TOREGISTER, TOHELP,
-    //locale commands
-    SETLANGUAGE;
+    //locale command
+    SETLANGUAGE,
+    //pagination
+    SETSIZE;
 
     public Command getCurrentCommand() throws EnumConstantNotPresentException {
         switch (this) {
@@ -57,11 +59,14 @@ public enum CommandType {
             case TOREGISTER:
                 return new GoToRegister();
 
-            case TOHELP:
-                return new GoToHelp();
+//            case TOHELP:
+//                return new GoToHelp();
 
             case SETLANGUAGE:
                 return new ChangeLocale();
+
+            case SETSIZE:
+                return new SetPaginationSize();
 
             default:
                 throw new EnumConstantNotPresentException(this.getDeclaringClass(), this.name());

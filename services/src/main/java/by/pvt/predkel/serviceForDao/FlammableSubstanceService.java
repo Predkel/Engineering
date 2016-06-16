@@ -46,4 +46,15 @@ public class FlammableSubstanceService {
         //return FlammableSubstanceDao.getInstance().read(id);
         return new FlammableSubstanceDaoImpl().getById(id);
     }
+
+    public Long getCountOfSubstances() throws DaoException {
+        return new FlammableSubstanceDaoImpl().getCount();
+    }
+
+    public List<FlammableSubstance> getSubstancesForPage(int page, int maxResult) throws DaoException {
+        int firstResult = (page - 1) * maxResult;
+        return new FlammableSubstanceDaoImpl().pagination(firstResult, maxResult);
+    }
+
+
 }

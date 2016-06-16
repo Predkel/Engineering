@@ -15,4 +15,7 @@ public class Attributes {
     public static final String ALL_SUBSTANCES = "substances";
     public static final String SAVE_BUILDING = "saveBuilding";
     public static final String LOCALE = "local";
+    public static final String COUNT_OF_PAGES = "countOfPages";
+    public static final String PAGE = "page";
+    public static final String PAGINATION_SIZE = "paginationSize";
 }

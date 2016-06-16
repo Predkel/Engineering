@@ -14,6 +14,9 @@ public class Parameters {
     public static final String PASSWORD = "password";
     public static final String ROLE = "role";
     /////flammable substances\\\\\\
+    public static final String AMOUNT_OF_SUBSTANCES = "amountOfSubstances";
+    public static final String PAGINATION_SIZE = "paginationSize";
+    public static final String PAGE = "page";
     public static final String ID_SUBSTANCE = "idSubstance";
     public static final String NAME_OF_SUBSTANCE = "nameOfSubstance";
     public static final String AMOUNT_OF_COMBUSTION_AIR = "amountOfCombustionAir";

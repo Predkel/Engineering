@@ -8,12 +8,10 @@ import by.pvt.predkel.navigateCommand.GoToListOfSubstances;
 import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Parameters;
-import by.pvt.predkel.parameters.Path;
 import by.pvt.predkel.serviceForDao.FlammableSubstanceService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
@@ -23,10 +21,11 @@ public class SubstancesListCommand extends AbstractCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
+        Integer size = Integer.parseInt(request.getParameter(Parameters.AMOUNT_OF_SUBSTANCES));
+
         FlammableSubstance sub = new FlammableSubstance();
         try {
-            List<FlammableSubstance> list = FlammableSubstanceService.getInstance().getAllSubstances();
-            for (int i = 0; i < list.size() + 1; i++)
+            for (int i = 0; i < size + 1; i++)
                 if (request.getParameterValues(Parameters.ID_SUBSTANCE)[i].isEmpty() &&
                         !request.getParameterValues(Parameters.NAME_OF_SUBSTANCE)[i].isEmpty() &&
                         !request.getParameterValues(Parameters.AMOUNT_OF_COMBUSTION_AIR)[i].isEmpty() &&
@@ -70,6 +69,6 @@ public class SubstancesListCommand extends AbstractCommand {
             request.setAttribute(Attributes.ERROR, Errors.CALCULATE_INCORRECT_ERROR);
             return new GoToListOfSubstances().execute(request, response);
         }
-        return Path.FUNCTIONS_PATH;
+        return new GoToListOfSubstances().execute(request, response);
     }
 }

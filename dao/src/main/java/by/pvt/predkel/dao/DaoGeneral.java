@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class DaoGeneral<T> implements DaoI<T> {
     private static DaoGeneral instance;
-    String message;
+    private String message;
     private T entity;
 
     @Override
