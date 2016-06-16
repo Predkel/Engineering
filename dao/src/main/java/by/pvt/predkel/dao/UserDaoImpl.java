@@ -18,7 +18,7 @@ public class UserDaoImpl extends DaoGeneral<User> {
 
     public User isAuthorized(String login, String password) throws DaoException {
         Session session = null;
-        boolean isLogIn = false;
+//        boolean isLogIn = false;
         User user = new MyEntityObjectFactory().createUser();
         try {
             session = HibernateUtil.currentSession();
