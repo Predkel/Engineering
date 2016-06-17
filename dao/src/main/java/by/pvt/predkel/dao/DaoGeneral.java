@@ -5,7 +5,6 @@ import by.pvt.predkel.settings.HibernateUtil;
 import by.pvt.predkel.utils.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 
 import java.util.ArrayList;
@@ -25,10 +24,7 @@ public class DaoGeneral<T> implements DaoI<T> {
         T t;
         try {
             session = HibernateUtil.currentSession();
-            Transaction tx = session.beginTransaction();
             t = (T) session.load(getPersistentClass(), id);
-            tx.commit();
-            HibernateUtil.closeSession();
         } catch (Exception e) {
             message = "Unable to get entity by id";
             Logger.getInstance().logError(getClass(), message);
@@ -42,10 +38,7 @@ public class DaoGeneral<T> implements DaoI<T> {
         Session session;
         try {
             session = HibernateUtil.currentSession();
-            Transaction tx = session.beginTransaction();
             session.save(t);
-            tx.commit();
-            HibernateUtil.closeSession();
         } catch (Exception e) {
             message = "Unable to save entity";
             Logger.getInstance().logError(getClass(), message);
@@ -58,10 +51,7 @@ public class DaoGeneral<T> implements DaoI<T> {
         Session session;
         try {
             session = HibernateUtil.currentSession();
-            Transaction tx = session.beginTransaction();
             session.update(t);
-            tx.commit();
-            HibernateUtil.closeSession();
         } catch (Exception e) {
             message = "Unable to update entity";
             Logger.getInstance().logError(getClass(), message);
@@ -74,9 +64,7 @@ public class DaoGeneral<T> implements DaoI<T> {
         Session session;
         try {
             session = HibernateUtil.currentSession();
-            session.beginTransaction();
             session.delete(t);
-            session.getTransaction().commit();
         } catch (Exception e) {
             message = "Unable to delete entity";
             Logger.getInstance().logError(getClass(), message);

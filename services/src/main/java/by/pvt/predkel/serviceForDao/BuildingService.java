@@ -3,6 +3,9 @@ package by.pvt.predkel.serviceForDao;
 import by.pvt.predkel.dao.BuildingDaoImpl;
 import by.pvt.predkel.entities.Building;
 import by.pvt.predkel.exceptions.DaoException;
+import by.pvt.predkel.settings.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -24,46 +27,59 @@ public class BuildingService {
     }
 
     public Building getBuildingByFkAndName(Building building) throws DaoException {
-        //return BuildingDao.getInstance().isCreated(build).get(0);
-        return new BuildingDaoImpl().isCreated(building);
+        Session session = HibernateUtil.currentSession();
+        Transaction tx = session.beginTransaction();
+        Building newBuilding = new BuildingDaoImpl().isCreated(building);
+        tx.commit();
+        return newBuilding;
     }
 
     public List<Building> getAllByFk(Long userId) throws DaoException {
-        //return BuildingDao.getInstance().isCreated(build).get(0);
-        return new BuildingDaoImpl().geAllByFk(userId);
+        Session session = HibernateUtil.currentSession();
+        Transaction tx = session.beginTransaction();
+        List<Building> list = new BuildingDaoImpl().geAllByFk(userId);
+        tx.commit();
+        return list;
     }
 
     public Building readBuilding(Long id) throws DaoException {
-        //return BuildingDao.getInstance().read(id);
-        return new BuildingDaoImpl().getById(id);
+        Session session = HibernateUtil.currentSession();
+        Transaction tx = session.beginTransaction();
+        Building building = new BuildingDaoImpl().getById(id);
+        tx.commit();
+        return building;
     }
 
     public void deleteBuilding(Building building) throws DaoException {
-        //BuildingDao.getInstance().delete(building);
+        Session session = HibernateUtil.currentSession();
+        Transaction tx = session.beginTransaction();
         new BuildingDaoImpl().delete(building);
+        tx.commit();
     }
 
     public boolean addBuilding(Building building) throws DaoException {
         GregorianCalendar time = new GregorianCalendar();
         String buildingTime = (time.get(time.HOUR_OF_DAY) + ":" + time.get(time.MINUTE) + " " + time.get(time.DATE) + "-" + (time.get(time.MONTH) + 1) + "-" + time.get(time.YEAR));
+        Boolean checker;
 
-        //List<Building> list = BuildingDao.getInstance().isCreated(building);
+        Session session = HibernateUtil.currentSession();
+        Transaction tx = session.beginTransaction();
+
         BuildingDaoImpl dao = new BuildingDaoImpl();
         Building build = dao.isCreated(building);
-        if (//list.size() > 0
-                build != null || building.getId() != 0) {
-            building.setId(//list.get(0).getId()
-                    build.getId());
+
+        if (build != null || building.getId() != 0) {
+            building.setId(build.getId());
             building.setDateOfBuilding("изм. " + buildingTime);
-            //BuildingDao.getInstance().update(building);
             dao.update(building);
-            return false;
+            checker = false;
         } else {
             building.setDateOfBuilding("созд. " + buildingTime);
             dao.create(building);
-            //BuildingDao.getInstance().create(building);
-            return true;
+            checker = true;
         }
+        tx.commit();
 
+        return checker;
     }
 }
