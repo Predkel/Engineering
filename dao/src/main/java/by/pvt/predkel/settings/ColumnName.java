@@ -11,7 +11,7 @@ public class ColumnName {
     public static final String BUILDING_NAME = "nameOfBuilding";
     public static final String BUILDING_TEMPERATURE = "selectedTemperatureOfRegion";
     public static final String BUILDING_DATE = "dateofbuilding";
-    public static final String BUILDING_FK_ID_USER = "fk.id.user";
+    public static final String BUILDING_FK_ID_USER = "userId";
     public static final String BUILDING_COEFFICIENT_C5 = "specifyingCoefficientS5";
 
     public static final String COEFFICIENTS_FOR_BUILDING_FKID = "fk.id.building";

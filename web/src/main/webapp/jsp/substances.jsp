@@ -16,6 +16,7 @@
 <fmt:message bundle="${loc}" key="material.heat" var="heat"/>
 <fmt:message bundle="${loc}" key="material.speed" var="speed"/>
 <fmt:message bundle="${loc}" key="material.send" var="send"/>
+<fmt:message bundle="${loc}" key="material.change.size" var="size"/>
 <%@ include file="parts/links.jsp" %>
 <script src="jsp/js/validate.js"></script>
 <title>${material}</title>
@@ -33,9 +34,8 @@
 </div>
 <div class="container">
     <form class="center-block" action="controller" method="POST">
-        <input type="hidden" name="command" value="SUBSTANCES">
+        <input type="hidden" name="command" value="substances">
         <div class="row">
-
 
             <div class="col-md-6">
                 <%
@@ -240,7 +240,37 @@
         </c:forEach>
         <% } %>
         <% } %>
-
+        <span class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <button class="btn btn-primary">${size}</button><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="controller?command=setsize&paginationSize=2">2</a></li>
+                <li><a href="controller?command=setsize&paginationSize=4">4</a></li>
+                <li><a href="controller?command=setsize&paginationSize=6">6</a></li>
+                <li><a href="controller?command=setsize&paginationSize=8">8</a></li>
+                <li><a href="controller?command=setsize&paginationSize=10">10</a></li>
+                <li><a href="controller?command=setsize&paginationSize=16">16</a></li>
+                <li><a href="controller?command=setsize&paginationSize=20">20</a></li>
+            </ul>
+        </span>
+        <br>
+        <br>
+        <%--<form class="center-block" action="controller" method="POST">--%>
+        <%--<input type="hidden" name="command" value="setsize">--%>
+        <%--<select name="paginationSize" class="selectpicker form-control select-lg">--%>
+        <%--<optgroup label="Размерность"></optgroup>--%>
+        <%--<option value="2">2</option>--%>
+        <%--<option value="4">4</option>--%>
+        <%--<option value="6">6</option>--%>
+        <%--<option value="8">8</option>--%>
+        <%--<option value="10">10</option>--%>
+        <%--<option value="16">16</option>--%>
+        <%--<option value="20">20</option>--%>
+        <%--</select>--%>
+        <%--<div class="form-group">--%>
+        <%--<input type="submit" class="btn btn-block btn-primary" value="Изменить размерность">--%>
+        <%--</div>--%>
+        <%--</form>--%>
     </div>
 </div>
 

@@ -30,24 +30,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!--<filter>-->
-    <!--<filter-name>ListOfBuildings</filter-name>-->
-    <!--<filter-class>by.pvt.predkel.filter.ListOfBuildings</filter-class>-->
-    <!--</filter>-->
-    <!--<filter-mapping>-->
-    <!--<filter-name>ListOfBuildings</filter-name>-->
-    <!--<url-pattern>/*</url-pattern>-->
-    <!--</filter-mapping>-->
-
-    <!--<filter>-->
-    <!--<filter-name>ListOfFlammableSubstances</filter-name>-->
-    <!--<filter-class>by.pvt.predkel.filter.ListOfFlammableSubstances</filter-class>-->
-    <!--</filter>-->
-    <!--<filter-mapping>-->
-    <!--<filter-name>ListOfFlammableSubstances</filter-name>-->
-    <!--<url-pattern>/WebApp/*</url-pattern>-->
-    <!--</filter-mapping>-->
-
     <filter>
         <filter-name>SecurityRedirect</filter-name>
         <filter-class>by.pvt.predkel.filter.SecurityRedirect</filter-class>

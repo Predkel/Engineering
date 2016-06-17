@@ -18,6 +18,10 @@ public interface DaoI<TYPE> {
     //READ - чтение всех элементов по условию
     List<TYPE> getAll() throws DaoException;
 
+    Long getCountOfRows() throws DaoException;
+
+    List<TYPE> pagination(int firstResult, int maxResult) throws DaoException;
+
     Class getPersistentClass();
 
 }

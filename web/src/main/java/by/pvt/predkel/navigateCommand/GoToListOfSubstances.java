@@ -27,8 +27,10 @@ public class GoToListOfSubstances extends AbstractCommand {
         } catch (NumberFormatException e) {// то выкинет null и попадем на первую
             page = 1;//а если просто переходим на след. страницу
         }//достанем из параметров номер страницы
-
-        Integer maxResult = 10;
+        Integer maxResult;
+        if (request.getSession().getAttribute(Attributes.PAGINATION_SIZE) != null) {
+            maxResult = (Integer) request.getSession().getAttribute(Attributes.PAGINATION_SIZE);
+        } else maxResult = 10;
 
         Integer countOfPages = 0;
         List<FlammableSubstance> substances = null;

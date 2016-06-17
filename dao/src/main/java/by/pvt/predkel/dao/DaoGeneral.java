@@ -2,9 +2,11 @@ package by.pvt.predkel.dao;
 
 import by.pvt.predkel.exceptions.DaoException;
 import by.pvt.predkel.settings.HibernateUtil;
-import by.pvt.predkel.utils.PaymentSystemLogger;
+import by.pvt.predkel.utils.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +21,8 @@ public class DaoGeneral<T> implements DaoI<T> {
 
     @Override
     public T getById(long id) throws DaoException {
-        Session session = null;
-        T t = null;
+        Session session;
+        T t;
         try {
             session = HibernateUtil.currentSession();
             Transaction tx = session.beginTransaction();
@@ -29,19 +31,15 @@ public class DaoGeneral<T> implements DaoI<T> {
             HibernateUtil.closeSession();
         } catch (Exception e) {
             message = "Unable to get entity by id";
-            PaymentSystemLogger.getInstance().logError(getClass(), message);
+            Logger.getInstance().logError(getClass(), message);
             throw new DaoException(message, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                HibernateUtil.closeSession();
-            }
         }
         return t;
     }
 
     @Override
     public void create(T t) throws DaoException {
-        Session session = null;
+        Session session;
         try {
             session = HibernateUtil.currentSession();
             Transaction tx = session.beginTransaction();
@@ -50,18 +48,14 @@ public class DaoGeneral<T> implements DaoI<T> {
             HibernateUtil.closeSession();
         } catch (Exception e) {
             message = "Unable to save entity";
-            PaymentSystemLogger.getInstance().logError(getClass(), message);
+            Logger.getInstance().logError(getClass(), message);
             throw new DaoException(message, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                HibernateUtil.closeSession();
-            }
         }
     }
 
     @Override
     public void update(T t) throws DaoException {
-        Session session = null;
+        Session session;
         try {
             session = HibernateUtil.currentSession();
             Transaction tx = session.beginTransaction();
@@ -70,18 +64,14 @@ public class DaoGeneral<T> implements DaoI<T> {
             HibernateUtil.closeSession();
         } catch (Exception e) {
             message = "Unable to update entity";
-            PaymentSystemLogger.getInstance().logError(getClass(), message);
+            Logger.getInstance().logError(getClass(), message);
             throw new DaoException(message, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                HibernateUtil.closeSession();
-            }
         }
     }
 
     @Override
     public void delete(T t) throws DaoException {
-        Session session = null;
+        Session session;
         try {
             session = HibernateUtil.currentSession();
             session.beginTransaction();
@@ -89,19 +79,15 @@ public class DaoGeneral<T> implements DaoI<T> {
             session.getTransaction().commit();
         } catch (Exception e) {
             message = "Unable to delete entity";
-            PaymentSystemLogger.getInstance().logError(getClass(), message);
+            Logger.getInstance().logError(getClass(), message);
             throw new DaoException(message, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                HibernateUtil.closeSession();
-            }
         }
     }
 
     @Override
     public List<T> getAll() throws DaoException {
-        Session session = null;
-        List t = new ArrayList<>();
+        Session session;
+        List<T> t;
         try {
             session = HibernateUtil.currentSession();
             t = (List<T>) session.createCriteria(getPersistentClass()).list();
@@ -109,14 +95,42 @@ public class DaoGeneral<T> implements DaoI<T> {
             return new ArrayList<>();
         } catch (Exception e) {
             message = "Unable to get all entities";
-            PaymentSystemLogger.getInstance().logError(getClass(), message);
+            Logger.getInstance().logError(getClass(), message);
             throw new DaoException(message, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                HibernateUtil.closeSession();
-            }
         }
         return t;
+    }
+
+    @Override
+    public Long getCountOfRows() throws DaoException {
+        Session session;
+        try {
+            session = HibernateUtil.currentSession();
+            return (Long) session.createCriteria(getPersistentClass())
+                    .setProjection(Projections.rowCount())
+                    .list()
+                    .get(0);
+        } catch (Exception e) {
+            message = "Unable to get row count from table";
+            Logger.getInstance().logError(getClass(), message);
+            throw new DaoException(message, e);
+        }
+    }
+
+    @Override
+    public List<T> pagination(int firstResult, int maxResult) throws DaoException {
+        List<T> list;
+        Session session;
+        try {
+            session = HibernateUtil.currentSession();
+            Criteria userCriteria = session.createCriteria(getPersistentClass());
+            list = (List<T>) userCriteria.setFirstResult(firstResult).setMaxResults(maxResult).list();
+        } catch (Exception e) {
+            message = "Unable to get data for pagination";
+            Logger.getInstance().logError(getClass(), message);
+            throw new DaoException(message, e);
+        }
+        return list;
     }
 
     @Override

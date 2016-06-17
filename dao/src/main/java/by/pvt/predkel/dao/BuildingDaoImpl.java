@@ -4,8 +4,9 @@ import by.pvt.predkel.entities.Building;
 import by.pvt.predkel.entities.User;
 import by.pvt.predkel.exceptions.DaoException;
 import by.pvt.predkel.factory.MyEntityObjectFactory;
+import by.pvt.predkel.settings.ColumnName;
 import by.pvt.predkel.settings.HibernateUtil;
-import by.pvt.predkel.utils.PaymentSystemLogger;
+import by.pvt.predkel.utils.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -22,7 +23,7 @@ public class BuildingDaoImpl extends DaoGeneral<Building> {
 
     @Override
     public void delete(Building building) throws DaoException {
-        Session session = null;
+        Session session;
         try {
             session = HibernateUtil.currentSession();
             Transaction tx = session.beginTransaction();
@@ -33,18 +34,14 @@ public class BuildingDaoImpl extends DaoGeneral<Building> {
             HibernateUtil.closeSession();
         } catch (Exception e) {
             message = "Unable to update building";
-            PaymentSystemLogger.getInstance().logError(getClass(), message);
+            Logger.getInstance().logError(getClass(), message);
             throw new DaoException(message, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                HibernateUtil.closeSession();
-            }
         }
     }
 
     @Override
     public void update(Building building) throws DaoException {
-        Session session = null;
+        Session session;
         try {
             session = HibernateUtil.currentSession();
             Transaction tx = session.beginTransaction();
@@ -55,18 +52,14 @@ public class BuildingDaoImpl extends DaoGeneral<Building> {
             HibernateUtil.closeSession();
         } catch (Exception e) {
             message = "Unable to update building";
-            PaymentSystemLogger.getInstance().logError(getClass(), message);
+            Logger.getInstance().logError(getClass(), message);
             throw new DaoException(message, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                HibernateUtil.closeSession();
-            }
         }
     }
 
     @Override
     public void create(Building building) throws DaoException {
-        Session session = null;
+        Session session;
         try {
             session = HibernateUtil.currentSession();//напрямую нельзя добавить здание
             Transaction tx = session.beginTransaction();//т.к. оно зависит от юзера
@@ -77,56 +70,40 @@ public class BuildingDaoImpl extends DaoGeneral<Building> {
             HibernateUtil.closeSession();
         } catch (Exception e) {
             message = "Unable to save building";
-            PaymentSystemLogger.getInstance().logError(getClass(), message);
+            Logger.getInstance().logError(getClass(), message);
             throw new DaoException(message, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                HibernateUtil.closeSession();
-            }
         }
     }
 
     public Building isCreated(Building entity) throws DaoException {
-        Session session = null;
-        Building building = new MyEntityObjectFactory().createBuilding();
+        Session session;
+        Building building;
         try {
             session = HibernateUtil.currentSession();
-//            Query query=session.createQuery("from Building where userId=:userId and nameOfBuilding=:name");
-//            query.setParameter("userId",entity.getUserId());
-//            query.setParameter("name",entity.getNameOfBuilding());
-//            t = query.list();
             Criteria userCriteria = session.createCriteria(getPersistentClass());
-            userCriteria.add(Restrictions.eq("userId", entity.getUserId()));
-            userCriteria.add(Restrictions.eq("nameOfBuilding", entity.getNameOfBuilding()));
+            userCriteria.add(Restrictions.eq(ColumnName.BUILDING_FK_ID_USER, entity.getUserId()));
+            userCriteria.add(Restrictions.eq(ColumnName.BUILDING_NAME, entity.getNameOfBuilding()));
             building = (Building) userCriteria.uniqueResult();
         } catch (Exception e) {
             message = "Unable to get building by name and foreign key";
-            PaymentSystemLogger.getInstance().logError(getClass(), message);
+            Logger.getInstance().logError(getClass(), message);
             throw new DaoException(message, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                HibernateUtil.closeSession();
-            }
         }
         return building;
     }
 
     public List<Building> geAllByFk(Long userId) throws DaoException {
-        Session session = null;
+        Session session;
         List<Building> buildings;
         try {
             session = HibernateUtil.currentSession();
             Criteria userCriteria = session.createCriteria(getPersistentClass());
-            userCriteria.add(Restrictions.eq("userId", userId));
+            userCriteria.add(Restrictions.eq(ColumnName.BUILDING_FK_ID_USER, userId));
             buildings = (List<Building>) userCriteria.list();
         } catch (Exception e) {
             message = "Unable to get building by foreign key";
-            PaymentSystemLogger.getInstance().logError(getClass(), message);
+            Logger.getInstance().logError(getClass(), message);
             throw new DaoException(message, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                HibernateUtil.closeSession();
-            }
         }
         return buildings;
     }

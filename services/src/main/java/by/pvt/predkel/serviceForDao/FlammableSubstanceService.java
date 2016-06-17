@@ -48,7 +48,7 @@ public class FlammableSubstanceService {
     }
 
     public Long getCountOfSubstances() throws DaoException {
-        return new FlammableSubstanceDaoImpl().getCount();
+        return new FlammableSubstanceDaoImpl().getCountOfRows();
     }
 
     public List<FlammableSubstance> getSubstancesForPage(int page, int maxResult) throws DaoException {

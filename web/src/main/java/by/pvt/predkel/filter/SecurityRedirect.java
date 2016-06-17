@@ -1,5 +1,6 @@
 package by.pvt.predkel.filter;
 
+import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Path;
 
 import javax.servlet.*;
@@ -23,7 +24,7 @@ public class SecurityRedirect implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
-        if (httpRequest.getSession(false).getAttribute("User") == null)
+        if (httpRequest.getSession(false).getAttribute(Attributes.USER) == null)
             httpResponse.sendRedirect(httpRequest.getContextPath() + Path.INDEX_PATH);
         filterChain.doFilter(servletRequest, servletResponse);
     }

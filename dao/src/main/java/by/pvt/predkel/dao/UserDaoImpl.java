@@ -3,8 +3,9 @@ package by.pvt.predkel.dao;
 import by.pvt.predkel.entities.User;
 import by.pvt.predkel.exceptions.DaoException;
 import by.pvt.predkel.factory.MyEntityObjectFactory;
+import by.pvt.predkel.settings.ColumnName;
 import by.pvt.predkel.settings.HibernateUtil;
-import by.pvt.predkel.utils.PaymentSystemLogger;
+import by.pvt.predkel.utils.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -17,52 +18,34 @@ public class UserDaoImpl extends DaoGeneral<User> {
     private User user = new MyEntityObjectFactory().createUser();
 
     public User isAuthorized(String login, String password) throws DaoException {
-        Session session = null;
-//        boolean isLogIn = false;
-        User user = new MyEntityObjectFactory().createUser();
+        Session session;
+        User user;
         try {
             session = HibernateUtil.currentSession();
-//            Query query=session.createQuery("from User where login=:login and password=:password");
-//            query.setParameter("login",login);
-//            query.setParameter("password",password);
-//            List t = query.list();
             Criteria userCriteria = session.createCriteria(User.class);
-            userCriteria.add(Restrictions.eq("login", login));
-            userCriteria.add(Restrictions.eq("password", password));
+            userCriteria.add(Restrictions.eq(ColumnName.USER_LOGIN, login));
+            userCriteria.add(Restrictions.eq(ColumnName.USER_PASSWORD, password));
             user = (User) userCriteria.uniqueResult();
-            //  if (t.size()>0)
         } catch (Exception e) {
             message = "Unable to authorize user";
-            PaymentSystemLogger.getInstance().logError(getClass(), message);
+            Logger.getInstance().logError(getClass(), message);
             throw new DaoException(message, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                HibernateUtil.closeSession();
-            }
         }
         return user;
     }
 
     public User getByLogin(String login) throws DaoException {
-        Session session = null;
-        User user = new MyEntityObjectFactory().createUser();
+        Session session;
+        User user;
         try {
             session = HibernateUtil.currentSession();
-//            Query query=session.createQuery("from User where login=:login");
-//            query.setParameter("login",login);
-//            List t = query.list();
-//            user=(User)t.get(0);
             Criteria userCriteria = session.createCriteria(User.class);
-            userCriteria.add(Restrictions.eq("login", login));
+            userCriteria.add(Restrictions.eq(ColumnName.USER_LOGIN, login));
             user = (User) userCriteria.uniqueResult();
         } catch (Exception e) {
             message = "Unable to get user by login";
-            PaymentSystemLogger.getInstance().logError(getClass(), message);
+            Logger.getInstance().logError(getClass(), message);
             throw new DaoException(message, e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                HibernateUtil.closeSession();
-            }
         }
         return user;
     }
