@@ -59,8 +59,8 @@ public enum CommandType {
             case TOREGISTER:
                 return new GoToRegister();
 
-//            case TOHELP:
-//                return new GoToHelp();
+            case TOHELP:
+                return new GoToHelp();
 
             case SETLANGUAGE:
                 return new ChangeLocale();

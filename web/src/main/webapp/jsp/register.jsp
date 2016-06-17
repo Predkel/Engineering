@@ -23,7 +23,7 @@
 </select>
 <input type="submit" value="Зарегистрировать">
 </form>-->
-
+<div class="container">
 <div class="row">
     <div class="col-md-2">
 
@@ -67,5 +67,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <%@ include file="parts/bottom.jsp" %>

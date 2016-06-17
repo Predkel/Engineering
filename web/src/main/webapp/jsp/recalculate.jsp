@@ -90,20 +90,21 @@
 <%@ include file="parts/links.jsp" %>
 <title>${calculate}</title>
 <%@ include file="parts/header.jsp" %>
-<div class="row">
-    <div class="col-md-2">
 
-    </div>
-    <div class="col-md-8">
-        <h3>${error}</h3>
-    </div>
-    <div class="col-md-2">
-
-    </div>
-</div>
 <form action="controller" method="POST" novalidate="">
     <input type="hidden" name="command" value="calculate">
     <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-8">
+                <h3>${error}</h3>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <%

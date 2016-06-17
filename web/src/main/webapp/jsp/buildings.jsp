@@ -16,19 +16,19 @@
 <%@ include file="parts/links.jsp" %>
 <title>${history}</title>
 <%@ include file="parts/header.jsp" %>
-<div class="row">
-    <div class="col-md-2">
 
-    </div>
-    <div class="col-md-8">
-        <h3>${error}</h3>
-    </div>
-    <div class="col-md-2">
-
-    </div>
-</div>
 <div class="container">
+    <div class="row">
+        <div class="col-md-2">
 
+        </div>
+        <div class="col-md-8">
+            <h3>${error}</h3>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
     <div class="row">
         <b>
             <div class=col-md-4>${name}</div>

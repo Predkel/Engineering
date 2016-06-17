@@ -21,18 +21,19 @@
 <script src="jsp/js/validate.js"></script>
 <title>${material}</title>
 <%@ include file="parts/header.jsp" %>
-<div class="row">
-    <div class="col-md-2">
 
-    </div>
-    <div class="col-md-8">
-        <h3>${error}</h3>
-    </div>
-    <div class="col-md-2">
-
-    </div>
-</div>
 <div class="container">
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+            <h3>${error}</h3>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
     <form class="center-block" action="controller" method="POST">
         <input type="hidden" name="command" value="substances">
         <div class="row">
@@ -204,40 +205,66 @@
     <div class="row">
         <div class="center-block">
             <%if (lastPage == firstPage) { %>
-            <span><%=thisPage%></span>
+            <button class="btn btn-danger"><span><%=thisPage%></span></button>
             <%} else if (lastPage > firstPage) { %>
 
             <% if (thisPage > firstPage + betweenNumbers) { %>
-            <a href="controller?command=tosubstances&page=1">1</a>
+            <a href="controller?command=tosubstances&page=<%=previousPage%>"><img src="jsp/images/leftArrow.png"
+                                                                                  WIDTH="20" HEIGHT="20" BORDER="0"></a>
+            <a href="controller?command=tosubstances&page=1">
+                <button class="btn btn-default">1</button>
+            </a>
 
             <span>...</span>
 
             <c:forEach var="i" begin="<%=earlyPage%>" end="<%=previousPage%>">
-                <a href="controller?command=tosubstances&page=${i}">${i}</a>
+                <a href="controller?command=tosubstances&page=${i}">
+                    <button class="btn btn-default">${i}</button>
+                </a>
             </c:forEach>
 
             <% } else if ((thisPage <= firstPage + betweenNumbers) && (thisPage >= firstPage)) {%>
+
+            <%if (thisPage > firstPage) {%>
+            <a href="controller?command=tosubstances&page=<%=previousPage%>"><img src="jsp/images/leftArrow.png"
+                                                                                  WIDTH="20" HEIGHT="20" BORDER="0"></a>
+            <% } %>
             <c:forEach var="i" begin="1" end="<%=previousPage%>">
-                <a href="controller?command=tosubstances&page=${i}">${i}</a>
+                <a href="controller?command=tosubstances&page=${i}">
+                    <button class="btn btn-default">${i}</button>
+                </a>
             </c:forEach>
             <% } %>
 
-            <span><%=thisPage%></span>
+            <button class="btn btn-danger"><span><%=thisPage%></span></button>
 
             <% if (laterPage < lastPage) { %>
             <c:forEach var="i" begin="<%=nextPage%>" end="<%=laterPage%>">
-                <a href="controller?command=tosubstances&page=${i}">${i}</a>
+                <a href="controller?command=tosubstances&page=${i}">
+                    <button class="btn btn-default">${i}</button>
+                </a>
             </c:forEach>
 
             <span>...</span>
 
-            <a href="controller?command=tosubstances&page=<%=lastPage%>"><%=lastPage%>
+            <a href="controller?command=tosubstances&page=<%=lastPage%>">
+                <button class="btn btn-default"><%=lastPage%>
+                </button>
             </a>
+
+            <a href="controller?command=tosubstances&page=<%=nextPage%>"><img src="jsp/images/rightArrow.png" WIDTH="20"
+                                                                              HEIGHT="20" BORDER="0"></a>
 
             <% } else if ((thisPage >= lastPage - betweenNumbers)) {%>
             <c:forEach var="i" begin="<%=nextPage%>" end="<%=lastPage%>">
-                <a href="controller?command=tosubstances&page=${i}">${i}</a>
+                <a href="controller?command=tosubstances&page=${i}">
+                    <button class="btn btn-default">${i}</button>
+                </a>
             </c:forEach>
+            <%if (thisPage < lastPage) {%>
+            <a href="controller?command=tosubstances&page=<%=nextPage%>"><img src="jsp/images/rightArrow.png"
+                                                                              WIDTH="20" HEIGHT="20" BORDER="0"></a>
+            <% } %>
             <% } %>
             <% } %>
             <span class="dropdown">
