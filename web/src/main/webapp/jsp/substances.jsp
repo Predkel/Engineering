@@ -146,7 +146,7 @@
                                 <a href="#collapse-0" data-parent="#accordion3"
                                    data-toggle="collapse">${newMaterial}</a>
                             </h4>
-                </div>
+                        </div>
                         <div id="collapse-0" class="panel-collapse collapse">
                             <div class="panel-body">
 
@@ -202,59 +202,60 @@
     <%int laterPage = thisPage + betweenNumbers;%>
     <%int lastPage = (Integer) request.getAttribute(Attributes.COUNT_OF_PAGES);%>
     <div class="row">
+        <div class="center-block">
+            <%if (lastPage == firstPage) { %>
+            <span><%=thisPage%></span>
+            <%} else if (lastPage > firstPage) { %>
 
-        <%if (lastPage == firstPage) { %>
-        <span><%=thisPage%></span>
-        <%} else if (lastPage > firstPage) { %>
+            <% if (thisPage > firstPage + betweenNumbers) { %>
+            <a href="controller?command=tosubstances&page=1">1</a>
 
-        <% if (thisPage > firstPage + betweenNumbers) { %>
-        <a href="controller?command=tosubstances&page=1">1</a>
+            <span>...</span>
 
-        <span>...</span>
+            <c:forEach var="i" begin="<%=earlyPage%>" end="<%=previousPage%>">
+                <a href="controller?command=tosubstances&page=${i}">${i}</a>
+            </c:forEach>
 
-        <c:forEach var="i" begin="<%=earlyPage%>" end="<%=previousPage%>">
-            <a href="controller?command=tosubstances&page=${i}">${i}</a>
-        </c:forEach>
+            <% } else if ((thisPage <= firstPage + betweenNumbers) && (thisPage >= firstPage)) {%>
+            <c:forEach var="i" begin="1" end="<%=previousPage%>">
+                <a href="controller?command=tosubstances&page=${i}">${i}</a>
+            </c:forEach>
+            <% } %>
 
-        <% } else if ((thisPage <= firstPage + betweenNumbers) && (thisPage >= firstPage)) {%>
-        <c:forEach var="i" begin="1" end="<%=previousPage%>">
-            <a href="controller?command=tosubstances&page=${i}">${i}</a>
-        </c:forEach>
-        <% } %>
+            <span><%=thisPage%></span>
 
-        <span><%=thisPage%></span>
+            <% if (laterPage < lastPage) { %>
+            <c:forEach var="i" begin="<%=nextPage%>" end="<%=laterPage%>">
+                <a href="controller?command=tosubstances&page=${i}">${i}</a>
+            </c:forEach>
 
-        <% if (laterPage < lastPage) { %>
-        <c:forEach var="i" begin="<%=nextPage%>" end="<%=laterPage%>">
-            <a href="controller?command=tosubstances&page=${i}">${i}</a>
-        </c:forEach>
+            <span>...</span>
 
-        <span>...</span>
+            <a href="controller?command=tosubstances&page=<%=lastPage%>"><%=lastPage%>
+            </a>
 
-        <a href="controller?command=tosubstances&page=<%=lastPage%>"><%=lastPage%>
-        </a>
-
-        <% } else if ((thisPage >= lastPage - betweenNumbers)) {%>
-        <c:forEach var="i" begin="<%=nextPage%>" end="<%=lastPage%>">
-            <a href="controller?command=tosubstances&page=${i}">${i}</a>
-        </c:forEach>
-        <% } %>
-        <% } %>
-        <span class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <button class="btn btn-primary">${size}</button><b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li><a href="controller?command=setsize&paginationSize=2">2</a></li>
-                <li><a href="controller?command=setsize&paginationSize=4">4</a></li>
-                <li><a href="controller?command=setsize&paginationSize=6">6</a></li>
-                <li><a href="controller?command=setsize&paginationSize=8">8</a></li>
-                <li><a href="controller?command=setsize&paginationSize=10">10</a></li>
-                <li><a href="controller?command=setsize&paginationSize=16">16</a></li>
-                <li><a href="controller?command=setsize&paginationSize=20">20</a></li>
-            </ul>
-        </span>
-        <br>
-        <br>
+            <% } else if ((thisPage >= lastPage - betweenNumbers)) {%>
+            <c:forEach var="i" begin="<%=nextPage%>" end="<%=lastPage%>">
+                <a href="controller?command=tosubstances&page=${i}">${i}</a>
+            </c:forEach>
+            <% } %>
+            <% } %>
+            <span class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <button class="btn btn-primary">${size}</button><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="controller?command=setsize&paginationSize=2">2</a></li>
+                    <li><a href="controller?command=setsize&paginationSize=4">4</a></li>
+                    <li><a href="controller?command=setsize&paginationSize=6">6</a></li>
+                    <li><a href="controller?command=setsize&paginationSize=8">8</a></li>
+                    <li><a href="controller?command=setsize&paginationSize=10">10</a></li>
+                    <li><a href="controller?command=setsize&paginationSize=16">16</a></li>
+                    <li><a href="controller?command=setsize&paginationSize=20">20</a></li>
+                </ul>
+            </span>
+            <br>
+            <br>
+        </div>
         <%--<form class="center-block" action="controller" method="POST">--%>
         <%--<input type="hidden" name="command" value="setsize">--%>
         <%--<select name="paginationSize" class="selectpicker form-control select-lg">--%>
