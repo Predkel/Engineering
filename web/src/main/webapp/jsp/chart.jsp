@@ -17,8 +17,9 @@
 <title>${result}</title>
 <%@ include file="parts/header.jsp" %>
 
-<c:choose>
-    <c:when test="${error!=null}">
+<br>
+<br>
+<br>
         <div class="row">
             <div class="col-md-2">
 
@@ -30,13 +31,7 @@
 
             </div>
         </div>
-    </c:when>
-    <c:otherwise>
-        <br>
-        <br>
-        <br>
-    </c:otherwise>
-</c:choose>
+
 
 <div class="row">
     <div class="col-md-3">
