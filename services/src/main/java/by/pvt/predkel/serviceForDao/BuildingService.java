@@ -68,7 +68,11 @@ public class BuildingService {
         BuildingDaoImpl dao = new BuildingDaoImpl();
         Building build = dao.isCreated(building);
 
-        if (build != null || building.getId() != 0) {
+        if (building.getId() != 0) {
+            building.setDateOfBuilding("изм. " + buildingTime);
+            dao.update(building);
+            checker = false;
+        } else if (build != null) {
             building.setId(build.getId());
             building.setDateOfBuilding("изм. " + buildingTime);
             dao.update(building);

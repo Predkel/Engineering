@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
-<%@ page import="by.pvt.predkel.entities.User" %>
-<%@ page import="by.pvt.predkel.parameters.Attributes" %>
 <jsp:useBean id="User" class="by.pvt.predkel.entities.User" scope="session"/>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -51,8 +49,7 @@
                 </div>
             </div>
         </div>
-        <%--<c:if test="${User.role==1}">--%>
-        <% if (((User) session.getAttribute(Attributes.USER)).getRole() == 1) { %>
+        <c:if test="${User.role==1}">
         <div class="item">
             <div class="thumbnail">
                 <a href="controller?command=toregister"><img src="jsp/images/register.png" alt=""></a>
@@ -71,8 +68,7 @@
                 </div>
             </div>
         </div>
-        <% } %>
-        <%--</c:if>--%>
+        </c:if>
     </div>
 </div>
 <%@ include file="parts/bottom.jsp" %>

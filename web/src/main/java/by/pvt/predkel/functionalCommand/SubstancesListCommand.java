@@ -25,7 +25,7 @@ public class SubstancesListCommand extends AbstractCommand {
 
         FlammableSubstance sub = new FlammableSubstance();
         try {
-            for (int i = 0; i < size + 1; i++)
+            for (int i = 0; i < size; i++)
                 if (request.getParameterValues(Parameters.ID_SUBSTANCE)[i].isEmpty() &&
                         !request.getParameterValues(Parameters.NAME_OF_SUBSTANCE)[i].isEmpty() &&
                         !request.getParameterValues(Parameters.AMOUNT_OF_COMBUSTION_AIR)[i].isEmpty() &&

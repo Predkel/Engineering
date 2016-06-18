@@ -2,6 +2,9 @@
 <%@ page import="by.pvt.predkel.entities.*" %>
 <%@ page import="by.pvt.predkel.parameters.Attributes" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<jsp:useBean id="error" class="java.lang.String" scope="request"/>
+
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%--<jsp:useBean id="substances" class="java.util.ArrayList" scope="session"/>--%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -17,24 +20,24 @@
 <fmt:message bundle="${loc}" key="calculate.building.minsk" var="minsk"/>
 <fmt:message bundle="${loc}" key="calculate.building.mogilev" var="mogilev"/>
 <fmt:message bundle="${loc}" key="calculate.building.coefficient" var="coefficientBuild"/>
-<fmt:message bundle="${loc}" key="calculate.building.s2" var="s2"/>
-<fmt:message bundle="${loc}" key="calculate.building.s2.1" var="s2-1"/>
-<fmt:message bundle="${loc}" key="calculate.building.s2.2" var="s2-2"/>
-<fmt:message bundle="${loc}" key="calculate.building.s2.3" var="s2-3"/>
-<fmt:message bundle="${loc}" key="calculate.building.s2.4" var="s2-4"/>
-<fmt:message bundle="${loc}" key="calculate.building.s3" var="s3"/>
-<fmt:message bundle="${loc}" key="calculate.building.s3.1" var="s3-1"/>
-<fmt:message bundle="${loc}" key="calculate.building.s3.2" var="s3-2"/>
-<fmt:message bundle="${loc}" key="calculate.building.s3.3" var="s3-3"/>
-<fmt:message bundle="${loc}" key="calculate.building.s5" var="s5"/>
-<fmt:message bundle="${loc}" key="calculate.building.s5.1" var="s5-1"/>
-<fmt:message bundle="${loc}" key="calculate.building.s5.2" var="s5-2"/>
-<fmt:message bundle="${loc}" key="calculate.building.s5.3" var="s5-3"/>
-<fmt:message bundle="${loc}" key="calculate.building.s5.4" var="s5-4"/>
-<fmt:message bundle="${loc}" key="calculate.building.s5.5" var="s5-5"/>
-<fmt:message bundle="${loc}" key="calculate.building.s6" var="s6"/>
-<fmt:message bundle="${loc}" key="calculate.building.s6.1" var="s6-1"/>
-<fmt:message bundle="${loc}" key="calculate.building.s6.2" var="s6-2"/>
+<fmt:message bundle="${loc}" key="calculate.building.s2" var="s2Text"/>
+<fmt:message bundle="${loc}" key="calculate.building.s2.1" var="s21"/>
+<fmt:message bundle="${loc}" key="calculate.building.s2.2" var="s22"/>
+<fmt:message bundle="${loc}" key="calculate.building.s2.3" var="s23"/>
+<fmt:message bundle="${loc}" key="calculate.building.s2.4" var="s24"/>
+<fmt:message bundle="${loc}" key="calculate.building.s3" var="s3Text"/>
+<fmt:message bundle="${loc}" key="calculate.building.s3.1" var="s31"/>
+<fmt:message bundle="${loc}" key="calculate.building.s3.2" var="s32"/>
+<fmt:message bundle="${loc}" key="calculate.building.s3.3" var="s33"/>
+<fmt:message bundle="${loc}" key="calculate.building.s5" var="s5Text"/>
+<fmt:message bundle="${loc}" key="calculate.building.s5.1" var="s51"/>
+<fmt:message bundle="${loc}" key="calculate.building.s5.2" var="s52"/>
+<fmt:message bundle="${loc}" key="calculate.building.s5.3" var="s53"/>
+<fmt:message bundle="${loc}" key="calculate.building.s5.4" var="s54"/>
+<fmt:message bundle="${loc}" key="calculate.building.s5.5" var="s55"/>
+<fmt:message bundle="${loc}" key="calculate.building.s6" var="s6Text"/>
+<fmt:message bundle="${loc}" key="calculate.building.s6.1" var="s61"/>
+<fmt:message bundle="${loc}" key="calculate.building.s6.2" var="s62"/>
 <fmt:message bundle="${loc}" key="calculate.building.coefficient5" var="coefficient5"/>
 <fmt:message bundle="${loc}" key="calculate.building.amountOfRoom" var="amountOfRoom"/>
 
@@ -44,32 +47,32 @@
 <fmt:message bundle="${loc}" key="calculate.room.name" var="roomName"/>
 <fmt:message bundle="${loc}" key="calculate.room.perimeter" var="perimeter"/>
 <fmt:message bundle="${loc}" key="calculate.room.position" var="position"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1" var="s1"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.1" var="s1-1"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.2" var="s1-2"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.3" var="s1-3"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.4" var="s1-4"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.5" var="s1-5"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.6" var="s1-6"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.7" var="s1-7"/>
-<fmt:message bundle="${loc}" key="calculate.room.s4" var="s4"/>
-<fmt:message bundle="${loc}" key="calculate.room.s4.1" var="s4-1"/>
-<fmt:message bundle="${loc}" key="calculate.room.s4.2" var="s4-2"/>
-<fmt:message bundle="${loc}" key="calculate.room.s4.3" var="s4-3"/>
-<fmt:message bundle="${loc}" key="calculate.room.s4.4" var="s4-4"/>
-<fmt:message bundle="${loc}" key="calculate.room.s4.5" var="s4-5"/>
-<fmt:message bundle="${loc}" key="calculate.room.s7" var="s7"/>
-<fmt:message bundle="${loc}" key="calculate.room.s7.1" var="s7-1"/>
-<fmt:message bundle="${loc}" key="calculate.room.s7.2" var="s7-2"/>
-<fmt:message bundle="${loc}" key="calculate.room.s8" var="s8"/>
-<fmt:message bundle="${loc}" key="calculate.room.s8.1" var="s8-1"/>
-<fmt:message bundle="${loc}" key="calculate.room.s8.2" var="s8-2"/>
-<fmt:message bundle="${loc}" key="calculate.room.s9" var="s9"/>
-<fmt:message bundle="${loc}" key="calculate.room.s9.1" var="s9-1"/>
-<fmt:message bundle="${loc}" key="calculate.room.s9.2" var="s9-2"/>
-<fmt:message bundle="${loc}" key="calculate.room.s10" var="s10"/>
-<fmt:message bundle="${loc}" key="calculate.room.s10.1" var="s10-1"/>
-<fmt:message bundle="${loc}" key="calculate.room.s10.2" var="s10-2"/>
+<fmt:message bundle="${loc}" key="calculate.room.s1" var="s1Text"/>
+<fmt:message bundle="${loc}" key="calculate.room.s1.1" var="s11"/>
+<fmt:message bundle="${loc}" key="calculate.room.s1.2" var="s12"/>
+<fmt:message bundle="${loc}" key="calculate.room.s1.3" var="s13"/>
+<fmt:message bundle="${loc}" key="calculate.room.s1.4" var="s14"/>
+<fmt:message bundle="${loc}" key="calculate.room.s1.5" var="s15"/>
+<fmt:message bundle="${loc}" key="calculate.room.s1.6" var="s16"/>
+<fmt:message bundle="${loc}" key="calculate.room.s1.7" var="s17"/>
+<fmt:message bundle="${loc}" key="calculate.room.s4" var="s4Text"/>
+<fmt:message bundle="${loc}" key="calculate.room.s4.1" var="s41"/>
+<fmt:message bundle="${loc}" key="calculate.room.s4.2" var="s42"/>
+<fmt:message bundle="${loc}" key="calculate.room.s4.3" var="s43"/>
+<fmt:message bundle="${loc}" key="calculate.room.s4.4" var="s44"/>
+<fmt:message bundle="${loc}" key="calculate.room.s4.5" var="s45"/>
+<fmt:message bundle="${loc}" key="calculate.room.s7" var="s7Text"/>
+<fmt:message bundle="${loc}" key="calculate.room.s7.1" var="s71"/>
+<fmt:message bundle="${loc}" key="calculate.room.s7.2" var="s72"/>
+<fmt:message bundle="${loc}" key="calculate.room.s8" var="s8Text"/>
+<fmt:message bundle="${loc}" key="calculate.room.s8.1" var="s81"/>
+<fmt:message bundle="${loc}" key="calculate.room.s8.2" var="s82"/>
+<fmt:message bundle="${loc}" key="calculate.room.s9" var="s9Text"/>
+<fmt:message bundle="${loc}" key="calculate.room.s9.1" var="s91"/>
+<fmt:message bundle="${loc}" key="calculate.room.s9.2" var="s92"/>
+<fmt:message bundle="${loc}" key="calculate.room.s10" var="s10Text"/>
+<fmt:message bundle="${loc}" key="calculate.room.s10.1" var="s101"/>
+<fmt:message bundle="${loc}" key="calculate.room.s10.2" var="s102"/>
 <fmt:message bundle="${loc}" key="calculate.room.square" var="square"/>
 <fmt:message bundle="${loc}" key="calculate.room.squareOfWall" var="squareOfWall"/>
 <fmt:message bundle="${loc}" key="calculate.room.volume" var="volume"/>
@@ -159,31 +162,31 @@
                 <div class="form-group">
 
                     <select name="s2" class="selectpicker form-control select-lg">
-                        <optgroup label="${s2}"></optgroup>
-                        <option value="1.5"<% if (s2 == 1.5) { %> selected="selected" <% } %>>${s2-1}</option>
-                        <option value="0.87"<% if (s2 == 0.87) { %> selected="selected" <% } %>>${s2-2}</option>
-                        <option value="0.8"<% if (s2 == 0.8) { %> selected="selected" <% } %>>${s2-3}</option>
-                        <option value="0.7"<% if (s2 == 0.7) { %> selected="selected" <% } %>>${s2-4}</option>
+                        <optgroup label="${s2Text}"></optgroup>
+                        <option value="1.5"<% if (s2 == 1.5) { %> selected="selected" <% } %>>${s21}</option>
+                        <option value="0.87"<% if (s2 == 0.87) { %> selected="selected" <% } %>>${s22}</option>
+                        <option value="0.8"<% if (s2 == 0.8) { %> selected="selected" <% } %>>${s23}</option>
+                        <option value="0.7"<% if (s2 == 0.7) { %> selected="selected" <% } %>>${s24}</option>
                     </select>
                     <select name="s3" class="selectpicker form-control select-lg">
-                        <optgroup label="${s3}"></optgroup>
-                        <option value="1.5"<% if (s3 == 1.5) { %> selected="selected" <% } %>>${s3-1}</option>
-                        <option value="0.9"<% if (s3 == 0.9) { %> selected="selected" <% } %>>${s3-2}</option>
-                        <option value="0.8"<% if (s3 == 0.8) { %> selected="selected" <% } %>>${s3-3}</option>
+                        <optgroup label="${s3Text}"></optgroup>
+                        <option value="1.5"<% if (s3 == 1.5) { %> selected="selected" <% } %>>${s31}</option>
+                        <option value="0.9"<% if (s3 == 0.9) { %> selected="selected" <% } %>>${s32}</option>
+                        <option value="0.8"<% if (s3 == 0.8) { %> selected="selected" <% } %>>${s33}</option>
                     </select>
 
                     <select name="s5" class="selectpicker form-control select-lg">
-                        <optgroup label="${s5}"></optgroup>
-                        <option value="0.61"<% if (s5 == 0.61) { %> selected="selected" <% } %>>${s5-1}</option>
-                        <option value="0.78"<% if (s5 == 0.78) { %> selected="selected" <% } %>>${s5-2}</option>
-                        <option value="1.0"<% if (s5 == 1.0) { %> selected="selected" <% } %>>${s5-3}</option>
-                        <option value="1.5"<% if (s5 == 1.5) { %> selected="selected" <% } %>>${s5-4}</option>
-                        <option value="0.5"<% if (s5 == 0.5) { %> selected="selected" <% } %>>${s5-5}</option>
+                        <optgroup label="${s5Text}"></optgroup>
+                        <option value="0.61"<% if (s5 == 0.61) { %> selected="selected" <% } %>>${s51}</option>
+                        <option value="0.78"<% if (s5 == 0.78) { %> selected="selected" <% } %>>${s52}</option>
+                        <option value="1.0"<% if (s5 == 1.0) { %> selected="selected" <% } %>>${s53}</option>
+                        <option value="1.5"<% if (s5 == 1.5) { %> selected="selected" <% } %>>${s54}</option>
+                        <option value="0.5"<% if (s5 == 0.5) { %> selected="selected" <% } %>>${s55}</option>
                     </select>
                     <select name="s6" class="selectpicker form-control select-lg">
-                        <optgroup label="${s6}"></optgroup>
-                        <option value="1.0"<% if (s6 == 1.0) { %> selected="selected" <% } %>>${s6-1}</option>
-                        <option value="0.9"<% if (s6 == 0.9) { %> selected="selected" <% } %>>${s6-2}</option>
+                        <optgroup label="${s6Text}"></optgroup>
+                        <option value="1.0"<% if (s6 == 1.0) { %> selected="selected" <% } %>>${s61}</option>
+                        <option value="0.9"<% if (s6 == 0.9) { %> selected="selected" <% } %>>${s62}</option>
                     </select>
                 </div>
 
@@ -247,7 +250,7 @@
                                 <div class="col-md-6">
                                     <%int k;%>
                                     <% for (k = 0; k < room.getAperture().size(); k++) {%>
-                                    <%Aperture aperture = (Aperture) room.getAperture().get(k);%>
+                                    <%Aperture aperture = room.getAperture().get(k);%>
                                     <% if (k == 3) { %>
                                 </div>
                                 <div class="col-md-6">
@@ -328,65 +331,65 @@
                             <%double s9 = ((Double) roomCoefficient.get(4)).doubleValue();%>
                             <%double s10 = ((Double) roomCoefficient.get(5)).doubleValue();%>
                             <select name="s1" class="selectpicker form-control select-lg">
-                                <optgroup label="${s1}"></optgroup>
-                                <option value="0.59"<% if (s1 == 0.59) { %> selected="selected" <% } %>>${s1-1}
+                                <optgroup label="${s1Text}"></optgroup>
+                                <option value="0.59"<% if (s1 == 0.59) { %> selected="selected" <% } %>>${s11}
                                 </option>
-                                <option value="0.57"<% if (s1 == 0.57) { %> selected="selected" <% } %>>${s1-2}
+                                <option value="0.57"<% if (s1 == 0.57) { %> selected="selected" <% } %>>${s12}
                                 </option>
-                                <option value="0.59"<% if (s1 == 0.59) { %> selected="selected" <% } %>>${s1-3}
+                                <option value="0.59"<% if (s1 == 0.59) { %> selected="selected" <% } %>>${s13}
                                 </option>
-                                <option value="1.0"<% if (s1 == 1.0) { %> selected="selected" <% } %>>${s1-4}
+                                <option value="1.0"<% if (s1 == 1.0) { %> selected="selected" <% } %>>${s14}
                                 </option>
                                 <optgroup label="${s1-5}"></optgroup>
-                                <option value="0.63"<% if (s1 == 0.63) { %> selected="selected" <% } %>>${s1-6}
+                                <option value="0.63"<% if (s1 == 0.63) { %> selected="selected" <% } %>>${s16}
                                 </option>
-                                <option value="0.61"<% if (s1 == 0.61) { %> selected="selected" <% } %>>${s1-7}
+                                <option value="0.61"<% if (s1 == 0.61) { %> selected="selected" <% } %>>${s17}
                                 </option>
                             </select>
 
                             <select name="s4" class="selectpicker form-control select-lg">
-                                <optgroup label="${s4}"></optgroup>
-                                <option value="1.5"<% if (s4 == 1.5) { %> selected="selected" <% } %>>${s4-1}
+                                <optgroup label="${s4Text}"></optgroup>
+                                <option value="1.5"<% if (s4 == 1.5) { %> selected="selected" <% } %>>${s41}
                                 </option>
-                                <option value="0.73"<% if (s4 == 0.73) { %> selected="selected" <% } %>>${s4-2}
+                                <option value="0.73"<% if (s4 == 0.73) { %> selected="selected" <% } %>>${s42}
                                 </option>
-                                <option value="0.87"<% if (s4 == 0.87) { %> selected="selected" <% } %>>${s4-3}
+                                <option value="0.87"<% if (s4 == 0.87) { %> selected="selected" <% } %>>${s43}
                                 </option>
-                                <!--<option value="">${s4-4}</option> -->
-                                <option value="1.0"<% if (s4 == 1.0) { %> selected="selected" <% } %>>${s4-5}
+                                <!--<option value="">${s44}</option> -->
+                                <option value="1.0"<% if (s4 == 1.0) { %> selected="selected" <% } %>>${s45}
                                 </option>
                             </select>
 
                             <select name="s7"
                                     class="selectpicker form-control select-lg">
-                                <optgroup label="${s7}"></optgroup>
-                                <option value="1"<% if (s7 == 1) { %> selected="selected" <% } %>>${s7-1}</option>
-                                <option value="0.9"<% if (s7 == 0.9) { %> selected="selected" <% } %>>${s7-2}
+                                <optgroup label="${s7Text}"></optgroup>
+                                <option value="1"<% if (s7 == 1) { %> selected="selected" <% } %>>${s71}</option>
+                                <option value="0.9"<% if (s7 == 0.9) { %> selected="selected" <% } %>>${s72}
                                 </option>
                             </select>
 
                             <select name="s8" class="selectpicker form-control select-lg">
-                                <optgroup label="${s8}"></optgroup>
-                                <option value="1"<% if (s8 == 1) { %> selected="selected" <% } %>>${s8-1}</option>
-                                <option value="0.9"<% if (s8 == 0.9) { %> selected="selected" <% } %>>${s8-2}
+                                <optgroup label="${s8Text}"></optgroup>
+                                <option value="1"<% if (s8 == 1) { %> selected="selected" <% } %>>${s81}</option>
+                                <option value="0.9"<% if (s8 == 0.9) { %> selected="selected" <% } %>>${s82}
                                 </option>
                             </select>
 
                             <select name="s9"
                                     class="selectpicker form-control select-lg">
-                                <optgroup label="${s9}"></optgroup>
-                                <option value="1.5"<% if (s9 == 1.5) { %> selected="selected" <% } %>>${s9-1}
+                                <optgroup label="${s9Text}"></optgroup>
+                                <option value="1.5"<% if (s9 == 1.5) { %> selected="selected" <% } %>>${s91}
                                 </option>
-                                <option value="1.0"<% if (s9 == 1.0) { %> selected="selected" <% } %>>${s9-2}
+                                <option value="1.0"<% if (s9 == 1.0) { %> selected="selected" <% } %>>${s92}
                                 </option>
                             </select>
 
                             <select name="s10"
                                     class="selectpicker form-control select-lg">
-                                <optgroup label="${s10}"></optgroup>
-                                <option value="0.9"<% if (s10 == 0.9) { %> selected="selected" <% } %>>${s10-1}
+                                <optgroup label="${s10Text}"></optgroup>
+                                <option value="0.9"<% if (s10 == 0.9) { %> selected="selected" <% } %>>${s101}
                                 </option>
-                                <option value="1.0"<% if (s10 == 1.0) { %> selected="selected" <% } %>>${s10-2}
+                                <option value="1.0"<% if (s10 == 1.0) { %> selected="selected" <% } %>>${s102}
                                 </option>
                             </select>
                         </div>
@@ -396,7 +399,7 @@
                             <div class="col-md-6">
                                 <%int m;%>
                                 <% for (m = 0; m < room.getSubstanceOfRoom().size(); m++) {%>
-                                <%SubstanceOfRoom substanceOfRoom = (SubstanceOfRoom) room.getSubstanceOfRoom().get(m);%>
+                                <%SubstanceOfRoom substanceOfRoom = room.getSubstanceOfRoom().get(m);%>
                                 <% if (m == 3) { %>
                             </div>
                             <div class="col-md-6">

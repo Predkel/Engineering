@@ -1,6 +1,6 @@
-<%@ page import="by.pvt.predkel.entities.User" %>
-<%@ page import="by.pvt.predkel.parameters.Attributes" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="User" class="by.pvt.predkel.entities.User" scope="session"/>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ include file="parts/links.jsp" %>
 <title>Помощь. Ввод данных</title>
@@ -13,7 +13,7 @@
         </div>
         <div class="col-md-8">
             <h3>${error}</h3>
-            <% if (((User) session.getAttribute(Attributes.USER)).getRole() == 1) { %>
+            <c:if test="${User.role==1}">
             <h3>Регистрация пользователя</h3>
             <p>На форме регистрации нового пользователя присутствуют три поля для ввода данных. Пример на рис. 1
                 <br>
@@ -52,7 +52,7 @@
                 <img src="jsp/images/substance4.png" alt="ошибка формы материалов" WIDTH="600" HEIGHT="400">
                 <br>
             </p>
-            <% } %>
+            </c:if>
             <h3>История расчетов</h3>
             <p>При входе на данную страницу вы увидите список созданных вами ранее расчетов. Пример на рис.7
                 <br>

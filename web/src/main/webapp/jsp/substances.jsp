@@ -1,11 +1,12 @@
-<%@ page import="by.pvt.predkel.parameters.Attributes" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.math.BigDecimal" %>
-<%@ page import="java.math.RoundingMode" %>
-<%@ page import="by.pvt.predkel.entities.FlammableSubstance" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
-<%--<jsp:useBean id="substances" class="java.util.ArrayList" scope="session"/>--%>
+
+<jsp:useBean id="leftSubstances" class="java.util.ArrayList" scope="request"/>
+<jsp:useBean id="rightSubstances" class="java.util.ArrayList" scope="request"/>
+<jsp:useBean id="error" class="java.lang.String" scope="request"/>
+<jsp:useBean id="beforeThisPage" class="java.util.ArrayList" scope="request"/>
+<jsp:useBean id="afterThisPage" class="java.util.ArrayList" scope="request"/>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="locales.local" var="loc"/>
@@ -39,98 +40,89 @@
         <div class="row">
 
             <div class="col-md-6">
-                <%
-                    List t = (List<Object>) request.getAttribute("substances");
-                    int size = t.size();
-                    int firstHalf = new BigDecimal(size / 2).setScale(0, RoundingMode.UP).intValue();
-                %>
+
                 <div id="accordion" class="panel-group">
-                    <%for (int m = 0; m < firstHalf; m++) {%>
-                    <%FlammableSubstance sub = (FlammableSubstance) t.get(m);%>
+                    <c:forEach items="${leftSubstances}" var="sub">
 
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a href="#collapse-<%=sub.getId()%>" data-parent="#accordion"
-                                   data-toggle="collapse"><%=sub.getNameOfSubstance()%>
-                                </a>
+                                <a href="#collapse-${sub.id}" data-parent="#accordion"
+                                   data-toggle="collapse">${sub.nameOfSubstance}</a>
                             </h4>
                         </div>
-                        <div id="collapse-<%=sub.getId()%>" class="panel-collapse collapse">
+                        <div id="collapse-${sub.id}" class="panel-collapse collapse">
                             <div class="panel-body">
 
-                                <input type="hidden" name="idSubstance" value="<%=sub.getId()%>">
+                                <input type="hidden" name="idSubstance" value="${sub.id}">
 
                                 <div class="form-group">
                                     <label>${name}</label>
                                     <input type="text" name="nameOfSubstance" class="form-control"
-                                           placeholder="${name}" value="<%=sub.getNameOfSubstance()%>">
+                                           placeholder="${name}" value="${sub.nameOfSubstance}">
                                 </div>
                                 <div class="form-group">
                                     <label>${air}</label><br>
                                     <input type="text" name="amountOfCombustionAir" class="form-control"
-                                           placeholder="${air}" value="<%=sub.getAmountOfCombustionAir()%>">
+                                           placeholder="${air}" value="${sub.amountOfCombustionAir}">
                                 </div>
                                 <div class="form-group">
                                     <label>${heat}</label>
                                     <input type="text" name="combustionHeat" class="form-control"
-                                           placeholder="${heat}" value="<%=sub.getCombustionHeat()%>">
+                                           placeholder="${heat}" value="${sub.combustionHeat}">
                                 </div>
                                 <div class="form-group">
                                     <label>${speed}</label>
                                     <input type="text" name="averageSpeedBurnout" class="form-control"
-                                           placeholder="${speed}" value="<%=sub.getAverageSpeedBurnout()%>">
+                                           placeholder="${speed}" value="${sub.averageSpeedBurnout}">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </c:forEach>
 
-                    <%}%>
                 </div>
             </div>
             <div class="col-md-6">
                 <div id="accordion2" class="panel-group">
-                    <%for (int m = firstHalf; m < size; m++) {%>
-                    <%FlammableSubstance sub = (FlammableSubstance) t.get(m);%>
+                    <c:forEach items="${rightSubstances}" var="sub">
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a href="#collapse-<%=sub.getId()%>" data-parent="#accordion2"
-                                   data-toggle="collapse"><%=sub.getNameOfSubstance()%>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse-<%=sub.getId()%>" class="panel-collapse collapse">
-                            <div class="panel-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="#collapse-${sub.id}" data-parent="#accordion"
+                                       data-toggle="collapse">${sub.nameOfSubstance}</a>
+                                </h4>
+                            </div>
+                            <div id="collapse-${sub.id}" class="panel-collapse collapse">
+                                <div class="panel-body">
 
-                                <input type="hidden" name="idSubstance" value="<%=sub.getId()%>">
+                                    <input type="hidden" name="idSubstance" value="${sub.id}">
 
-                                <div class="form-group">
-                                    <label>${name}</label>
-                                    <input type="text" name="nameOfSubstance" class="form-control"
-                                           placeholder="${name}" value="<%=sub.getNameOfSubstance()%>">
-                                </div>
-                                <div class="form-group">
-                                    <label>${air}</label><br>
-                                    <input type="text" name="amountOfCombustionAir" class="form-control"
-                                           placeholder="${air}" value="<%=sub.getAmountOfCombustionAir()%>">
-                                </div>
-                                <div class="form-group">
-                                    <label>${heat}</label>
-                                    <input type="text" name="combustionHeat" class="form-control"
-                                           placeholder="${heat}" value="<%=sub.getCombustionHeat()%>">
-                                </div>
-                                <div class="form-group">
-                                    <label>${speed}</label>
-                                    <input type="text" name="averageSpeedBurnout" class="form-control"
-                                           placeholder="${speed}" value="<%=sub.getAverageSpeedBurnout()%>">
+                                    <div class="form-group">
+                                        <label>${name}</label>
+                                        <input type="text" name="nameOfSubstance" class="form-control"
+                                               placeholder="${name}" value="${sub.nameOfSubstance}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>${air}</label><br>
+                                        <input type="text" name="amountOfCombustionAir" class="form-control"
+                                               placeholder="${air}" value="${sub.amountOfCombustionAir}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>${heat}</label>
+                                        <input type="text" name="combustionHeat" class="form-control"
+                                               placeholder="${heat}" value="${sub.combustionHeat}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>${speed}</label>
+                                        <input type="text" name="averageSpeedBurnout" class="form-control"
+                                               placeholder="${speed}" value="${sub.averageSpeedBurnout}">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <%}%>
+                    </c:forEach>
                 </div>
             </div>
         </div>
@@ -188,117 +180,73 @@
             <div class="col-md-2">
             </div>
         </div>
-        <%int thisPage = (Integer) request.getAttribute(Attributes.PAGE);%>
-        <input type="hidden" name="amountOfSubstances" value="<%=size%>">
-        <input type="hidden" name="page" value="<%=thisPage%>">
+
+        <input type="hidden" name="amountOfSubstances" value="<c:out value="${amountOfSubstances}"/>">
+        <input type="hidden" name="page" value="<c:out value="${page}"/>">
     </form>
 
 
-    <%int betweenNumbers = 4;%>
-    <%int firstPage = 1;%>
-
-    <%int earlyPage = thisPage - betweenNumbers;%>
-    <%int previousPage = thisPage - 1;%>
-    <%int nextPage = thisPage + 1;%>
-    <%int laterPage = thisPage + betweenNumbers;%>
-    <%int lastPage = (Integer) request.getAttribute(Attributes.COUNT_OF_PAGES);%>
     <div class="row">
         <div class="center-block">
-            <%if (lastPage == firstPage) { %>
-            <button class="btn btn-danger"><span><%=thisPage%></span></button>
-            <%} else if (lastPage > firstPage) { %>
 
-            <% if (thisPage > firstPage + betweenNumbers) { %>
-            <a href="controller?command=tosubstances&page=<%=previousPage%>"><img src="jsp/images/leftArrow.png"
-                                                                                  WIDTH="20" HEIGHT="20" BORDER="0"></a>
-            <a href="controller?command=tosubstances&page=1">
-                <button class="btn btn-default">1</button>
-            </a>
+            <c:if test="${previousPage!=0}">
+                <a href="controller?command=tosubstances&page=${previousPage}"><img src="jsp/images/leftArrow.png"
+                                                                                    WIDTH="20" HEIGHT="20"
+                                                                                    BORDER="0"></a>
+            </c:if>
 
-            <span>...</span>
+            <c:if test="${showFirstPage==true}">
+                <a href="controller?command=tosubstances&page=1">
+                    <button class="btn btn-default">1</button>
+                </a>
+            </c:if>
 
-            <c:forEach var="i" begin="<%=earlyPage%>" end="<%=previousPage%>">
-                <a href="controller?command=tosubstances&page=${i}">
-                    <button class="btn btn-default">${i}</button>
+            <c:if test="${showFirstDots==true}">
+                <span>...</span>
+            </c:if>
+
+            <c:forEach items="${beforeThisPage}" var="number">
+                <a href="controller?command=tosubstances&page=${number}">
+                    <button class="btn btn-default">${number}</button>
                 </a>
             </c:forEach>
 
-            <% } else if ((thisPage <= firstPage + betweenNumbers) && (thisPage >= firstPage)) {%>
+            <button class="btn btn-danger">${page}</button>
 
-            <%if (thisPage > firstPage) {%>
-            <a href="controller?command=tosubstances&page=<%=previousPage%>"><img src="jsp/images/leftArrow.png"
-                                                                                  WIDTH="20" HEIGHT="20" BORDER="0"></a>
-            <% } %>
-            <c:forEach var="i" begin="1" end="<%=previousPage%>">
-                <a href="controller?command=tosubstances&page=${i}">
-                    <button class="btn btn-default">${i}</button>
-                </a>
-            </c:forEach>
-            <% } %>
-
-            <button class="btn btn-danger"><span><%=thisPage%></span></button>
-
-            <% if (laterPage < lastPage) { %>
-            <c:forEach var="i" begin="<%=nextPage%>" end="<%=laterPage%>">
-                <a href="controller?command=tosubstances&page=${i}">
-                    <button class="btn btn-default">${i}</button>
+            <c:forEach items="${afterThisPage}" var="number">
+                <a href="controller?command=tosubstances&page=${number}">
+                    <button class="btn btn-default">${number}</button>
                 </a>
             </c:forEach>
 
-            <span>...</span>
+            <c:if test="${showLastDots==true}">
+                <span>...</span>
+            </c:if>
 
-            <a href="controller?command=tosubstances&page=<%=lastPage%>">
-                <button class="btn btn-default"><%=lastPage%>
-                </button>
-            </a>
-
-            <a href="controller?command=tosubstances&page=<%=nextPage%>"><img src="jsp/images/rightArrow.png" WIDTH="20"
-                                                                              HEIGHT="20" BORDER="0"></a>
-
-            <% } else if ((thisPage >= lastPage - betweenNumbers)) {%>
-            <c:forEach var="i" begin="<%=nextPage%>" end="<%=lastPage%>">
-                <a href="controller?command=tosubstances&page=${i}">
-                    <button class="btn btn-default">${i}</button>
+            <c:if test="${showLastPage==true}">
+                <a href="controller?command=tosubstances&page=${countOfPages}">
+                    <button class="btn btn-default">${countOfPages}</button>
                 </a>
-            </c:forEach>
-            <%if (thisPage < lastPage) {%>
-            <a href="controller?command=tosubstances&page=<%=nextPage%>"><img src="jsp/images/rightArrow.png"
-                                                                              WIDTH="20" HEIGHT="20" BORDER="0"></a>
-            <% } %>
-            <% } %>
-            <% } %>
+            </c:if>
+
+            <c:if test="${nextPage!=0}">
+                <a href="controller?command=tosubstances&page=${nextPage}"><img src="jsp/images/rightArrow.png"
+                                                                                WIDTH="20" HEIGHT="20" BORDER="0"></a>
+            </c:if>
+
             <span class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <button class="btn btn-primary">${size}</button><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="controller?command=setsize&paginationSize=2">2</a></li>
-                    <li><a href="controller?command=setsize&paginationSize=4">4</a></li>
-                    <li><a href="controller?command=setsize&paginationSize=6">6</a></li>
-                    <li><a href="controller?command=setsize&paginationSize=8">8</a></li>
                     <li><a href="controller?command=setsize&paginationSize=10">10</a></li>
-                    <li><a href="controller?command=setsize&paginationSize=16">16</a></li>
                     <li><a href="controller?command=setsize&paginationSize=20">20</a></li>
+                    <li><a href="controller?command=setsize&paginationSize=40">40</a></li>
                 </ul>
             </span>
             <br>
             <br>
         </div>
-        <%--<form class="center-block" action="controller" method="POST">--%>
-        <%--<input type="hidden" name="command" value="setsize">--%>
-        <%--<select name="paginationSize" class="selectpicker form-control select-lg">--%>
-        <%--<optgroup label="Размерность"></optgroup>--%>
-        <%--<option value="2">2</option>--%>
-        <%--<option value="4">4</option>--%>
-        <%--<option value="6">6</option>--%>
-        <%--<option value="8">8</option>--%>
-        <%--<option value="10">10</option>--%>
-        <%--<option value="16">16</option>--%>
-        <%--<option value="20">20</option>--%>
-        <%--</select>--%>
-        <%--<div class="form-group">--%>
-        <%--<input type="submit" class="btn btn-block btn-primary" value="Изменить размерность">--%>
-        <%--</div>--%>
-        <%--</form>--%>
     </div>
 </div>
 

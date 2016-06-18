@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
+
+<jsp:useBean id="error" class="java.lang.String" scope="request"/>
+<jsp:useBean id="substances" class="java.util.ArrayList" scope="request"/>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="locales.local" var="loc"/>

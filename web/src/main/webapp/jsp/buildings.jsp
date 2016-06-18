@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 
+<jsp:useBean id="buildings" class="java.util.ArrayList" scope="request"/>
+<jsp:useBean id="error" class="java.lang.String" scope="request"/>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="locales.local" var="loc"/>
@@ -47,7 +50,6 @@
     <%--<%=request.getContentType()%>--%>
     <%--<%=request.getLocale()%>--%>
     <c:forEach items="${buildings}" var="build">
-        <%--<c:forEach items="${User.building}" var="build">--%>
         <div class="row">
             <form action="controller" method="GET">
                 <input type="hidden" name="command" value="buildings">
@@ -76,7 +78,6 @@
                                 <button value="delete" name="buildingAction" class="btn btn-default"
                                         type="submit">${delete}</button>
                             </li>
-                                <%--<li><input value="${delete}" name="buildingAction" class="btn btn-default" type="submit"></li>--%>
                         </ul>
                     </div>
                 </div>
