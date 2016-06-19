@@ -28,7 +28,6 @@ public class CalculateCommand extends AbstractCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         GoToCalculate go = new GoToCalculate();
-        //request.setCharacterEncoding("UTF-8");
         MyEntityObjectFactory factory = new MyEntityObjectFactory();
 
         User us = (User) request.getSession().getAttribute(Attributes.USER);
@@ -36,7 +35,7 @@ public class CalculateCommand extends AbstractCommand {
         if ((request.getParameter(Parameters.AMOUNT_OF_ROOMS)).isEmpty()
                 || (Integer.parseInt(request.getParameter(Parameters.AMOUNT_OF_ROOMS)) == 0)) {
             request.setAttribute(Attributes.ERROR, Errors.ROOM_AMOUNT_ERROR);
-            return go.execute(request, response);//Path.CALCULATE_PATH;
+            return go.execute(request, response);
         }
 
         Integer amountOfRooms = Integer.parseInt(request.getParameter(Parameters.AMOUNT_OF_ROOMS));
@@ -58,7 +57,6 @@ public class CalculateCommand extends AbstractCommand {
             build.getCoefficientSForBuild().add(Double.parseDouble(request.getParameter(Parameters.BUILDING_C6)));
             build.setSpecifyingCoefficientS5(Double.parseDouble(request.getParameter(Parameters.BUILDING_SPECIFYING_COEFFICIENT_C5)));
 
-// Integer amountOfRooms=Integer.parseInt(request.getParameter("amountOfRooms"));
             for (int i = 0; i < amountOfRooms; i++) {
                 Room room = factory.createRoom();
                 if (request.getParameterValues(Parameters.POSITION_OF_ROOM)[i].isEmpty())
@@ -80,7 +78,6 @@ public class CalculateCommand extends AbstractCommand {
                         request.getParameterValues(Parameters.SQUARE_OF_CONSTRUCTION_ROOM)[i]));
 
 
-                //  Integer amountOfApertures=Integer.parseInt(request.getParameterValues("amountOfApertures")[i]);
                 for (int j = 0; j < amountOfApertures; j++) {
                     Aperture aperture = factory.createAperture();
                     if (request.getParameterValues(Parameters.TYPE_OF_APERTURE)[currentAmountOfApertures].isEmpty()) {
@@ -144,9 +141,11 @@ public class CalculateCommand extends AbstractCommand {
             }
 
         } catch (NullPointerException e) {
+            MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.CALCULATE_EMPTY_ERROR);
             return go.execute(request, response);//Path.CALCULATE_PATH;
         } catch (IllegalArgumentException e2) {
+            MyLogger.INSTANCE.logError(getClass(), e2.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.CALCULATE_INCORRECT_ERROR);
             return go.execute(request, response);//Path.CALCULATE_PATH;
         }
@@ -177,11 +176,8 @@ public class CalculateCommand extends AbstractCommand {
         request.getSession().setAttribute(Attributes.BUILDING, build);
         request.getSession().setAttribute(Attributes.USERNAME, us.getLogin());
         request.getSession().setAttribute(Attributes.NAME_OF_BUILDING, Transliterator.transliterate(build.getNameOfBuilding()));
-        //request.setAttribute("rooms",build.getRoom());
         request.getSession().setAttribute(Attributes.NAME_OF_CHARTS, create.getChart().getImageNames());
-//        request.getSession().setAttribute("size", create.getChart().getImageNames().size());
         request.getSession().setAttribute(Attributes.REPORT_FILEPATH, Path.REPORT_PATH);
-//        Boolean save=true;
         request.getSession().setAttribute(Attributes.SAVE_BUILDING, true);
 
         return Path.CHART_PATH;
