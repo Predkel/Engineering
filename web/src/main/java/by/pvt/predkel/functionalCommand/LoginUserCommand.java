@@ -32,8 +32,7 @@ public class LoginUserCommand extends AbstractCommand {
 
             User user = UserService.getInstance().loginUser(login, password);
             if (user != null) {
-                request.getSession(true);
-                request.getSession().setAttribute(Attributes.USER, user);
+                request.getSession(true).setAttribute(Attributes.USER, user);
                 return Path.FUNCTIONS_PATH;
             } else {
                 request.setAttribute(Attributes.ERROR, Errors.USER_INCORRECT_ERROR);

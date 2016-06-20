@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 
+<jsp:useBean id="userName" class="java.lang.String" scope="session"/>
 <jsp:useBean id="buildName" class="java.lang.String" scope="session"/>
 <jsp:useBean id="error" class="java.lang.String" scope="request"/>
 <jsp:useBean id="chartNames" class="java.util.ArrayList" scope="session"/>
@@ -16,48 +17,44 @@
 <%@ include file="parts/links.jsp" %>
 <title>${result}</title>
 <%@ include file="parts/header.jsp" %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
 
-<br>
-<br>
-<br>
-        <div class="row">
-            <div class="col-md-2">
-
-            </div>
-            <div class="col-md-8">
-                <h3>${error}</h3>
-            </div>
-            <div class="col-md-2">
-
-            </div>
         </div>
+        <div class="col-md-8">
+            <h3>${error}</h3>
+        </div>
+        <div class="col-md-2">
 
-
-<div class="row">
-    <div class="col-md-3">
-
+        </div>
     </div>
-    <div class="col-md-6">
-        <c:forEach items="${chartNames}" var="name">
-            <img src="jsp/other/${name}" WIDTH="600" HEIGHT="400" BORDER="0" alt="">
-        </c:forEach>
-        <br>
-        <a href="jsp/other/<c:out value="${buildName}"/>.docx" download>
-            <button class="btn btn-block btn-lg btn-primary">${download}</button>
-        </a>
+    <div class="row">
+        <div class="col-md-3">
 
-        <c:if test="${saveBuilding}">
-            <a href="controller?command=savereport">
-                <button class="btn btn-block btn-lg btn-primary">${save}</button>
+        </div>
+        <div class="col-md-6">
+            <c:forEach items="${chartNames}" var="name">
+                <img src="jsp/reports/<c:out value="${userName}"/>/${name}" WIDTH="600" HEIGHT="400" BORDER="0" alt="">
+            </c:forEach>
+            <br>
+            <a href="jsp/reports/<c:out value="${userName}"/>/<c:out value="${buildName}"/>.docx" download>
+                <button class="btn btn-block btn-lg btn-primary">${download}</button>
             </a>
-        </c:if>
 
-        <a href="controller?command=torecalculate">
-            <button class="btn btn-block btn-lg btn-primary">${change}</button>
-        </a>
-    </div>
-    <div class="col-md-3">
+            <c:if test="${saveBuilding}">
+                <a href="controller?command=savereport">
+                    <button class="btn btn-block btn-lg btn-primary">${save}</button>
+                </a>
+            </c:if>
 
+            <a href="controller?command=torecalculate">
+                <button class="btn btn-block btn-lg btn-primary">${change}</button>
+            </a>
+        </div>
+        <div class="col-md-3">
+
+        </div>
     </div>
 </div>
 

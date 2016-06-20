@@ -13,9 +13,9 @@
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 
-    <!--<listener>-->
-    <!--<listener-class>by.pvt.listener.DeleteGeneratedFiles</listener-class>-->
-    <!--</listener>-->
+    <listener>
+        <listener-class>by.pvt.predkel.listener.DeleteGeneratedFiles</listener-class>
+    </listener>
 
     <filter>
         <filter-name>EncodingFilter</filter-name>

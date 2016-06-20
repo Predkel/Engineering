@@ -18,18 +18,18 @@
 <%@ include file="parts/links.jsp" %>
 <title>${functions}</title>
 <%@ include file="parts/header.jsp" %>
-<div class="row">
-    <div class="col-md-2">
-
-    </div>
-    <div class="col-md-8">
-        <h3>${error}</h3>
-    </div>
-    <div class="col-md-2">
-
-    </div>
-</div>
 <div class="container">
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+            <h3>${error}</h3>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
     <div class="row masonry" data-columns>
         <div class="item">
             <div class="thumbnail">
@@ -50,24 +50,24 @@
             </div>
         </div>
         <c:if test="${User.role==1}">
-        <div class="item">
-            <div class="thumbnail">
-                <a href="controller?command=toregister"><img src="jsp/images/register.png" alt=""></a>
-                <div class="caption">
-                    <h3><a href="controller?command=toregister">${register}</a></h3>
-                    <p>${registerDiscription}</p>
+            <div class="item">
+                <div class="thumbnail">
+                    <a href="controller?command=toregister"><img src="jsp/images/register.png" alt=""></a>
+                    <div class="caption">
+                        <h3><a href="controller?command=toregister">${register}</a></h3>
+                        <p>${registerDiscription}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="item">
-            <div class="thumbnail">
-                <a href="controller?command=tosubstances"><img src="jsp/images/substances.png" alt=""></a>
-                <div class="caption">
-                    <h3><a href="controller?command=tosubstances">${substances}</a></h3>
-                    <p>${substancesDiscription}</p>
+            <div class="item">
+                <div class="thumbnail">
+                    <a href="controller?command=tosubstances"><img src="jsp/images/substances.png" alt=""></a>
+                    <div class="caption">
+                        <h3><a href="controller?command=tosubstances">${substances}</a></h3>
+                        <p>${substancesDiscription}</p>
+                    </div>
                 </div>
             </div>
-        </div>
         </c:if>
     </div>
 </div>

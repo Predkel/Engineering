@@ -155,15 +155,16 @@ public class CalculateCommand extends AbstractCommand {
 
         AllDefinition def = new AllDefinition();
         def.setALlParameters(build);
-
+        //System.getProperty("user.dir") + "/tomcat/webapps/Engineering/other/" + us.getLogin() + "/"
         ///путь для генерации отчета и графиков
-        File myPath = new File(Path.REPORT_PATH);
-        myPath.mkdirs();
+        String path = request.getServletContext().getRealPath("/") + "jsp/reports/" + us.getLogin() + "/";
+        File myPath = new File(path);
+        myPath.mkdirs();//Path.REPORT_PATH
 
         CreateReport create = new CreateReport(build);
 
         try {
-            create.create(Path.REPORT_PATH);
+            create.create(path);
         }catch (NumberFormatException e1){
             MyLogger.INSTANCE.logError(getClass(), e1.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.NUBER_FORMAT_ERROR);
