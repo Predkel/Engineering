@@ -11,7 +11,6 @@ import by.pvt.predkel.entities.Entity;
 
 public class ParametersCalculatedFireLoad extends Entity {
     private static final long serialVersionUID = 1L;
-    private long roomId;
     private double specificFireLoad;
     private double specificFireLoadZVEZDOCHKA;
     private double reducedHeightOfApertures;
@@ -72,13 +71,6 @@ public class ParametersCalculatedFireLoad extends Entity {
         return result;
     }
 
-    public long getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(long roomId) {
-        this.roomId = roomId;
-    }
     /**
      * Gets the value of the specificFireLoad property.
      */

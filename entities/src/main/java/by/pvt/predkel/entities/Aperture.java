@@ -9,8 +9,6 @@ package by.pvt.predkel.entities;
 
 public class Aperture extends Entity {
 
-    private long roomId;
-
     private String typeOfAperture;
     private double width;
     private double height;
@@ -46,20 +44,6 @@ public class Aperture extends Entity {
         temp = Double.doubleToLongBits(getSquareOfAperture());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
-    }
-
-    /**
-     * Gets the value of the roomId property.
-     */
-    public long getRoomId() {
-        return roomId;
-    }
-
-    /**
-     * Sets the value of the roomId property.
-     */
-    public void setRoomId(long value) {
-        this.roomId = value;
     }
 
     /**

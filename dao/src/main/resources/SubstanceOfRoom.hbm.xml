@@ -8,10 +8,9 @@
         <id name="id" type="java.lang.Long">
             <generator class="increment"/>
         </id>
-        <!--<property name="roomId" type="java.lang.Long"/>-->
+
         <many-to-one name="flammableSubstance" column="flammableSubstance"
                      class="by.pvt.predkel.entities.FlammableSubstance" not-null="true" cascade="none" lazy="false"/>
         <property name="weight"/>
-        <!--<property name="roomId"/>-->
     </class>
 </hibernate-mapping>

@@ -11,7 +11,6 @@ import by.pvt.predkel.entities.Entity;
 
 public class IntegratedThermalAndTechnicalParameters extends Entity {
     private static final long serialVersionUID = 1L;
-    private long roomId;
     private double maximumMeanBulkTemperature;
     private double durationOfFireSurround;
     private double timeReachMaximumMeanBulkTemperature;
@@ -63,13 +62,6 @@ public class IntegratedThermalAndTechnicalParameters extends Entity {
         return result;
     }
 
-    public long getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(long roomId) {
-        this.roomId = roomId;
-    }
 
     /**
      * Gets the value of the maximumMeanBulkTemperature property.

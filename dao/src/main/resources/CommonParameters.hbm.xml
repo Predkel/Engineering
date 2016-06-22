@@ -15,6 +15,5 @@
         <property name="perimeter" type="java.lang.Double"/>
         <property name="volume" type="java.lang.Double"/>
         <property name="squareOfConstruction" type="java.lang.Double"/>
-        <!--<property name="roomId"/>-->
     </class>
 </hibernate-mapping>

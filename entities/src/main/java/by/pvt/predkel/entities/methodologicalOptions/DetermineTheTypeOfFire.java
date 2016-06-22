@@ -11,7 +11,6 @@ import by.pvt.predkel.entities.Entity;
 
 public class DetermineTheTypeOfFire extends Entity {
     private static final long serialVersionUID = 1L;
-    private long roomId;
     private double proemnostOfRoom;
     private double averageAmountOfCombustionAir;
     private double specificCriticalAmountOfFireLoad;
@@ -59,14 +58,6 @@ public class DetermineTheTypeOfFire extends Entity {
 
     public void setPrn(boolean prn) {
         this.prn = prn;
-    }
-
-    public long getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(long roomId) {
-        this.roomId = roomId;
     }
 
     /**

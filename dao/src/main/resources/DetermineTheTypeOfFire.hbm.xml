@@ -13,6 +13,5 @@
         <property name="specificCriticalAmountOfFireLoad" type="java.lang.Double"/>
         <property name="specificValueOfFireLoad" type="java.lang.Double"/>
         <property name="prn" type="java.lang.Boolean"/>
-        <!--<property name="roomId"/>-->
     </class>
 </hibernate-mapping>

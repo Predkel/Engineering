@@ -16,10 +16,7 @@ public class ChangeInTemperatureOfSlab extends Entity {
 
     private static final long serialVersionUID = 1L;
 
-    private int roomId;
-
     private List<Double> changes;
-
 
     @Override
     public boolean equals(Object o) {
@@ -29,31 +26,15 @@ public class ChangeInTemperatureOfSlab extends Entity {
 
         ChangeInTemperatureOfSlab that = (ChangeInTemperatureOfSlab) o;
 
-        if (getRoomId() != that.getRoomId()) return false;
-        return getChanges() != null ? getChanges().equals(that.getChanges()) : that.getChanges() == null;
+        return getChanges().equals(that.getChanges());
 
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + getRoomId();
-        result = 31 * result + (getChanges() != null ? getChanges().hashCode() : 0);
+        result = 31 * result + getChanges().hashCode();
         return result;
-    }
-
-    /**
-     * Gets the value of the roomId property.
-     */
-    public int getRoomId() {
-        return roomId;
-    }
-
-    /**
-     * Sets the value of the roomId property.
-     */
-    public void setRoomId(int value) {
-        this.roomId = value;
     }
 
     /**

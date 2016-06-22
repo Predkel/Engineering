@@ -19,6 +19,5 @@
         <property name="coefficientB" type="java.lang.Double"/>
         <property name="coefficientS" type="java.lang.Double"/>
         <property name="estimatedFireLoad" type="java.lang.Double"/>
-        <!--<property name="roomId"/>-->
     </class>
 </hibernate-mapping>

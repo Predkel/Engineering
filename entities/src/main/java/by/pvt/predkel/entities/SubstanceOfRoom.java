@@ -11,10 +11,6 @@ import by.pvt.predkel.factory.MyEntityObjectFactory;
 public class SubstanceOfRoom extends Entity {
     private static final long serialVersionUID = 1L;
 
-//    private int substanceId;
-
-    private long roomId;
-
     private FlammableSubstance flammableSubstance;
     private double weight;
 
@@ -38,34 +34,6 @@ public class SubstanceOfRoom extends Entity {
         temp = Double.doubleToLongBits(getWeight());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
-    }
-
-/**
-     * Gets the value of the substanceId property.
-     */
-//    public int getSubstanceId() {
-//        return substanceId;
-//    }
-//
-//    /**
-//     * Sets the value of the substanceId property.
-//     */
-//    public void setSubstanceId(int value) {
-//        this.substanceId = value;
-//    }
-
-    /**
-     * Gets the value of the roomId property.
-     */
-    public long getRoomId() {
-        return roomId;
-    }
-
-    /**
-     * Sets the value of the roomId property.
-     */
-    public void setRoomId(long value) {
-        this.roomId = value;
     }
 
     /**

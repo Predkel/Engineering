@@ -19,8 +19,6 @@ import java.util.List;
 public class Room extends Entity {
     private static final long serialVersionUID = 1L;
 
-    private long buildingId;
-
     private CommonParameters commonParameters;
 
     private List<Double> coefficientSForRoom;
@@ -80,19 +78,6 @@ public class Room extends Entity {
         return result;
     }
 
-    /**
-     * Gets the value of the buildingId property.
-     */
-    public long getBuildingId() {
-        return buildingId;
-    }
-
-    /**
-     * Sets the value of the buildingId property.
-     */
-    public void setBuildingId(long value) {
-        this.buildingId = value;
-    }
 
     /**
      * Gets the value of the commonParameters property.

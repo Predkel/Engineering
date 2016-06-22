@@ -13,11 +13,7 @@
             <key column="roomId"/>
             <one-to-many class="by.pvt.predkel.entities.Aperture"/>
         </bag>
-        <!--<property name="buildingId"/>-->
-        <!--<bag name="coefficientSForRoom" cascade="all">-->
-        <!--<key column="roomId"/>-->
-        <!--<one-to-many class="java.util.List"/>-->
-        <!--</bag>-->
+
         <list name="coefficientSForRoom" table="coefficientSForRoom" cascade="all" lazy="false">
             <key column="roomId"/>
             <list-index column="position"/>
@@ -56,17 +52,6 @@
             <list-index column="minute"/>
             <element type="java.lang.Double" column="temperature"/>
         </list>
-        <!--<bag name="changeInMeanBulkTemperature" cascade="all">-->
-        <!--<key column="roomId"/>-->
-        <!--<one-to-many class="java.util.List"/>-->
-        <!--</bag>-->
-        <!--<bag name="changeInTemperatureOfSlab" cascade="all">-->
-        <!--<key column="roomId"/>-->
-        <!--<one-to-many class="java.util.List"/>-->
-        <!--</bag>-->
-        <!--<bag name="changeInTemperatureOfWalls" cascade="all">-->
-        <!--<key column="roomId"/>-->
-        <!--<one-to-many class="java.util.List"/>-->
-        <!--</bag>-->
+
     </class>
 </hibernate-mapping>

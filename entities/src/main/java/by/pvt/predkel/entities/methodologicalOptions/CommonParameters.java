@@ -11,7 +11,6 @@ import by.pvt.predkel.entities.Entity;
 
 public class CommonParameters extends Entity {
     private static final long serialVersionUID = 1L;
-    private long roomId;
     private String positionOfRoom;
     private String nameOfRoom;
     private double square;
@@ -57,13 +56,6 @@ public class CommonParameters extends Entity {
         return result;
     }
 
-    public long getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(long roomId) {
-        this.roomId = roomId;
-    }
     /**
      * Gets the value of the positionOfRoom property.
      *

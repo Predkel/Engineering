@@ -16,6 +16,5 @@
         <property name="timeToReachMaximumTemperatureOfWallSurface" type="java.lang.Double"/>
         <property name="averageMaximumTemperatureOfSlab" type="java.lang.Double"/>
         <property name="timeToReachMaximumTemperatureOfSlabSurface" type="java.lang.Double"/>
-        <!--<property name="roomId"/>-->
     </class>
 </hibernate-mapping>
