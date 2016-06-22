@@ -51,27 +51,13 @@ public class BuildingsListCommand extends AbstractCommand {
                 request.getSession().setAttribute(Attributes.BUILDING, build);
                 request.getSession().setAttribute(Attributes.USERNAME, user.getLogin());
                 request.getSession().setAttribute(Attributes.NAME_OF_BUILDING, Transliterator.transliterate(build.getNameOfBuilding()));
-                //request.setAttribute("rooms",build.getRoom());
                 request.getSession().setAttribute(Attributes.NAME_OF_CHARTS, create.getChart().getImageNames());
-//        request.getSession().setAttribute("size", create.getChart().getImageNames().size());
                 request.getSession().setAttribute(Attributes.REPORT_FILEPATH, Path.REPORT_PATH);
-//        Boolean save=true;
                 request.getSession().setAttribute(Attributes.SAVE_BUILDING, true);
 
                 return Path.CHART_PATH;
             } else if (action.equals(Parameters.DELETE)) {//если пользователь выбрал удаление отчета
-
                 BuildingService.getInstance().deleteBuilding(build);
-//                Building removeBuild = null;
-//                for (Building temp : user.getBuilding()) {
-//                    if (temp.equals(build)) {
-//                        removeBuild = temp;
-//                        break;
-//                    }
-//                }
-//                if (removeBuild != null)
-//                    user.getBuilding().remove(removeBuild);
-
                 request.setAttribute(Attributes.ALL_USER_BUILDINGS, BuildingService.getInstance().getAllByFk(user.getId()));
                 return Path.BUILDINGS_PATH;
             }

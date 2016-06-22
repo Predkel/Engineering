@@ -155,11 +155,11 @@ public class CalculateCommand extends AbstractCommand {
 
         AllDefinition def = new AllDefinition();
         def.setALlParameters(build);
-        //System.getProperty("user.dir") + "/tomcat/webapps/Engineering/other/" + us.getLogin() + "/"
+        //System.getProperty("user.dir") + "/tomcat/webapps/Engineering/other/" + us.getLogin() + "/"- было раньше
         ///путь для генерации отчета и графиков
         String path = request.getServletContext().getRealPath("/") + "jsp/reports/" + us.getLogin() + "/";
         File myPath = new File(path);
-        myPath.mkdirs();//Path.REPORT_PATH
+        myPath.mkdirs();
 
         CreateReport create = new CreateReport(build);
 

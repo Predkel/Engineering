@@ -21,6 +21,8 @@ public class SubstancesListCommand extends AbstractCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
+        GoToListOfSubstances go = new GoToListOfSubstances();
+
         Integer size = Integer.parseInt(request.getParameter(Parameters.AMOUNT_OF_SUBSTANCES));
 
         FlammableSubstance sub = new FlammableSubstance();
@@ -63,12 +65,12 @@ public class SubstancesListCommand extends AbstractCommand {
         } catch (DaoException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.DB_ERROR);
-            return new GoToListOfSubstances().execute(request, response);
+            return go.execute(request, response);
         } catch (IllegalArgumentException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.CALCULATE_INCORRECT_ERROR);
-            return new GoToListOfSubstances().execute(request, response);
+            return go.execute(request, response);
         }
-        return new GoToListOfSubstances().execute(request, response);
+        return go.execute(request, response);
     }
 }

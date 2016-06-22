@@ -36,10 +36,6 @@ public class CreateReport {
         chart = new MyChart(build);
         chart.outputChart(wordMLPackage, filepath);
 
-       /* List<Object>ch=chart.imageAdd.getCharts();
-        for (Object temp:ch){
-            wordMLPackage.getMainDocumentPart().addObject(ch);
-        }*/
         wordMLPackage.save(new java.io.File(filepath + Transliterator.transliterate(build.getNameOfBuilding()) + ".docx"));
     }
 }
