@@ -49,12 +49,6 @@ public class BuildingDaoImpl extends DaoGeneral<Building> {
             throw new DaoException(message, e);
         }
     }
-// session = HibernateUtil.currentSession();
-//    User user = (User) session.load(User.class, building.getUserId());
-//    Building building1=getById(building.getId());
-//    session.delete(building1);
-//    building.setUser(user);
-//    session.save(building);
 
     @Override
     public void create(Building building) throws DaoException {

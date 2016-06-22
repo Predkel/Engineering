@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Фильтр проверяющий вошел ли пользователь (не доработан)
+ * Фильтр проверяющий вошел ли пользователь
  */
-@WebFilter(urlPatterns = {"/WebApp/*"})
+@WebFilter(urlPatterns = {"/controller"})
 public class SecurityRedirect implements Filter {
 
     @Override
