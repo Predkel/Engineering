@@ -14,17 +14,11 @@ import java.io.File;
  * Листенер был создан для создания папки с именем пользователя, когда он заходит
  * там бы складывались его графики и отчеты
  * а после выхода удалялись
- * НО пока есть косячок
  */
 public class DeleteGeneratedFiles implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-//        HttpSession session = httpSessionEvent.getSession();
-//        User us = (User) session.getAttribute("User");
-//        File myPath = new File(session.getServletContext().getRealPath("/") + "jsp/reports/" + us.getLogin() + "/");
-//        myPath.mkdirs();
-//        users.set(us);
     }
 
     @Override
