@@ -1,9 +1,7 @@
 package by.pvt.predkel.serviceForDao;
 
+import by.pvt.predkel.entities.User;
 import by.pvt.predkel.exceptions.DaoException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Admin on 14.06.2016.
@@ -144,12 +142,20 @@ public class main {
 
 //        double t = 15 / 10;
 //        System.out.print(Math.ceil((double) 11 / 10));
-        List<Integer> first = new ArrayList<>();
-        first.add(1);
-        first.add(2);
-        first.add(3);
-        first.add(4);
-        List<Integer> second = first.subList(0, 2);
-        System.out.print(second);
+//        List<Integer> first = new ArrayList<>();
+//        first.add(1);
+//        first.add(2);
+//        first.add(3);
+//        first.add(4);
+//        List<Integer> second = first.subList(0, 2);
+//        System.out.print(second);
+        try {
+
+            User user = UserService.getInstance().loginUser("Admin", "8827");
+
+            System.out.print(user.getLogin());
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
     }
 }

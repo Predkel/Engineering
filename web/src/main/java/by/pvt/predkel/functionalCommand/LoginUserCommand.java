@@ -27,20 +27,22 @@ public class LoginUserCommand extends AbstractCommand {
         }
         String login = request.getParameter(Parameters.LOGIN);
         String password = request.getParameter(Parameters.PASSWORD);
+        User user;
 
         try {
+            user = UserService.getInstance().loginUser(login, password);
 
-            User user = UserService.getInstance().loginUser(login, password);
-            if (user != null) {
-                request.getSession(true).setAttribute(Attributes.USER, user);
-                return Path.FUNCTIONS_PATH;
-            } else {
-                request.setAttribute(Attributes.ERROR, Errors.USER_INCORRECT_ERROR);
-                return Path.INDEX_PATH;
-            }
         } catch (DaoException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.DB_ERROR);
+            return Path.INDEX_PATH;
+        }
+
+        if (user != null) {
+            request.getSession(true).setAttribute(Attributes.USER, user);
+            return Path.FUNCTIONS_PATH;
+        } else {
+            request.setAttribute(Attributes.ERROR, Errors.USER_INCORRECT_ERROR);
             return Path.INDEX_PATH;
         }
     }

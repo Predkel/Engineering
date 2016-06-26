@@ -9,8 +9,6 @@ import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Parameters;
 import by.pvt.predkel.parameters.Path;
 import by.pvt.predkel.serviceForDao.UserService;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.XmlWebApplicationContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +21,9 @@ public class RegistrationUserCommand extends AbstractCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
-        ApplicationContext context = new XmlWebApplicationContext();
-        User user = (User) context.getBean("registerUser");
+//        WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
+//        User user = (User) context.getBean("registerUser");
+        User user = new User();
 
         if (request.getParameter(Parameters.LOGIN).isEmpty() ||
                 request.getParameter(Parameters.PASSWORD).isEmpty()) {
