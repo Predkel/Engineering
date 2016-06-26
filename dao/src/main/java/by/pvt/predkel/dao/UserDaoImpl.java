@@ -16,6 +16,7 @@ import org.hibernate.criterion.Restrictions;
 public class UserDaoImpl extends DaoGeneral<User> {
     private String message;
     private User user = new MyEntityObjectFactory().createUser();
+    private Session session;
 
     public User isAuthorized(String login, String password) throws DaoException {
         Session session;

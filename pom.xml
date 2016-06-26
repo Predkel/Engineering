@@ -14,6 +14,10 @@
         <module>entities</module>
         <module>web</module>
     </modules>
+    <properties>
+        <project.spring.version>4.3.0.RELEASE</project.spring.version>
+    </properties>
+
     <name>Engineering Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>

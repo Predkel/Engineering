@@ -13,6 +13,10 @@
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
     <listener>
         <listener-class>by.pvt.predkel.listener.DeleteGeneratedFiles</listener-class>
     </listener>
@@ -36,7 +40,7 @@
     </filter>
     <filter-mapping>
         <filter-name>SecurityRedirect</filter-name>
-        <url-pattern>/WebApp/*</url-pattern>
+        <url-pattern>/controller</url-pattern>
     </filter-mapping>
 
 </web-app>
