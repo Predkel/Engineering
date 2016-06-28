@@ -50,7 +50,6 @@ function validateSubstance(form) {
     var heat = elementsForm.combustionHeat.value;
     var speed = elementsForm.averageSpeedBurnout.value;
 
-
     resetError(elementsForm.amountOfCombustionAir.parentNode);
     if (/\D/.test(air)) {
         showError(elementsForm.amountOfCombustionAir.parentNode, ' Нельзя использовать строковые значения');

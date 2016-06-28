@@ -56,7 +56,11 @@
 
         </div>
     </div>
-</div>
 
+    <br>
+    <br>
+    <br>
+
+</div>
 
 <%@ include file="parts/bottom.jsp" %>

@@ -90,7 +90,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a href="#collapse-${sub.id}" data-parent="#accordion"
+                                    <a href="#collapse-${sub.id}" data-parent="#accordion2"
                                        data-toggle="collapse">${sub.nameOfSubstance}</a>
                                 </h4>
                             </div>
@@ -248,6 +248,9 @@
             <br>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
 </div>
 
 <%@ include file="parts/bottom.jsp" %>
