@@ -1,26 +1,27 @@
 package by.pvt.predkel.dao;
 
+import by.pvt.predkel.entities.Entity;
 import by.pvt.predkel.exceptions.DaoException;
 
 import java.util.List;
 
-public interface DaoI<TYPE> {
+public interface DaoI<T extends Entity> {
     //READ чтение отдельной сущности
-    TYPE getById(long id) throws DaoException;
+    T getById(long id) throws DaoException;
 
     //CREATE,UPDATE,DELETE обновление сущности
-    void create(TYPE entity) throws DaoException;
+    void create(T entity) throws DaoException;
 
-    void update(TYPE entity) throws DaoException;
+    void update(T entity) throws DaoException;
 
-    void delete(TYPE entity) throws DaoException;
+    void delete(T entity) throws DaoException;
 
     //READ - чтение всех элементов по условию
-    List<TYPE> getAll() throws DaoException;
+    List<T> getAll() throws DaoException;
 
     Long getCountOfRows() throws DaoException;
 
-    List<TYPE> pagination(int firstResult, int maxResult) throws DaoException;
+    List<T> pagination(int firstResult, int maxResult) throws DaoException;
 
     Class getPersistentClass();
 

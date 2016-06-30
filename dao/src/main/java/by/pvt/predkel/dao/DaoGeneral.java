@@ -1,5 +1,6 @@
 package by.pvt.predkel.dao;
 
+import by.pvt.predkel.entities.Entity;
 import by.pvt.predkel.exceptions.DaoException;
 import by.pvt.predkel.settings.HibernateUtil;
 import by.pvt.predkel.utils.Logger;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * Created by Admin on 29.05.2016.
  */
-public class DaoGeneral<T> implements DaoI<T> {
+public class DaoGeneral<T extends Entity> implements DaoI<T> {
     private static DaoGeneral instance;
     private String message;
     private T entity;
