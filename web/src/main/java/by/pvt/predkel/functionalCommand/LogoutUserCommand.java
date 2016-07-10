@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LogoutUserCommand extends AbstractCommand {
 
-    @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         request.setAttribute(Attributes.ERROR, "Вы покинули приложение");

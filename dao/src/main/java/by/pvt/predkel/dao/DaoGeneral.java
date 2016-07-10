@@ -2,29 +2,41 @@ package by.pvt.predkel.dao;
 
 import by.pvt.predkel.entities.Entity;
 import by.pvt.predkel.exceptions.DaoException;
-import by.pvt.predkel.settings.HibernateUtil;
 import by.pvt.predkel.utils.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Admin on 29.05.2016.
  */
-public class DaoGeneral<T extends Entity> implements DaoI<T> {
-    private static DaoGeneral instance;
+public abstract class DaoGeneral<T extends Entity> implements DaoI<T> {
     private String message;
     private T entity;
+
+    private SessionFactory sessionFactory;
+
+    @Autowired
+    public DaoGeneral(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    protected Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
+    }
 
     @Override
     public T getById(long id) throws DaoException {
         Session session;
         T t;
         try {
-            session = HibernateUtil.currentSession();
+            session = getCurrentSession();
             t = (T) session.load(getPersistentClass(), id);
         } catch (Exception e) {
             message = "Unable to get entity by id";
@@ -35,11 +47,11 @@ public class DaoGeneral<T extends Entity> implements DaoI<T> {
     }
 
     @Override
-    public void create(T t) throws DaoException {
+    public Serializable create(T t) throws DaoException {
         Session session;
         try {
-            session = HibernateUtil.currentSession();
-            session.save(t);
+            session = getCurrentSession();
+            return session.save(t);
         } catch (Exception e) {
             message = "Unable to save entity";
             Logger.getInstance().logError(getClass(), message);
@@ -51,7 +63,7 @@ public class DaoGeneral<T extends Entity> implements DaoI<T> {
     public void update(T t) throws DaoException {
         Session session;
         try {
-            session = HibernateUtil.currentSession();
+            session = getCurrentSession();
             session.update(t);
         } catch (Exception e) {
             message = "Unable to update entity";
@@ -64,7 +76,7 @@ public class DaoGeneral<T extends Entity> implements DaoI<T> {
     public void delete(T t) throws DaoException {
         Session session;
         try {
-            session = HibernateUtil.currentSession();
+            session = getCurrentSession();
             session.delete(t);
         } catch (Exception e) {
             message = "Unable to delete entity";
@@ -78,7 +90,7 @@ public class DaoGeneral<T extends Entity> implements DaoI<T> {
         Session session;
         List<T> t;
         try {
-            session = HibernateUtil.currentSession();
+            session = getCurrentSession();
             t = (List<T>) session.createCriteria(getPersistentClass()).list();
         } catch (NullPointerException e1) {
             return new ArrayList<>();
@@ -94,7 +106,7 @@ public class DaoGeneral<T extends Entity> implements DaoI<T> {
     public Long getCountOfRows() throws DaoException {
         Session session;
         try {
-            session = HibernateUtil.currentSession();
+            session = getCurrentSession();
             return (Long) session.createCriteria(getPersistentClass())
                     .setProjection(Projections.rowCount())
                     .list()
@@ -111,7 +123,7 @@ public class DaoGeneral<T extends Entity> implements DaoI<T> {
         List<T> list;
         Session session;
         try {
-            session = HibernateUtil.currentSession();
+            session = getCurrentSession();
             Criteria userCriteria = session.createCriteria(getPersistentClass());
             list = (List<T>) userCriteria.setFirstResult(firstResult).setMaxResults(maxResult).list();
         } catch (Exception e) {

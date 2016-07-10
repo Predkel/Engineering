@@ -14,116 +14,196 @@
         <module>entities</module>
         <module>web</module>
     </modules>
+
     <properties>
         <project.spring.version>4.3.0.RELEASE</project.spring.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <hibernate.version>4.3.8.Final</hibernate.version>
+        <spring.version>4.2.4.RELEASE</spring.version>
+        <spring.security.version>4.0.3.RELEASE</spring.security.version>
+        <taglibs.version>1.1.2</taglibs.version>
+        <cglib.version>3.2.0</cglib.version>
+        <tiles.version>3.0.5</tiles.version>
+        <aspectj.version>1.8.4</aspectj.version>
+        <inject.version>1</inject.version>
+        <jstl.version>1.2</jstl.version>
+        <mysql.version>5.1.38</mysql.version>
+        <log4j.version>1.2.17</log4j.version>
+        <slf4j.version>1.7.13</slf4j.version>
+        <servlet.api.version>3.1.0</servlet.api.version>
+        <pool.version>2.1.1</pool.version>
+        <junit.version>4.12</junit.version>
+        <validation.version>1.1.0.Final</validation.version>
+        <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+        <tomcat.maven.plugin.version>1.1</tomcat.maven.plugin.version>
     </properties>
+
 
     <name>Engineering Maven Webapp</name>
     <url>http://maven.apache.org</url>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>2.0.2-beta</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-    </dependencies>
-    <build>
-        <finalName>Engineering</finalName>
-        <plugins>
-            <!--<plugin>-->
-            <!--<groupId>org.apache.maven.plugins</groupId>-->
-            <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
-            <!--<version>2.6</version>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<phase>install</phase>-->
-            <!--<goals>-->
-            <!--<goal>check</goal>-->
-            <!--</goals>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-            <!--<groupId>org.apache.maven.plugins</groupId>-->
-            <!--<artifactId>maven-pmd-plugin</artifactId>-->
-            <!--<version>2.6</version>-->
-            <!--<configuration>-->
-            <!--<targetJdk>1.6</targetJdk>-->
-            <!--<verbose>true</verbose>-->
-            <!--</configuration>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<phase>install</phase>-->
-            <!--<goals><goal>check</goal></goals>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-            <!--<groupId>org.codehaus.mojo</groupId>-->
-            <!--<artifactId>findbugs-maven-plugin</artifactId>-->
-            <!--<version>1.2</version>-->
-            <!--<configuration>-->
-            <!--<threshold>High</threshold>-->
-            <!--<effort>Default</effort>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
-            <!--&lt;!&ndash; Normally, we take off the dependency report, saves time. &ndash;&gt;-->
-            <!--<plugin>-->
-            <!--<groupId>org.apache.maven.plugins</groupId>-->
-            <!--<artifactId>maven-project-info-reports-plugin</artifactId>-->
-            <!--<version>2.9</version>-->
-            <!--<configuration>-->
-            <!--<dependencyLocationsEnabled>false</dependencyLocationsEnabled>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.11</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>2.0.2-beta</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
 
-            <!--// integrate maven-cobertura-plugin to project site-->
-            <!--<plugin>-->
-            <!--<groupId>org.codehaus.mojo</groupId>-->
-            <!--<artifactId>cobertura-maven-plugin</artifactId>-->
-            <!--<version>2.7</version>-->
-            <!--<configuration>-->
-            <!--<formats>-->
-            <!--<format>html</format>-->
-            <!--<format>xml</format>-->
-            <!--</formats>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-            <!--<groupId>org.codehaus.mojo</groupId>-->
-            <!--<artifactId>cobertura-maven-plugin</artifactId>-->
-            <!--<version>2.7</version>-->
-            <!--<configuration>-->
-            <!--<instrumentation>-->
-            <!--<ignores>-->
-            <!--<ignore>com.example.boringcode.*</ignore>-->
-            <!--</ignores>-->
-            <!--<excludes>-->
-            <!--<exclude>com/example/dullcode/**/*.class</exclude>-->
-            <!--<exclude>com/example/**/*Test.class</exclude>-->
-            <!--</excludes>-->
-            <!--</instrumentation>-->
-            <!--</configuration>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<goals>-->
-            <!--<goal>clean</goal>-->
-            <!--</goals>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--</plugin>-->
-        </plugins>
+
+            <!--Cglib-->
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+            </dependency>
+
+            <!-- Taglib -->
+            <dependency>
+                <groupId>taglibs</groupId>
+                <artifactId>standard</artifactId>
+                <version>${taglibs.version}</version>
+            </dependency>
+
+            <!--AspectJ-->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+
+            <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!-- Spring security -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-taglibs</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+
+            <!-- Tiles -->
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-core</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-el</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-jsp</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-servlet</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>tiles-template</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>engineering</finalName>
+
     </build>
 
 </project>

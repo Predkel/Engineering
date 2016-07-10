@@ -2,24 +2,22 @@ package by.pvt.predkel.functionalCommand;
 
 import by.pvt.predkel.command.AbstractCommand;
 import by.pvt.predkel.entities.FlammableSubstance;
-import by.pvt.predkel.exceptions.DaoException;
+import by.pvt.predkel.exceptions.ServiceException;
 import by.pvt.predkel.logger.MyLogger;
 import by.pvt.predkel.navigateCommand.GoToListOfSubstances;
 import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Parameters;
-import by.pvt.predkel.serviceForDao.FlammableSubstanceService;
+import by.pvt.predkel.serviceForDao.IFlammableSubstanceService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  *
  */
 public class SubstancesListCommand extends AbstractCommand {
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, IFlammableSubstanceService flammableSubstanceService) {
 
         GoToListOfSubstances go = new GoToListOfSubstances();
 
@@ -38,7 +36,7 @@ public class SubstancesListCommand extends AbstractCommand {
                     sub.setAmountOfCombustionAir(Double.parseDouble(request.getParameterValues(Parameters.AMOUNT_OF_COMBUSTION_AIR)[i]));
                     sub.setCombustionHeat(Double.parseDouble(request.getParameterValues(Parameters.COMBUSTION_HEAT)[i]));
                     sub.setAverageSpeedBurnout(Double.parseDouble(request.getParameterValues(Parameters.AVERAGE_SPEED_BURNOUT)[i]));
-                    FlammableSubstanceService.getInstance().createSubstance(sub);
+                    flammableSubstanceService.save(sub);
 
                 } else if (!request.getParameterValues(Parameters.ID_SUBSTANCE)[i].isEmpty() && (
                         request.getParameterValues(Parameters.NAME_OF_SUBSTANCE)[i].isEmpty() ||
@@ -47,7 +45,7 @@ public class SubstancesListCommand extends AbstractCommand {
                                 request.getParameterValues(Parameters.AVERAGE_SPEED_BURNOUT)[i].isEmpty())) {
 
                     sub.setId(Long.parseLong(request.getParameterValues(Parameters.ID_SUBSTANCE)[i]));
-                    FlammableSubstanceService.getInstance().deleteSubstance(sub);
+                    flammableSubstanceService.delete(sub);
 
                 } else if (!request.getParameterValues(Parameters.ID_SUBSTANCE)[i].isEmpty() &&
                         !request.getParameterValues(Parameters.NAME_OF_SUBSTANCE)[i].isEmpty() &&
@@ -60,17 +58,17 @@ public class SubstancesListCommand extends AbstractCommand {
                     sub.setAmountOfCombustionAir(Double.parseDouble(request.getParameterValues(Parameters.AMOUNT_OF_COMBUSTION_AIR)[i]));
                     sub.setCombustionHeat(Double.parseDouble(request.getParameterValues(Parameters.COMBUSTION_HEAT)[i]));
                     sub.setAverageSpeedBurnout(Double.parseDouble(request.getParameterValues(Parameters.AVERAGE_SPEED_BURNOUT)[i]));
-                    FlammableSubstanceService.getInstance().updateSubstance(sub);
+                    flammableSubstanceService.update(sub);
                 }
-        } catch (DaoException e) {
+        } catch (ServiceException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.DB_ERROR);
-            return go.execute(request, response);
+            return go.execute(request, flammableSubstanceService);
         } catch (IllegalArgumentException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.CALCULATE_INCORRECT_ERROR);
-            return go.execute(request, response);
+            return go.execute(request, flammableSubstanceService);
         }
-        return go.execute(request, response);
+        return go.execute(request, flammableSubstanceService);
     }
 }

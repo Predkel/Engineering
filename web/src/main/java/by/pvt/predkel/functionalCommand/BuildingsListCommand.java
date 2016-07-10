@@ -4,17 +4,17 @@ import by.pvt.predkel.command.AbstractCommand;
 import by.pvt.predkel.entities.Building;
 import by.pvt.predkel.entities.User;
 import by.pvt.predkel.exceptions.DaoException;
+import by.pvt.predkel.exceptions.ServiceException;
 import by.pvt.predkel.logger.MyLogger;
 import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Parameters;
 import by.pvt.predkel.parameters.Path;
-import by.pvt.predkel.serviceForDao.BuildingService;
+import by.pvt.predkel.serviceForDao.IBuildingService;
 import by.pvt.predkel.utils.CreateReport;
 import by.pvt.predkel.utils.Transliterator;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 
 /**
@@ -22,15 +22,14 @@ import java.io.File;
  */
 public class BuildingsListCommand extends AbstractCommand {
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, IBuildingService buildingService) {
         String action = request.getParameter(Parameters.BUILDING_ACTION);
 
         String idBuilding = request.getParameter(Parameters.ID_BUILDING);
 
         Building build;
         try {
-            build = BuildingService.getInstance().readBuilding(Long.parseLong(idBuilding));
+            build = buildingService.getById(Long.parseLong(idBuilding));
 
             User user = (User) request.getSession(false).getAttribute(Attributes.USER);
 
@@ -38,10 +37,11 @@ public class BuildingsListCommand extends AbstractCommand {
                 //здесь надо либо создавать новый отчет или достать старый
                 CreateReport create = new CreateReport(build);
 
-                File myPath = new File(Path.REPORT_PATH);
+                String path = request.getServletContext().getRealPath("/") + "asserts/reports/" + user.getLogin() + "/";
+                File myPath = new File(path);
                 myPath.mkdirs();
                 try {
-                    create.create(Path.REPORT_PATH);
+                    create.create(path);
                 } catch (Exception e) {
                     MyLogger.INSTANCE.logError(getClass(), e.getMessage());
                     request.setAttribute(Attributes.ERROR, Errors.REPORT_ERROR);
@@ -52,19 +52,21 @@ public class BuildingsListCommand extends AbstractCommand {
                 request.getSession().setAttribute(Attributes.USERNAME, user.getLogin());
                 request.getSession().setAttribute(Attributes.NAME_OF_BUILDING, Transliterator.transliterate(build.getNameOfBuilding()));
                 request.getSession().setAttribute(Attributes.NAME_OF_CHARTS, create.getChart().getImageNames());
-                request.getSession().setAttribute(Attributes.REPORT_FILEPATH, Path.REPORT_PATH);
+                request.getSession().setAttribute(Attributes.REPORT_FILEPATH, path);
                 request.getSession().setAttribute(Attributes.SAVE_BUILDING, true);
 
                 return Path.CHART_PATH;
             } else if (action.equals(Parameters.DELETE)) {//если пользователь выбрал удаление отчета
-                BuildingService.getInstance().deleteBuilding(build);
-                request.setAttribute(Attributes.ALL_USER_BUILDINGS, BuildingService.getInstance().getAllByFk(user.getId()));
+                buildingService.delete(build);
+                request.setAttribute(Attributes.ALL_USER_BUILDINGS, buildingService.getAllByFk(user.getId()));
                 return Path.BUILDINGS_PATH;
             }
         } catch (DaoException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.DB_ERROR);
             return Path.BUILDINGS_PATH;
+        } catch (ServiceException e) {
+            e.printStackTrace();
         }
         return Path.BUILDINGS_PATH;
     }

@@ -8,18 +8,16 @@ import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Parameters;
 import by.pvt.predkel.parameters.Path;
-import by.pvt.predkel.serviceForDao.UserService;
+import by.pvt.predkel.serviceForDao.IUserService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  *
  */
 public class LoginUserCommand extends AbstractCommand {
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, IUserService userService) {
 
         if (request.getParameter(Parameters.LOGIN).isEmpty() || request.getParameter(Parameters.PASSWORD).isEmpty()) {
             request.setAttribute(Attributes.ERROR, Errors.USER_EMPTY_ERROR);
@@ -30,7 +28,7 @@ public class LoginUserCommand extends AbstractCommand {
         User user;
 
         try {
-            user = UserService.getInstance().loginUser(login, password);
+            user = userService.loginUser(login, password);
 
         } catch (DaoException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());

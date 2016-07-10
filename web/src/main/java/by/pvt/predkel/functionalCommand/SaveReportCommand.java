@@ -7,20 +7,19 @@ import by.pvt.predkel.logger.MyLogger;
 import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Path;
-import by.pvt.predkel.serviceForDao.BuildingService;
+import by.pvt.predkel.serviceForDao.IBuildingService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by Admin on 02.06.2016.
  */
 public class SaveReportCommand extends AbstractCommand {
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+
+    public String execute(HttpServletRequest request, IBuildingService buildingService) {
         Building build = (Building) request.getSession().getAttribute(Attributes.BUILDING);
         try {
-            BuildingService.getInstance().addBuilding(build);
+            buildingService.addBuilding(build);
         } catch (DaoException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.DB_ERROR);

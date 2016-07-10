@@ -4,7 +4,7 @@ package by.pvt.predkel.functionalCommand;
 import by.pvt.predkel.calculateParameters.AllDefinition;
 import by.pvt.predkel.command.AbstractCommand;
 import by.pvt.predkel.entities.*;
-import by.pvt.predkel.exceptions.DaoException;
+import by.pvt.predkel.exceptions.ServiceException;
 import by.pvt.predkel.factory.MyEntityObjectFactory;
 import by.pvt.predkel.logger.MyLogger;
 import by.pvt.predkel.navigateCommand.GoToCalculate;
@@ -12,12 +12,11 @@ import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Parameters;
 import by.pvt.predkel.parameters.Path;
-import by.pvt.predkel.serviceForDao.FlammableSubstanceService;
+import by.pvt.predkel.serviceForDao.IFlammableSubstanceService;
 import by.pvt.predkel.utils.CreateReport;
 import by.pvt.predkel.utils.Transliterator;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 
 /**
@@ -25,8 +24,7 @@ import java.io.File;
  */
 public class CalculateCommand extends AbstractCommand {
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, IFlammableSubstanceService flammableSubstanceService) {
         GoToCalculate go = new GoToCalculate();
         MyEntityObjectFactory factory = new MyEntityObjectFactory();
 
@@ -35,7 +33,7 @@ public class CalculateCommand extends AbstractCommand {
         if ((request.getParameter(Parameters.AMOUNT_OF_ROOMS)).isEmpty()
                 || (Integer.parseInt(request.getParameter(Parameters.AMOUNT_OF_ROOMS)) == 0)) {
             request.setAttribute(Attributes.ERROR, Errors.ROOM_AMOUNT_ERROR);
-            return go.execute(request, response);
+            return go.execute(request, flammableSubstanceService);
         }
 
         Integer amountOfRooms = Integer.parseInt(request.getParameter(Parameters.AMOUNT_OF_ROOMS));
@@ -112,12 +110,12 @@ public class CalculateCommand extends AbstractCommand {
 
                     FlammableSubstance substance;
                     try {
-                        substance = FlammableSubstanceService.getInstance().readSubstance(
+                        substance = flammableSubstanceService.getById(
                                 Long.parseLong(request.getParameterValues(Parameters.NAME_OF_SUBSTANCE)[currentAmountOfSubstances]));
-                    } catch (DaoException e) {
+                    } catch (ServiceException e) {
                         MyLogger.INSTANCE.logError(getClass(), e.getMessage());
                         request.setAttribute(Attributes.ERROR, Errors.DB_ERROR);
-                        return go.execute(request, response);//Path.CALCULATE_PATH;
+                        return go.execute(request, flammableSubstanceService);//Path.CALCULATE_PATH;
                     }
 
                     SubstanceOfRoom subOfRoom = factory.createSubstanceOfRoom();
@@ -136,18 +134,18 @@ public class CalculateCommand extends AbstractCommand {
                 if (room.getSubstanceOfRoom().size() == 0
                         && request.getParameterValues(Parameters.ROOM_SPECIFIC_FIRE_LOAD_ZVEZDOCHKA)[i].isEmpty()) {
                     request.setAttribute(Attributes.ERROR, Errors.SUBSTANCES_ERROR);
-                    return go.execute(request, response);//Path.CALCULATE_PATH;
+                    return go.execute(request, flammableSubstanceService);//Path.CALCULATE_PATH;
                 }
             }
 
         } catch (NullPointerException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.CALCULATE_EMPTY_ERROR);
-            return go.execute(request, response);//Path.CALCULATE_PATH;
+            return go.execute(request, flammableSubstanceService);//Path.CALCULATE_PATH;
         } catch (IllegalArgumentException e2) {
             MyLogger.INSTANCE.logError(getClass(), e2.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.CALCULATE_INCORRECT_ERROR);
-            return go.execute(request, response);//Path.CALCULATE_PATH;
+            return go.execute(request, flammableSubstanceService);//Path.CALCULATE_PATH;
         }
 
         build.setUserId(us.getId());
@@ -157,7 +155,7 @@ public class CalculateCommand extends AbstractCommand {
         def.setALlParameters(build);
         //System.getProperty("user.dir") + "/tomcat/webapps/Engineering/other/" + us.getLogin() + "/"- было раньше
         ///путь для генерации отчета и графиков
-        String path = request.getServletContext().getRealPath("/") + "jsp/reports/" + us.getLogin() + "/";
+        String path = request.getServletContext().getRealPath("/") + "asserts/reports/" + us.getLogin() + "/";
         File myPath = new File(path);
         myPath.mkdirs();
 
@@ -168,17 +166,17 @@ public class CalculateCommand extends AbstractCommand {
         }catch (NumberFormatException e1){
             MyLogger.INSTANCE.logError(getClass(), e1.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.NUBER_FORMAT_ERROR);
-            return go.execute(request, response);//Path.CALCULATE_PATH;
+            return go.execute(request, flammableSubstanceService);//Path.CALCULATE_PATH;
         }catch (Exception e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.REPORT_ERROR);
-            return go.execute(request, response);//Path.CALCULATE_PATH;
+            return go.execute(request, flammableSubstanceService);//Path.CALCULATE_PATH;
         }
         request.getSession().setAttribute(Attributes.BUILDING, build);
         request.getSession().setAttribute(Attributes.USERNAME, us.getLogin());
         request.getSession().setAttribute(Attributes.NAME_OF_BUILDING, Transliterator.transliterate(build.getNameOfBuilding()));
         request.getSession().setAttribute(Attributes.NAME_OF_CHARTS, create.getChart().getImageNames());
-        request.getSession().setAttribute(Attributes.REPORT_FILEPATH, Path.REPORT_PATH);
+//        request.getSession().setAttribute(Attributes.REPORT_FILEPATH, path);
         request.getSession().setAttribute(Attributes.SAVE_BUILDING, true);
 
         return Path.CHART_PATH;

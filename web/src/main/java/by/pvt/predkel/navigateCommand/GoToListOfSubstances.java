@@ -8,10 +8,9 @@ import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Parameters;
 import by.pvt.predkel.parameters.Path;
-import by.pvt.predkel.serviceForDao.FlammableSubstanceService;
+import by.pvt.predkel.serviceForDao.IFlammableSubstanceService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -22,8 +21,7 @@ import java.util.List;
  */
 public class GoToListOfSubstances extends AbstractCommand {
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, IFlammableSubstanceService flammableSubstanceService) {
         Integer page;
         try {//тут схитрил маленько
             page = Integer.valueOf(request.getParameter(Parameters.PAGE));//если заходим в первый раз
@@ -38,9 +36,9 @@ public class GoToListOfSubstances extends AbstractCommand {
         Integer countOfPages = 0;
         List<FlammableSubstance> substances = null;
         try {
-            Long countOfSubstances = FlammableSubstanceService.getInstance().getCountOfSubstances();
+            Long countOfSubstances = flammableSubstanceService.getCountOfSubstances();
             countOfPages = (int) Math.ceil((double) countOfSubstances / maxResult);
-            substances = FlammableSubstanceService.getInstance().getSubstancesForPage(page, maxResult);
+            substances = flammableSubstanceService.getSubstancesForPage(page, maxResult);
         } catch (DaoException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.DB_ERROR);

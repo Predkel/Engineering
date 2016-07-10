@@ -3,6 +3,7 @@ package by.pvt.predkel.dao;
 import by.pvt.predkel.entities.Entity;
 import by.pvt.predkel.exceptions.DaoException;
 
+import java.io.Serializable;
 import java.util.List;
 
 public interface DaoI<T extends Entity> {
@@ -10,7 +11,7 @@ public interface DaoI<T extends Entity> {
     T getById(long id) throws DaoException;
 
     //CREATE,UPDATE,DELETE обновление сущности
-    void create(T entity) throws DaoException;
+    Serializable create(T entity) throws DaoException;
 
     void update(T entity) throws DaoException;
 

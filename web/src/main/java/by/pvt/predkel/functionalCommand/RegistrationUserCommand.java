@@ -8,18 +8,16 @@ import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Parameters;
 import by.pvt.predkel.parameters.Path;
-import by.pvt.predkel.serviceForDao.UserService;
+import by.pvt.predkel.serviceForDao.IUserService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  *
  */
 public class RegistrationUserCommand extends AbstractCommand {
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, IUserService userService) {
 
 //        WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
 //        User user = (User) context.getBean("registerUser");
@@ -37,7 +35,7 @@ public class RegistrationUserCommand extends AbstractCommand {
 
         Boolean checker;
         try {
-            checker = UserService.getInstance().registerUser(user);
+            checker = userService.registerUser(user);
         } catch (DaoException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.DB_ERROR);

@@ -5,7 +5,6 @@ import by.pvt.predkel.parameters.Parameters;
 import by.pvt.predkel.parameters.Path;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -13,7 +12,7 @@ import java.io.IOException;
 /**
  * Фильтр проверяющий вошел ли пользователь
  */
-@WebFilter(urlPatterns = {"/controller"})
+//@WebFilter(urlPatterns = {"/controller"})
 public class SecurityRedirect implements Filter {
 
     @Override

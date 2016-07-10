@@ -8,10 +8,9 @@ import by.pvt.predkel.logger.MyLogger;
 import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Path;
-import by.pvt.predkel.serviceForDao.BuildingService;
+import by.pvt.predkel.serviceForDao.IBuildingService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -20,24 +19,16 @@ import java.util.List;
  */
 public class GoToListOfBuildings extends AbstractCommand {
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, IBuildingService buildingService) {
         User user = (User) request.getSession(false).getAttribute(Attributes.USER);
         List<Building> buildings = null;
         try {
-            // buildings = BuildingDao.getInstance().getAllByFkId(user.getId());
-            buildings = BuildingService.getInstance().getAllByFk(user.getId());
+            buildings = buildingService.getAllByFk(user.getId());
         } catch (DaoException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.DB_ERROR);
         }
 
-//        if ((buildings.size() != user.getBuilding().size()) || (!checkLists(user.getBuilding(), buildings))) {
-//            user.getBuilding().removeAll(user.getBuilding());
-//            for (Building temp : buildings) {
-//                user.getBuilding().add(temp);
-//            }
-//        }
         request.setAttribute(Attributes.ALL_USER_BUILDINGS, buildings);
         return Path.BUILDINGS_PATH;
     }

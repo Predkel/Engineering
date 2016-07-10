@@ -1,13 +1,22 @@
 package by.pvt.predkel.serviceForDao;
 
+import by.pvt.predkel.dao.impl.BuildingDaoImpl;
 import by.pvt.predkel.entities.User;
 import by.pvt.predkel.exceptions.DaoException;
+import by.pvt.predkel.exceptions.ServiceException;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Created by Admin on 14.06.2016.
  */
 public class main {
-    public static void main(String[] args) throws DaoException {
+    @Autowired
+    BuildingDaoImpl buildingDao;
+
+    public static void main(String[] args) throws DaoException, ServiceException {
 //        User user = new User();
 //        user.setPassword("guevara333");
 //        user.setRole(1);
@@ -149,13 +158,26 @@ public class main {
 //        first.add(4);
 //        List<Integer> second = first.subList(0, 2);
 //        System.out.print(second);
-        try {
+//        try {
+//
+////            User user = UserService.getInstance().loginUser("Admin", "8827");
+//
+////            System.out.print(user.getLogin());
+//        } catch (DaoException e) {
+//            e.printStackTrace();
+//        }
 
-            User user = UserService.getInstance().loginUser("Admin", "8827");
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:services-context.xml");
+        SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
+        IUserService userService = (IUserService) context.getBean("userService");
+        User user = userService.loginUser("Admin", "8827");
+        String name = user.getLogin();
+        System.out.println(name);
 
-            System.out.print(user.getLogin());
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }
+//        ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:services-context.xml");
+//        IBuildingService buildingService= (IBuildingService) context.getBean("buildingService");
+//        Building building=buildingService.getById((long)1);
+//        String name=building.getNameOfBuilding();
+//        System.out.print(name);
     }
 }
