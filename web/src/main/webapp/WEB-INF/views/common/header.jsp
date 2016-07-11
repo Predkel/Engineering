@@ -6,9 +6,9 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#responsive-menu">
                 <span class="sr-only"><s:message var="choose" code="header.navigation"/></span>
-                <span class="icon-bar"/>
-                <span class="icon-bar"/>
-                <span class="icon-bar"/>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
             <a href="http://www.engin.by" class="navbar-brand">
                 <img src="${pageContext.request.contextPath}/asserts/images/logo.png" alt="Logo"/>

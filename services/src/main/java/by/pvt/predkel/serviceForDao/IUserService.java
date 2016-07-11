@@ -11,5 +11,7 @@ public interface IUserService extends IService<User> {
 
     boolean deleteUser(String login) throws DaoException;
 
+    User getByLogin(String login) throws DaoException;
+
     User loginUser(String login, String password) throws DaoException;
 }

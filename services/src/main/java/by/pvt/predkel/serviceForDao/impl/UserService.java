@@ -45,6 +45,11 @@ public class UserService extends AbstractService<User> implements IUserService {
     }
 
     @Override
+    public User getByLogin(String login) throws DaoException {
+        return userDao.getByLogin(login);
+    }
+
+    @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public User loginUser(String login, String password) throws DaoException {
         return userDao.isAuthorized(login, password);

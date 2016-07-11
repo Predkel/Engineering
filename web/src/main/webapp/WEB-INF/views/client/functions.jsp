@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <jsp:useBean id="User" scope="session" type="by.pvt.predkel.entities.User"/>
 <div class="container">
@@ -38,7 +39,7 @@
             </div>
         </div>
 
-        <c:if test="${User.role==1}">
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
             <div class="item">
                 <div class="thumbnail">
                     <a href="${pageContext.request.contextPath}/admin/toregister"><img
@@ -61,7 +62,7 @@
                     </div>
                 </div>
             </div>
-        </c:if>
+        </sec:authorize>
     </div>
 
     <br/>
