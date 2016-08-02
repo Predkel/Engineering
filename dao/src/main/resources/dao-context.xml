@@ -17,63 +17,94 @@
     <!--Translate exceptions to Spring exceptions-->
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
-    <bean id="dataSourceLocal" class="org.apache.commons.dbcp2.BasicDataSource"
-          p:url="jdbc:mysql://localhost/test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8"
-          p:driverClassName="com.mysql.jdbc.Driver"
-          p:username="root"
-          p:password="1234"
-          p:initialSize="5"
-          p:maxTotal="10"
-    />
+    <!--<bean id="dataSourceLocal" class="org.apache.commons.dbcp2.BasicDataSource"-->
+    <!--p:url="jdbc:mysql://localhost/test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8"-->
+    <!--p:driverClassName="com.mysql.jdbc.Driver"-->
+    <!--p:username="root"-->
+    <!--p:password="1234"-->
+    <!--p:initialSize="5"-->
+    <!--p:maxTotal="10"-->
+    <!--/>-->
 
-    <bean id="dataSourceHeroku" class="org.apache.commons.dbcp2.BasicDataSource"
-          p:url="jdbc:mysql://eu-cdbr-west-01.cleardb.com/heroku_7bf5528ea5538f5?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8&amp;reconnect=true"
-          p:driverClassName="com.mysql.jdbc.Driver"
-          p:username="b9df0de4f43775"
-          p:password="4f1d2c74"
-          p:initialSize="5"
-          p:maxTotal="10"
-    />
+    <!--<bean id="dataSourceHeroku" class="org.apache.commons.dbcp2.BasicDataSource"-->
+    <!--p:url="jdbc:mysql://eu-cdbr-west-01.cleardb.com/heroku_7bf5528ea5538f5?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8&amp;reconnect=true"-->
+    <!--p:driverClassName="com.mysql.jdbc.Driver"-->
+    <!--p:username="b9df0de4f43775"-->
+    <!--p:password="4f1d2c74"-->
+    <!--p:initialSize="5"-->
+    <!--p:maxTotal="10"-->
+    <!--/>-->
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSourceHeroku"/>
-        <property name="mappingResources">
-            <list>
-                <value>User.hbm.xml</value>
-                <value>Aperture.hbm.xml</value>
-                <value>Building.hbm.xml</value>
-                <value>CommonParameters.hbm.xml</value>
-                <value>DetermineTheTypeOfFire.hbm.xml</value>
-                <value>FlammableSubstance.hbm.xml</value>
-                <value>IntegratedThermalAndTechnicalParameters.hbm.xml</value>
-                <value>ParametersCalculatedFireLoad.xml</value>
-                <value>Room.hbm.xml</value>
-                <value>SubstanceOfRoom.hbm.xml</value>
-            </list>
-        </property>
+    <beans profile="local">
+        <context:property-placeholder location="classpath:/db/local.properties" system-properties-mode="OVERRIDE"/>
 
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+        <bean id="dataSource"
+              class="org.apache.commons.dbcp2.BasicDataSource"
+              p:url="${database.url}"
+              p:username="${database.username}"
+              p:password="${database.password}"
+              p:driverClassName="${database.driver}"
+              p:initialSize="5"
+              p:maxTotal="10"/>
+    </beans>
 
-                <!--<prop key="hibernate.c3p0.min_size">5</prop>-->
-                <!--<prop key="hibernate.c3p0.max_size">20</prop>-->
-                <!--<prop key="hibernate.c3p0.timeout">300</prop>-->
-                <!--<prop key="hibernate.c3p0.max_statements">50</prop>-->
-                <!--<prop key="hibernate.c3p0.idle_test_period">30000</prop>-->
 
-                <!--<prop key="connection.url">jdbc:mysql://localhost/test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8</prop>-->
-                <!--<prop key="hibernate.connection.password">1234</prop>-->
-                <!--<prop key="hibernate.connection.username">root</prop>-->
+    <beans profile="heroku">
+        <context:property-placeholder location="classpath:/db/heroku.properties" system-properties-mode="OVERRIDE"/>
 
-                <!--<prop key="hibernate.current_session_context_class">thread</prop>-->
-                <!--<prop key="connection.isolation">2</prop>-->
-                <!--<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>-->
-                <!--<prop key="hibernate.enable_lazy_load_no_trans">true</prop>-->
-                <!--<prop key="hibernate.hbm2ddl.auto">validate</prop>-->
-            </props>
-        </property>
-    </bean>
+        <bean class="java.net.URI" id="dbUrl">
+            <constructor-arg value="${database.url}"/>
+        </bean>
+        <bean id="dataSource"
+              class="org.apache.commons.dbcp2.BasicDataSource"
+              p:url="${database.url}"
+              p:username="${database.username}"
+              p:password="${database.password}"
+              p:driverClassName="${database.driver}"
+              p:initialSize="5"
+              p:maxTotal="10"/>
+
+        <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+            <property name="dataSource" ref="dataSource"/>
+            <property name="mappingResources">
+                <list>
+                    <value>mapping/User.hbm.xml</value>
+                    <value>mapping/Aperture.hbm.xml</value>
+                    <value>mapping/Building.hbm.xml</value>
+                    <value>mapping/CommonParameters.hbm.xml</value>
+                    <value>mapping/DetermineTheTypeOfFire.hbm.xml</value>
+                    <value>mapping/FlammableSubstance.hbm.xml</value>
+                    <value>mapping/IntegratedThermalAndTechnicalParameters.hbm.xml</value>
+                    <value>mapping/ParametersCalculatedFireLoad.xml</value>
+                    <value>mapping/Room.hbm.xml</value>
+                    <value>mapping/SubstanceOfRoom.hbm.xml</value>
+                </list>
+            </property>
+
+            <property name="hibernateProperties">
+                <props>
+                    <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+
+                    <!--<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>-->
+                    <!--<prop key="hibernate.c3p0.min_size">5</prop>-->
+                    <!--<prop key="hibernate.c3p0.max_size">20</prop>-->
+                    <!--<prop key="hibernate.c3p0.timeout">300</prop>-->
+                    <!--<prop key="hibernate.c3p0.max_statements">50</prop>-->
+                    <!--<prop key="hibernate.c3p0.idle_test_period">30000</prop>-->
+
+                    <!--<prop key="connection.url">jdbc:mysql://localhost/test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8</prop>-->
+                    <!--<prop key="hibernate.connection.password">1234</prop>-->
+                    <!--<prop key="hibernate.connection.username">root</prop>-->
+
+                    <!--<prop key="hibernate.current_session_context_class">thread</prop>-->
+                    <!--<prop key="connection.isolation">2</prop>-->
+                    <!--<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>-->
+                    <!--<prop key="hibernate.enable_lazy_load_no_trans">true</prop>-->
+                    <!--<prop key="hibernate.hbm2ddl.auto">validate</prop>-->
+                </props>
+            </property>
+        </bean>
+    </beans>
+
 
 </beans>
