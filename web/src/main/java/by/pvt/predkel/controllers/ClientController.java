@@ -1,11 +1,11 @@
 package by.pvt.predkel.controllers;
 
+import by.pvt.predkel.entities.User;
 import by.pvt.predkel.functionalCommand.BuildingsListCommand;
 import by.pvt.predkel.functionalCommand.CalculateCommand;
 import by.pvt.predkel.functionalCommand.SaveReportCommand;
-import by.pvt.predkel.navigateCommand.GoToCalculate;
-import by.pvt.predkel.navigateCommand.GoToListOfBuildings;
-import by.pvt.predkel.navigateCommand.GoToReCalculate;
+import by.pvt.predkel.navigateCommand.*;
+import by.pvt.predkel.security.PrincipalUtil;
 import by.pvt.predkel.serviceForDao.IBuildingService;
 import by.pvt.predkel.serviceForDao.IFlammableSubstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,37 +20,53 @@ import java.io.IOException;
 @Controller
 @RequestMapping(value = "/client")
 public class ClientController {
+
     @Autowired
     private IFlammableSubstanceService flammableSubstanceService;
     @Autowired
     private IBuildingService buildingService;
+    @Autowired
+    private PrincipalUtil principalUtil;
 
-    @RequestMapping(value = "/torecalculate")
+    @RequestMapping(value = "/main")
+    public String goToFunctions() throws ServletException, IOException {
+        return new GoToListOfFunctions().execute();
+    }
+
+    @RequestMapping(value = "/help")
+    public String goToHelp() throws ServletException, IOException {
+        return new GoToHelp().execute();
+    }
+
+    @RequestMapping(value = "/recalculate")
     public String goToRecalculate(HttpServletRequest request) throws ServletException, IOException {
         return new GoToReCalculate().execute(request, flammableSubstanceService);
     }
 
-    @RequestMapping(value = "/tocalculate")
+    @RequestMapping(value = "/calculate")
     public String goToCalculate(HttpServletRequest request) throws ServletException, IOException {
         return new GoToCalculate().execute(request, flammableSubstanceService);
     }
 
-    @RequestMapping(value = "/tohistory")
-    public String goToBuildings(HttpServletRequest request) throws ServletException, IOException {
-        return new GoToListOfBuildings().execute(request, buildingService);
-    }
-
-    @RequestMapping(value = "/calculate", method = RequestMethod.POST)
+    @RequestMapping(value = "/count", method = RequestMethod.POST)
     public String calculate(HttpServletRequest request) throws ServletException, IOException {
-        return new CalculateCommand().execute(request, flammableSubstanceService);
+        User user = principalUtil.getPrincipal();
+        return new CalculateCommand().execute(request, flammableSubstanceService, user);
     }
 
-    @RequestMapping(value = "/history", method = RequestMethod.POST)
+    @RequestMapping(value = "/history")
+    public String goToBuildings(HttpServletRequest request) throws ServletException, IOException {
+        User user = principalUtil.getPrincipal();
+        return new GoToListOfBuildings().execute(request, buildingService, user);
+    }
+
+    @RequestMapping(value = "/history/edit", method = RequestMethod.POST)
     public String buildings(HttpServletRequest request) throws ServletException, IOException {
-        return new BuildingsListCommand().execute(request, buildingService);
+        User user = principalUtil.getPrincipal();
+        return new BuildingsListCommand().execute(request, buildingService, user);
     }
 
-    @RequestMapping(value = "/savereport")
+    @RequestMapping(value = "/result/save")
     public String saveReport(HttpServletRequest request) throws ServletException, IOException {
         return new SaveReportCommand().execute(request, buildingService);
     }

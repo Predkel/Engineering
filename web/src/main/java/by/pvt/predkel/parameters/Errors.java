@@ -4,7 +4,7 @@ package by.pvt.predkel.parameters;
  * Created by Admin on 19.05.2016.
  */
 public class Errors {
-    public static final String NUBER_FORMAT_ERROR = "Некорректные данные";
+    public static final String NUMBER_FORMAT_ERROR = "Некорректные данные";
     public static final String REPORT_ERROR = "Ошибка при создании отчета";
     public static final String DB_ERROR = "Ошибка базы данных";
     public static final String SUBSTANCES_ERROR = "Пустые все поля горючих материалов и удельной пожарной нагрузки (что-то дожно быть заполнено)";

@@ -1,26 +1,10 @@
-<!--
-  User: lexxa
-  Date: 22.02.2016
-  Time: 15:09
--->
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
           xmlns="http://www.w3.org/1999/xhtml"
           xmlns:c="http://java.sun.com/jsp/jstl/core"
           xmlns:s="http://www.springframework.org/tags"
           version="2.0">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2">
 
-            </div>
-            <div class="col-md-8">
-                <h3>${error}</h3>
-            </div>
-            <div class="col-md-2">
-
-            </div>
-        </div>
-        <div class="modal-dialog">
+    <div class="modal-dialog" style="margin-top: 10%">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="text-center"><s:message code="registration"/></h1>
@@ -32,7 +16,8 @@
                 <s:message var="register" code="registration.register"/>
 
                 <div class="modal-body">
-                    <form class="col-md-12 center-block" action="registration" method="post">
+                    <s:url value="/admin/register" var="formUrl"/>
+                    <form class="col-md-12 center-block" action="${formUrl}" method="post">
 
                         <div class="form-group">
                             <input type="text" name="login" class="form-control input-lg" placeholder="${login}"/>
@@ -54,12 +39,12 @@
                         </div>
                     </form>
                     <div class="modal-footer">
-                        <!--<div class="col-md-12">
-                        </div>-->
+                        <div class="col-md-12">
+                            <h3>${error}</h3>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </jsp:root>
 

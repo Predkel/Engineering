@@ -1,9 +1,11 @@
 package by.pvt.predkel.security;
 
+import by.pvt.predkel.entities.Building;
 import by.pvt.predkel.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
+import java.util.List;
 
 public class CustomUser extends org.springframework.security.core.userdetails.User {
     private User user;
@@ -21,4 +23,13 @@ public class CustomUser extends org.springframework.security.core.userdetails.Us
     public String getUserLogin() {
         return user.getLogin();
     }
+
+    public List<Building> getUserBuildings() {
+        return user.getBuilding();
+    }
+
+    public Long getUserId() {
+        return user.getId();
+    }
+
 }

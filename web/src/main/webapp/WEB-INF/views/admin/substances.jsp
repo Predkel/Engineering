@@ -24,7 +24,8 @@
 
         </div>
     </div>
-    <form class="center-block" action="materials" method="POST">
+    <s:url value="/admin/materials/edit" var="formUrl"/>
+    <form class="center-block" action="${formUrl}" method="POST">
 
         <div class="row">
 
@@ -179,13 +180,13 @@
         <div class="center-block">
 
             <c:if test="${previousPage!=0}">
-                <a href="${pageContext.request.contextPath}/admin/tomaterials?page=${previousPage}">
+                <a href="${pageContext.request.contextPath}/admin/materials?page=${previousPage}">
                     <img src="${pageContext.request.contextPath}/asserts/images/leftArrow.png" WIDTH="20" HEIGHT="20"
                          BORDER="0"></a>
             </c:if>
 
             <c:if test="${showFirstPage==true}">
-                <a href="${pageContext.request.contextPath}/admin/tomaterials?page=1">
+                <a href="${pageContext.request.contextPath}/admin/materials?page=1">
                     <button class="btn btn-default">1</button>
                 </a>
             </c:if>
@@ -195,7 +196,7 @@
             </c:if>
 
             <c:forEach items="${beforeThisPage}" var="number">
-                <a href="${pageContext.request.contextPath}/admin/tomaterials?page=${number}">
+                <a href="${pageContext.request.contextPath}/admin/materials?page=${number}">
                     <button class="btn btn-default">${number}</button>
                 </a>
             </c:forEach>
@@ -203,7 +204,7 @@
             <button class="btn btn-danger">${page}</button>
 
             <c:forEach items="${afterThisPage}" var="number">
-                <a href="${pageContext.request.contextPath}/admin/tomaterials?page=${number}">
+                <a href="${pageContext.request.contextPath}/admin/materials?page=${number}">
                     <button class="btn btn-default">${number}</button>
                 </a>
             </c:forEach>
@@ -213,13 +214,13 @@
             </c:if>
 
             <c:if test="${showLastPage==true}">
-                <a href="${pageContext.request.contextPath}/admin/tomaterials?page=${countOfPages}">
+                <a href="${pageContext.request.contextPath}/admin/materials?page=${countOfPages}">
                     <button class="btn btn-default">${countOfPages}</button>
                 </a>
             </c:if>
 
             <c:if test="${nextPage!=0}">
-                <a href="${pageContext.request.contextPath}/admin/tomaterials?page=${nextPage}">
+                <a href="${pageContext.request.contextPath}/admin/materials?page=${nextPage}">
                     <img src="${pageContext.request.contextPath}/asserts/images/rightArrow.png" WIDTH="20" HEIGHT="20"
                          BORDER="0"></a>
             </c:if>

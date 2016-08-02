@@ -18,27 +18,28 @@ import java.io.IOException;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
+
     @Autowired
     private IUserService userService;
     @Autowired
     private IFlammableSubstanceService flammableSubstanceService;
 
-    @RequestMapping(value = "/toregister")
+    @RequestMapping(value = "/registration")
     public String goToRegister() throws ServletException, IOException {
         return new GoToRegister().execute();
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(HttpServletRequest request) throws ServletException, IOException {
         return new RegistrationUserCommand().execute(request, userService);
     }
 
-    @RequestMapping(value = "/tomaterials")
+    @RequestMapping(value = "/materials")
     public String goToSubstances(HttpServletRequest request) throws ServletException, IOException {
         return new GoToListOfSubstances().execute(request, flammableSubstanceService);
     }
 
-    @RequestMapping(value = "/materials", method = RequestMethod.POST)
+    @RequestMapping(value = "/materials/edit", method = RequestMethod.POST)
     public String substances(HttpServletRequest request) throws ServletException, IOException {
         return new SubstancesListCommand().execute(request, flammableSubstanceService);
     }

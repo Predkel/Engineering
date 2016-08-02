@@ -27,7 +27,8 @@
     <br/>
     <c:forEach items="${buildings}" var="build">
         <div class="row">
-            <form action="history" method="post">
+            <s:url value="/client/history/edit" var="formUrl"/>
+            <form action="${formUrl}" method="post">
                 <input type="hidden" name="idBuilding" value="${build.id}"/>
                 <div class="col-md-4">
                     <div class="form-group">

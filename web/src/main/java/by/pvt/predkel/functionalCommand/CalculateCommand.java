@@ -24,11 +24,9 @@ import java.io.File;
  */
 public class CalculateCommand extends AbstractCommand {
 
-    public String execute(HttpServletRequest request, IFlammableSubstanceService flammableSubstanceService) {
+    public String execute(HttpServletRequest request, IFlammableSubstanceService flammableSubstanceService, User user) {
         GoToCalculate go = new GoToCalculate();
         MyEntityObjectFactory factory = new MyEntityObjectFactory();
-
-        User us = (User) request.getSession().getAttribute(Attributes.USER);
 
         if ((request.getParameter(Parameters.AMOUNT_OF_ROOMS)).isEmpty()
                 || (Integer.parseInt(request.getParameter(Parameters.AMOUNT_OF_ROOMS)) == 0)) {
@@ -148,14 +146,14 @@ public class CalculateCommand extends AbstractCommand {
             return go.execute(request, flammableSubstanceService);//Path.CALCULATE_PATH;
         }
 
-        build.setUserId(us.getId());
-        build.setUser(us);
+        build.setUserId(user.getId());
+        build.setUser(user);
 
         AllDefinition def = new AllDefinition();
         def.setALlParameters(build);
         //System.getProperty("user.dir") + "/tomcat/webapps/Engineering/other/" + us.getLogin() + "/"- было раньше
         ///путь для генерации отчета и графиков
-        String path = request.getServletContext().getRealPath("/") + "asserts/reports/" + us.getLogin() + "/";
+        String path = request.getServletContext().getRealPath("/") + "asserts/reports/" + user.getLogin() + "/";
         File myPath = new File(path);
         myPath.mkdirs();
 
@@ -165,7 +163,7 @@ public class CalculateCommand extends AbstractCommand {
             create.create(path);
         }catch (NumberFormatException e1){
             MyLogger.INSTANCE.logError(getClass(), e1.getMessage());
-            request.setAttribute(Attributes.ERROR, Errors.NUBER_FORMAT_ERROR);
+            request.setAttribute(Attributes.ERROR, Errors.NUMBER_FORMAT_ERROR);
             return go.execute(request, flammableSubstanceService);//Path.CALCULATE_PATH;
         }catch (Exception e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
@@ -173,7 +171,7 @@ public class CalculateCommand extends AbstractCommand {
             return go.execute(request, flammableSubstanceService);//Path.CALCULATE_PATH;
         }
         request.getSession().setAttribute(Attributes.BUILDING, build);
-        request.getSession().setAttribute(Attributes.USERNAME, us.getLogin());
+        request.getSession().setAttribute(Attributes.USERNAME, user.getLogin());
         request.getSession().setAttribute(Attributes.NAME_OF_BUILDING, Transliterator.transliterate(build.getNameOfBuilding()));
         request.getSession().setAttribute(Attributes.NAME_OF_CHARTS, create.getChart().getImageNames());
 //        request.getSession().setAttribute(Attributes.REPORT_FILEPATH, path);

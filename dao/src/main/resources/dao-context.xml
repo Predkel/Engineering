@@ -17,7 +17,7 @@
     <!--Translate exceptions to Spring exceptions-->
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+    <bean id="dataSourceLocal" class="org.apache.commons.dbcp2.BasicDataSource"
           p:url="jdbc:mysql://localhost/test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8"
           p:driverClassName="com.mysql.jdbc.Driver"
           p:username="root"
@@ -26,8 +26,17 @@
           p:maxTotal="10"
     />
 
+    <bean id="dataSourceHeroku" class="org.apache.commons.dbcp2.BasicDataSource"
+          p:url="jdbc:mysql://eu-cdbr-west-01.cleardb.com/heroku_7bf5528ea5538f5?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8&amp;reconnect=true"
+          p:driverClassName="com.mysql.jdbc.Driver"
+          p:username="b9df0de4f43775"
+          p:password="4f1d2c74"
+          p:initialSize="5"
+          p:maxTotal="10"
+    />
+
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="dataSourceHeroku"/>
         <property name="mappingResources">
             <list>
                 <value>User.hbm.xml</value>
@@ -43,13 +52,11 @@
             </list>
         </property>
 
-        <!--<property name="packagesToScan">-->
-        <!--<list>-->
-        <!--<value>by.pvt.predkel.entities</value>-->
-        <!--</list>-->
-        <!--</property>-->
         <property name="hibernateProperties">
             <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+
                 <!--<prop key="hibernate.c3p0.min_size">5</prop>-->
                 <!--<prop key="hibernate.c3p0.max_size">20</prop>-->
                 <!--<prop key="hibernate.c3p0.timeout">300</prop>-->
@@ -60,8 +67,6 @@
                 <!--<prop key="hibernate.connection.password">1234</prop>-->
                 <!--<prop key="hibernate.connection.username">root</prop>-->
 
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
                 <!--<prop key="hibernate.current_session_context_class">thread</prop>-->
                 <!--<prop key="connection.isolation">2</prop>-->
                 <!--<prop key="hibernate.cglib.use_reflection_optimizer">true</prop>-->

@@ -14,37 +14,37 @@
                 <img src="${pageContext.request.contextPath}/asserts/images/logo.png" alt="Logo"/>
             </a>
         </div>
+        <s:message var="main" code="header.toMain"/>
+        <s:message var="logout" code="header.signOut"/>
+        <s:message var="help" code="header.myHelp"/>
+        <s:message var="data" code="header.dataInput"/>
         <div class="collapse navbar-collapse" id="responsive-menu">
             <ul class="nav navbar-nav">
-                <li><a href="${pageContext.request.contextPath}/tofunctions"><s:message var="choose"
-                                                                                        code="header.toMain"/></a></li>
-                <li><a href="${pageContext.request.contextPath}/logout"><s:message var="choose"
-                                                                                   code="header.signOut"/></a></li>
+                <li><a href="${pageContext.request.contextPath}/client/main">${main}</a></li>
+                <li><a href="${pageContext.request.contextPath}/logout">${logout}</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><s:message var="choose"
-                                                                                          code="header.myHelp"/><b
-                            class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">${help}<b class="caret"></b>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li><a href="${pageContext.request.contextPath}/tohelp"><s:message var="choose"
-                                                                                           code="header.dataInput"/></a>
+                        <li><a href="${pageContext.request.contextPath}/client/help">${data}</a>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/setlanguage?language=en">
-                        <img src="${pageContext.request.contextPath}/asserts/images/uk.png" alt=""/>
-                    </a>
-                </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/setlanguage?language=ru">
-                        <img src="${pageContext.request.contextPath}/asserts/images/rus.png" alt=""/>
-                    </a>
-                </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/setlanguage?language=be">
-                        <img src="${pageContext.request.contextPath}/asserts/images/by.png" alt=""/>
-                    </a>
-                </li>
+                <%--<li>--%>
+                <%--<a href="${pageContext.request.contextPath}/setlanguage?language=en">--%>
+                <%--<img src="${pageContext.request.contextPath}/asserts/images/uk.png" alt=""/>--%>
+                <%--</a>--%>
+                <%--</li>--%>
+                <%--<li>--%>
+                <%--<a href="${pageContext.request.contextPath}/setlanguage?language=ru">--%>
+                <%--<img src="${pageContext.request.contextPath}/asserts/images/rus.png" alt=""/>--%>
+                <%--</a>--%>
+                <%--</li>--%>
+                <%--<li>--%>
+                <%--<a href="${pageContext.request.contextPath}/setlanguage?language=be">--%>
+                <%--<img src="${pageContext.request.contextPath}/asserts/images/by.png" alt=""/>--%>
+                <%--</a>--%>
+                <%--</li>--%>
             </ul>
         </div>
     </div>

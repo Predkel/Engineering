@@ -22,9 +22,9 @@
     </definition>
 
     <!-- ADMIN PAGES -->
-    <definition name="admin/register" extends="default">
+    <definition name="admin/registration" extends="default">
         <put-attribute name="title" value="registration"/>
-        <put-attribute name="body" value="/WEB-INF/views/admin/register.jspx"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/registration.jspx"/>
     </definition>
 
     <definition name="admin/materials" extends="default">
@@ -70,7 +70,7 @@
     </definition>
 
     <!-- HELP PAGE -->
-    <definition name="help/help" extends="default">
+    <definition name="client/help" extends="default">
         <put-attribute name="title" value="page.error.title"/>
         <put-attribute name="body" value="/WEB-INF/views/info/info.jspx"/>
     </definition>

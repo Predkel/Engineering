@@ -22,7 +22,7 @@ import java.io.File;
  */
 public class BuildingsListCommand extends AbstractCommand {
 
-    public String execute(HttpServletRequest request, IBuildingService buildingService) {
+    public String execute(HttpServletRequest request, IBuildingService buildingService, User user) {
         String action = request.getParameter(Parameters.BUILDING_ACTION);
 
         String idBuilding = request.getParameter(Parameters.ID_BUILDING);
@@ -30,8 +30,6 @@ public class BuildingsListCommand extends AbstractCommand {
         Building build;
         try {
             build = buildingService.getById(Long.parseLong(idBuilding));
-
-            User user = (User) request.getSession(false).getAttribute(Attributes.USER);
 
             if (action.equals(Parameters.SAVE)) {//если пользователь выбрал скачивание отчета
                 //здесь надо либо создавать новый отчет или достать старый

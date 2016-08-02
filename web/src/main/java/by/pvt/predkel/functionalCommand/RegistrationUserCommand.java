@@ -26,7 +26,7 @@ public class RegistrationUserCommand extends AbstractCommand {
         if (request.getParameter(Parameters.LOGIN).isEmpty() ||
                 request.getParameter(Parameters.PASSWORD).isEmpty()) {
             request.setAttribute(Attributes.ERROR, Errors.USER_EMPTY_ERROR);
-            return Path.REGISTER_PATH;
+            return Path.REGISTRATION_PATH;
         } else {
             user.setLogin(request.getParameter(Parameters.LOGIN));
             user.setPassword(request.getParameter(Parameters.PASSWORD));
@@ -39,11 +39,11 @@ public class RegistrationUserCommand extends AbstractCommand {
         } catch (DaoException e) {
             MyLogger.INSTANCE.logError(getClass(), e.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.DB_ERROR);
-            return Path.REGISTER_PATH;
+            return Path.REGISTRATION_PATH;
         }
         if (!checker) {
             request.setAttribute(Attributes.ERROR, Errors.USER_NOT_EMPTY_LOGIN_ERROR);
-            return Path.REGISTER_PATH;
+            return Path.REGISTRATION_PATH;
         }
 
         return Path.FUNCTIONS_PATH;

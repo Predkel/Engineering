@@ -8,6 +8,7 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="locales.local" var="loc"/>
 <fmt:message bundle="${loc}" key="calculate" var="calculate"/>
@@ -90,8 +91,8 @@
 <fmt:message bundle="${loc}" key="calculate.material.weight" var="weightOfMaterial"/>
 
 <fmt:message bundle="${loc}" key="calculate.send" var="send"/>
-
-<form action="calculate" method="POST" novalidate="">
+<s:url value="/client/count" var="formUrl"/>
+<form action="${formUrl}" method="POST" novalidate="">
     <div class="container">
         <div class="row">
             <div class="col-md-2">

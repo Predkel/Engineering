@@ -37,12 +37,12 @@
             </a>
 
             <c:if test="${saveBuilding}">
-                <a href="${pageContext.request.contextPath}/client/savereport">
+                <a href="${pageContext.request.contextPath}/client/result/save">
                     <button class="btn btn-block btn-lg btn-primary"><s:message code="result.save"/></button>
                 </a>
             </c:if>
 
-            <a href="${pageContext.request.contextPath}/client/torecalculate">
+            <a href="${pageContext.request.contextPath}/client/recalculate">
                 <button class="btn btn-block btn-lg btn-primary"><s:message code="result.change"/></button>
             </a>
         </div>

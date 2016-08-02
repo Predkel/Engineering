@@ -2,6 +2,7 @@ package by.pvt.predkel.security;
 
 import by.pvt.predkel.entities.User;
 import by.pvt.predkel.exceptions.DaoException;
+import by.pvt.predkel.parameters.WebConstants;
 import by.pvt.predkel.serviceForDao.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,13 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Authentication manager
- * Created by: khudnitsky
- * Date: 29.02.2016
- * Time: 15:18
- */
 
 @Service("authenticationService")
 public class AuthenticationService implements UserDetailsService {
@@ -34,7 +28,7 @@ public class AuthenticationService implements UserDetailsService {
         try {
             user = userService.getByLogin(login);
             if (user == null) {
-                throw new UsernameNotFoundException("User not found");
+                throw new UsernameNotFoundException(WebConstants.USER_NOT_FOUND);
             }
         } catch (DaoException e) {
             e.printStackTrace();
@@ -45,9 +39,9 @@ public class AuthenticationService implements UserDetailsService {
     private List<GrantedAuthority> getGrantedAuthorities(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         if (user.getRole() == 1)
-            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            authorities.add(new SimpleGrantedAuthority(WebConstants.ROLE_ADMIN));
         else
-            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+            authorities.add(new SimpleGrantedAuthority(WebConstants.ROLE_USER));
 
 //        for (AccessLevel access : user.getAccessLevels()) {
 //            authorities.add(new SimpleGrantedAuthority(WebConstants.ROLE_PREFIX + access.getAccessLevelType().toString()));

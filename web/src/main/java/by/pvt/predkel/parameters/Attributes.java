@@ -4,6 +4,8 @@ package by.pvt.predkel.parameters;
  * Created by Admin on 03.06.2016.
  */
 public class Attributes {
+    public static final String ANONYMOUS_USER = "anonymousUser";
+
     public static final String USER = "User";
     public static final String NAME_OF_BUILDING = "buildName";
     public static final String BUILDING = "building";

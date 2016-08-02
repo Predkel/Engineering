@@ -23,7 +23,8 @@
         document.getElementById('Content').innerHTML = str1;
     }
 </script>
-<form action="calculate" method="post" novalidate="">
+<s:url value="/client/count" var="formUrl"/>
+<form action="${formUrl}" method="post" novalidate="">
     <div class="container">
         <div class="row">
             <div class="col-md-2">

@@ -1,6 +1,7 @@
 package by.pvt.predkel.security;
 
 import by.pvt.predkel.parameters.Path;
+import by.pvt.predkel.parameters.WebConstants;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -17,13 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
-
-/**
- * Success Authentication Handler
- * Created by: khudnitsky
- * Date: 01.03.2016
- * Time: 13:19
- */
 
 @Component
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
@@ -45,10 +39,10 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
         String targetUrl = determineTargetUrl(authentication);
 
         if (response.isCommitted()) {
-            logger.info("Response has already been committed. Unable to redirect to " + targetUrl);
+            logger.info(WebConstants.UNABLE_TO_REDIRECT + targetUrl);
             return;
         }
-        request.getSession().setAttribute("errorLoginOrPassword", messageSource.getMessage("message.loginerror", null, request.getLocale()));
+//        request.getSession().setAttribute("errorLoginOrPassword", messageSource.getMessage("message.loginerror", null, request.getLocale()));
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
@@ -59,10 +53,10 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
+            if (grantedAuthority.getAuthority().equals(WebConstants.ROLE_USER)) {
                 isClient = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+            } else if (grantedAuthority.getAuthority().equals(WebConstants.ROLE_ADMIN)) {
                 isAdmin = true;
                 break;
             }

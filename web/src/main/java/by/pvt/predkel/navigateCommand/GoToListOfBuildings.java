@@ -19,8 +19,8 @@ import java.util.List;
  */
 public class GoToListOfBuildings extends AbstractCommand {
 
-    public String execute(HttpServletRequest request, IBuildingService buildingService) {
-        User user = (User) request.getSession(false).getAttribute(Attributes.USER);
+    public String execute(HttpServletRequest request, IBuildingService buildingService, User user) {
+
         List<Building> buildings = null;
         try {
             buildings = buildingService.getAllByFk(user.getId());

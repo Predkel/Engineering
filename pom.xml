@@ -33,6 +33,7 @@
         <servlet.api.version>3.1.0</servlet.api.version>
         <pool.version>2.1.1</pool.version>
         <junit.version>4.12</junit.version>
+        <mockito.version>2.0.2-beta</mockito.version>
         <validation.version>1.1.0.Final</validation.version>
         <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
         <tomcat.maven.plugin.version>1.1</tomcat.maven.plugin.version>
@@ -46,21 +47,19 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.11</version>
+                <version>${junit.version.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
-                <version>2.0.2-beta</version>
+                <version>${mockito.version}</version>
             </dependency>
             <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
-
-
             <!--Cglib-->
             <dependency>
                 <groupId>cglib</groupId>
@@ -207,10 +206,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <finalName>engineering</finalName>
-
-    </build>
 
 </project>

@@ -9,6 +9,6 @@ import by.pvt.predkel.parameters.Path;
 public class GoToRegister extends AbstractCommand {
 
     public String execute() {
-        return Path.REGISTER_PATH;
+        return Path.REGISTRATION_PATH;
     }
 }

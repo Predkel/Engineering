@@ -20,10 +20,10 @@ public class Path {
     public static final String CALCULATE_PATH = "client/calculate";
     public static final String BUILDINGS_PATH = "client/history";
     public static final String SUBSTANCES_PATH = "admin/materials";
-    public static final String REGISTER_PATH = "admin/register";
+    public static final String REGISTRATION_PATH = "admin/registration";
     public static final String RECALCULATE_PATH = "client/recalculate";
-    public static final String HELP_PATH = "help/help";
-    public static final String ERROR_PATH = "error/error";
+    public static final String HELP_PATH = "client/help";
+    public static final String ERROR_PATH = "client/error";
 //    public static final String REPORT_PATH = "D:/settings/apache-tomcat-8.0.33/webapps/Engineering/jsp/other/";
 
 }
