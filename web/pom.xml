@@ -113,41 +113,41 @@
     </dependencies>
 
     <profiles>
-        <!--<profile>-->
-        <!--<id>tomcat-deploy</id>-->
-        <!--<build>-->
-        <!--<finalName>engineering</finalName>-->
-        <!--<plugins>-->
-        <!--<plugin>-->
-        <!--<groupId>org.codehaus.mojo</groupId>-->
-        <!--<artifactId>tomcat-maven-plugin</artifactId>-->
-        <!--<configuration>-->
-        <!--<url>http://localhost:8080/manager/text</url>-->
-        <!--<username>tomcat</username>-->
-        <!--<password>tomcat</password>-->
-        <!--<path>/${project.build.finalName}</path>-->
-        <!--<warFile>target/${project.build.finalName}.war</warFile>-->
-        <!--</configuration>-->
-        <!--<executions>-->
-        <!--<execution>-->
-        <!--<goals>-->
-        <!--<goal>redeploy</goal>-->
-        <!--</goals>-->
-        <!--<phase>install</phase>-->
-        <!--</execution>-->
-        <!--</executions>-->
-        <!--</plugin>-->
-        <!--<plugin>-->
-        <!--<groupId>org.apache.maven.plugins</groupId>-->
-        <!--<artifactId>maven-compiler-plugin</artifactId>-->
-        <!--<configuration>-->
-        <!--<source>1.7</source>-->
-        <!--<target>1.7</target>-->
-        <!--</configuration>-->
-        <!--</plugin>-->
-        <!--</plugins>-->
-        <!--</build>-->
-        <!--</profile>-->
+        <profile>
+            <id>tomcat-deploy</id>
+            <build>
+                <finalName>engineering</finalName>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>tomcat-maven-plugin</artifactId>
+                        <configuration>
+                            <url>http://localhost:8080/manager/text</url>
+                            <username>tomcat</username>
+                            <password>tomcat</password>
+                            <path>/${project.build.finalName}</path>
+                            <warFile>target/${project.build.finalName}.war</warFile>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>redeploy</goal>
+                                </goals>
+                                <phase>install</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <source>1.7</source>
+                            <target>1.7</target>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 
         <profile>
             <id>heroku</id>
