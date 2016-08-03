@@ -1,96 +1,94 @@
+<%@ page language="java" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="by.pvt.predkel.entities.*" %>
 <%@ page import="by.pvt.predkel.parameters.Attributes" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
 <jsp:useBean id="error" class="java.lang.String" scope="request"/>
 
-<%@ page language="java" pageEncoding="UTF-8" %>
+<s:message code="calculate" var="calculate"/>
+<s:message code="calculate.building.name" var="buildingName"/>
+<s:message code="calculate.building.region" var="region"/>
+<s:message code="calculate.building.brest" var="brest"/>
+<s:message code="calculate.building.vitebsk" var="vitebsk"/>
+<s:message code="calculate.building.gomel" var="gomel"/>
+<s:message code="calculate.building.grodno" var="grodno"/>
+<s:message code="calculate.building.minsk" var="minsk"/>
+<s:message code="calculate.building.mogilev" var="mogilev"/>
+<s:message code="calculate.building.coefficient" var="coefficientBuild"/>
+<s:message code="calculate.building.s2" var="s2Text"/>
+<s:message code="calculate.building.s2.1" var="s21"/>
+<s:message code="calculate.building.s2.2" var="s22"/>
+<s:message code="calculate.building.s2.3" var="s23"/>
+<s:message code="calculate.building.s2.4" var="s24"/>
+<s:message code="calculate.building.s3" var="s3Text"/>
+<s:message code="calculate.building.s3.1" var="s31"/>
+<s:message code="calculate.building.s3.2" var="s32"/>
+<s:message code="calculate.building.s3.3" var="s33"/>
+<s:message code="calculate.building.s5" var="s5Text"/>
+<s:message code="calculate.building.s5.1" var="s51"/>
+<s:message code="calculate.building.s5.2" var="s52"/>
+<s:message code="calculate.building.s5.3" var="s53"/>
+<s:message code="calculate.building.s5.4" var="s54"/>
+<s:message code="calculate.building.s5.5" var="s55"/>
+<s:message code="calculate.building.s6" var="s6Text"/>
+<s:message code="calculate.building.s6.1" var="s61"/>
+<s:message code="calculate.building.s6.2" var="s62"/>
+<s:message code="calculate.building.coefficient5" var="coefficient5"/>
+<s:message code="calculate.building.amountOfRoom" var="amountOfRoom"/>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
-<fmt:setLocale value="${sessionScope.local}"/>
-<fmt:setBundle basename="locales.local" var="loc"/>
-<fmt:message bundle="${loc}" key="calculate" var="calculate"/>
-<fmt:message bundle="${loc}" key="calculate.building.name" var="buildingName"/>
-<fmt:message bundle="${loc}" key="calculate.building.region" var="region"/>
-<fmt:message bundle="${loc}" key="calculate.building.brest" var="brest"/>
-<fmt:message bundle="${loc}" key="calculate.building.vitebsk" var="vitebsk"/>
-<fmt:message bundle="${loc}" key="calculate.building.gomel" var="gomel"/>
-<fmt:message bundle="${loc}" key="calculate.building.grodno" var="grodno"/>
-<fmt:message bundle="${loc}" key="calculate.building.minsk" var="minsk"/>
-<fmt:message bundle="${loc}" key="calculate.building.mogilev" var="mogilev"/>
-<fmt:message bundle="${loc}" key="calculate.building.coefficient" var="coefficientBuild"/>
-<fmt:message bundle="${loc}" key="calculate.building.s2" var="s2Text"/>
-<fmt:message bundle="${loc}" key="calculate.building.s2.1" var="s21"/>
-<fmt:message bundle="${loc}" key="calculate.building.s2.2" var="s22"/>
-<fmt:message bundle="${loc}" key="calculate.building.s2.3" var="s23"/>
-<fmt:message bundle="${loc}" key="calculate.building.s2.4" var="s24"/>
-<fmt:message bundle="${loc}" key="calculate.building.s3" var="s3Text"/>
-<fmt:message bundle="${loc}" key="calculate.building.s3.1" var="s31"/>
-<fmt:message bundle="${loc}" key="calculate.building.s3.2" var="s32"/>
-<fmt:message bundle="${loc}" key="calculate.building.s3.3" var="s33"/>
-<fmt:message bundle="${loc}" key="calculate.building.s5" var="s5Text"/>
-<fmt:message bundle="${loc}" key="calculate.building.s5.1" var="s51"/>
-<fmt:message bundle="${loc}" key="calculate.building.s5.2" var="s52"/>
-<fmt:message bundle="${loc}" key="calculate.building.s5.3" var="s53"/>
-<fmt:message bundle="${loc}" key="calculate.building.s5.4" var="s54"/>
-<fmt:message bundle="${loc}" key="calculate.building.s5.5" var="s55"/>
-<fmt:message bundle="${loc}" key="calculate.building.s6" var="s6Text"/>
-<fmt:message bundle="${loc}" key="calculate.building.s6.1" var="s61"/>
-<fmt:message bundle="${loc}" key="calculate.building.s6.2" var="s62"/>
-<fmt:message bundle="${loc}" key="calculate.building.coefficient5" var="coefficient5"/>
-<fmt:message bundle="${loc}" key="calculate.building.amountOfRoom" var="amountOfRoom"/>
+<s:message code="calculate.room" var="room"/>
+<s:message code="calculate.room.coefficient" var="coefficientRoom"/>
+<s:message code="calculate.room.height" var="height"/>
+<s:message code="calculate.room.name" var="roomName"/>
+<s:message code="calculate.room.perimeter" var="perimeter"/>
+<s:message code="calculate.room.position" var="position"/>
+<s:message code="calculate.room.s1" var="s1Text"/>
+<s:message code="calculate.room.s1.1" var="s11"/>
+<s:message code="calculate.room.s1.2" var="s12"/>
+<s:message code="calculate.room.s1.3" var="s13"/>
+<s:message code="calculate.room.s1.4" var="s14"/>
+<s:message code="calculate.room.s1.5" var="s15"/>
+<s:message code="calculate.room.s1.6" var="s16"/>
+<s:message code="calculate.room.s1.7" var="s17"/>
+<s:message code="calculate.room.s4" var="s4Text"/>
+<s:message code="calculate.room.s4.1" var="s41"/>
+<s:message code="calculate.room.s4.2" var="s42"/>
+<s:message code="calculate.room.s4.3" var="s43"/>
+<s:message code="calculate.room.s4.4" var="s44"/>
+<s:message code="calculate.room.s4.5" var="s45"/>
+<s:message code="calculate.room.s7" var="s7Text"/>
+<s:message code="calculate.room.s7.1" var="s71"/>
+<s:message code="calculate.room.s7.2" var="s72"/>
+<s:message code="calculate.room.s8" var="s8Text"/>
+<s:message code="calculate.room.s8.1" var="s81"/>
+<s:message code="calculate.room.s8.2" var="s82"/>
+<s:message code="calculate.room.s9" var="s9Text"/>
+<s:message code="calculate.room.s9.1" var="s91"/>
+<s:message code="calculate.room.s9.2" var="s92"/>
+<s:message code="calculate.room.s10" var="s10Text"/>
+<s:message code="calculate.room.s10.1" var="s101"/>
+<s:message code="calculate.room.s10.2" var="s102"/>
+<s:message code="calculate.room.square" var="square"/>
+<s:message code="calculate.room.squareOfWall" var="squareOfWall"/>
+<s:message code="calculate.room.volume" var="volume"/>
+<s:message code="calculate.room.specificFireLoad" var="specificFireLoad"/>
 
-<fmt:message bundle="${loc}" key="calculate.room" var="room"/>
-<fmt:message bundle="${loc}" key="calculate.room.coefficient" var="coefficientRoom"/>
-<fmt:message bundle="${loc}" key="calculate.room.height" var="height"/>
-<fmt:message bundle="${loc}" key="calculate.room.name" var="roomName"/>
-<fmt:message bundle="${loc}" key="calculate.room.perimeter" var="perimeter"/>
-<fmt:message bundle="${loc}" key="calculate.room.position" var="position"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1" var="s1Text"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.1" var="s11"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.2" var="s12"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.3" var="s13"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.4" var="s14"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.5" var="s15"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.6" var="s16"/>
-<fmt:message bundle="${loc}" key="calculate.room.s1.7" var="s17"/>
-<fmt:message bundle="${loc}" key="calculate.room.s4" var="s4Text"/>
-<fmt:message bundle="${loc}" key="calculate.room.s4.1" var="s41"/>
-<fmt:message bundle="${loc}" key="calculate.room.s4.2" var="s42"/>
-<fmt:message bundle="${loc}" key="calculate.room.s4.3" var="s43"/>
-<fmt:message bundle="${loc}" key="calculate.room.s4.4" var="s44"/>
-<fmt:message bundle="${loc}" key="calculate.room.s4.5" var="s45"/>
-<fmt:message bundle="${loc}" key="calculate.room.s7" var="s7Text"/>
-<fmt:message bundle="${loc}" key="calculate.room.s7.1" var="s71"/>
-<fmt:message bundle="${loc}" key="calculate.room.s7.2" var="s72"/>
-<fmt:message bundle="${loc}" key="calculate.room.s8" var="s8Text"/>
-<fmt:message bundle="${loc}" key="calculate.room.s8.1" var="s81"/>
-<fmt:message bundle="${loc}" key="calculate.room.s8.2" var="s82"/>
-<fmt:message bundle="${loc}" key="calculate.room.s9" var="s9Text"/>
-<fmt:message bundle="${loc}" key="calculate.room.s9.1" var="s91"/>
-<fmt:message bundle="${loc}" key="calculate.room.s9.2" var="s92"/>
-<fmt:message bundle="${loc}" key="calculate.room.s10" var="s10Text"/>
-<fmt:message bundle="${loc}" key="calculate.room.s10.1" var="s101"/>
-<fmt:message bundle="${loc}" key="calculate.room.s10.2" var="s102"/>
-<fmt:message bundle="${loc}" key="calculate.room.square" var="square"/>
-<fmt:message bundle="${loc}" key="calculate.room.squareOfWall" var="squareOfWall"/>
-<fmt:message bundle="${loc}" key="calculate.room.volume" var="volume"/>
-<fmt:message bundle="${loc}" key="calculate.room.specificFireLoad" var="specificFireLoad"/>
+<s:message code="calculate.aperture" var="aperture"/>
+<s:message code="calculate.aperture.aper" var="onlyAperture"/>
+<s:message code="calculate.aperture.amount" var="amountOfAperture"/>
+<s:message code="calculate.aperture.square" var="squareOfAperture"/>
+<s:message code="calculate.aperture.width" var="widthOfAperture"/>
+<s:message code="calculate.aperture.height" var="heightOfAperture"/>
 
-<fmt:message bundle="${loc}" key="calculate.aperture" var="aperture"/>
-<fmt:message bundle="${loc}" key="calculate.aperture.aper" var="onlyAperture"/>
-<fmt:message bundle="${loc}" key="calculate.aperture.amount" var="amountOfAperture"/>
-<fmt:message bundle="${loc}" key="calculate.aperture.square" var="squareOfAperture"/>
-<fmt:message bundle="${loc}" key="calculate.aperture.width" var="widthOfAperture"/>
-<fmt:message bundle="${loc}" key="calculate.aperture.height" var="heightOfAperture"/>
+<s:message code="calculate.material" var="typeOfMaterial"/>
+<s:message code="calculate.material.mat" var="material"/>
+<s:message code="calculate.material.weight" var="weightOfMaterial"/>
 
-<fmt:message bundle="${loc}" key="calculate.material" var="typeOfMaterial"/>
-<fmt:message bundle="${loc}" key="calculate.material.mat" var="material"/>
-<fmt:message bundle="${loc}" key="calculate.material.weight" var="weightOfMaterial"/>
+<s:message code="calculate.send" var="send"/>
 
-<fmt:message bundle="${loc}" key="calculate.send" var="send"/>
 <s:url value="/client/count" var="formUrl"/>
 <form action="${formUrl}" method="POST" novalidate="">
     <div class="container">
