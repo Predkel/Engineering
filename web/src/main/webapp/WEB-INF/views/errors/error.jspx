@@ -1,8 +1,3 @@
-<!--
-  User: lexxa
-  Date: 22.02.2016
-  Time: 15:47
--->
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
           xmlns:s="http://www.springframework.org/tags"
           xmlns="http://www.w3.org/1999/xhtml"

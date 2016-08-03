@@ -2,7 +2,6 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-2">

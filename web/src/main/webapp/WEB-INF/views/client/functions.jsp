@@ -2,7 +2,6 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
-<%--<jsp:useBean id="User" scope="session" type="by.pvt.predkel.entities.User"/>--%>
 <div class="container">
     <div class="row">
         <div class="col-md-2">
