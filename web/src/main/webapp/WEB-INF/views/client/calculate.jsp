@@ -6,22 +6,25 @@
 <jsp:useBean id="substances" class="java.util.ArrayList" scope="request"/>
 <s:message var="room" code="calculate.room"/>
 <script>
-    function spoiler() {
-        var str = document.getElementById('amountOfRooms').value;
-        if (str.length > 2)
-            return false;
-        var str1 = "";
-        var str2 = "";
-        var file = document.getElementById('data').innerHTML;
-        var k = 0;
-        for (var i = 0; i < parseInt(str); i++) {
-            k++;
-            str1 += '<div class="tab-pane fade" id="tab-' + i + '" >' + file + '</div>';
-            str2 += '<li><a href="#tab-' + i + '" data-toggle="tab">${room} ' + k + '</a></li>';
-        }
-        document.getElementById('Vkladka').innerHTML = str2;
-        document.getElementById('Content').innerHTML = str1;
-    }
+    //    $('#amountOfRooms').keypress(function(eventObject){
+    //    alert('Вы ввели символ с клавиатуры. Его код равен ' + eventObject.which);
+    //});
+    //    function spoiler() {
+    <%--var str = document.getElementById('amountOfRooms').value;--%>
+    <%--if (str.length > 2)--%>
+    <%--return false;--%>
+    <%--var str1 = "";--%>
+    <%--var str2 = "";--%>
+    <%--var file = document.getElementById('data').innerHTML;--%>
+    <%--var k = 0;--%>
+    <%--for (var i = 0; i < parseInt(str); i++) {--%>
+    <%--k++;--%>
+    <%--str1 += '<div class="tab-pane fade" id="tab-' + i + '" >' + file + '</div>';--%>
+    <%--str2 += '<li><a href="#tab-' + i + '" data-toggle="tab">${room} ' + k + '</a></li>';--%>
+    <%--}--%>
+    <%--document.getElementById('Vkladka').innerHTML = str2;--%>
+    <%--document.getElementById('Content').innerHTML = str1;--%>
+    //    }
 </script>
 <s:url value="/client/count" var="formUrl"/>
 <form action="${formUrl}" method="post" novalidate="">
@@ -109,17 +112,18 @@
                     <label>
                         ${coefficient5}
                     </label>
-                    <input name="specifyingCoefficientS5" class="form-control" placeholder="${coefficient5}"
-                           value="1"/>
+                    <input name="specifyingCoefficientS5" class="form-control" type="number"
+                           placeholder="${coefficient5}" value="1"/>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="amount">
                     <s:message var="amountOfRoom" code="calculate.building.amountOfRoom"/>
                     <label>
                         ${amountOfRoom}
                     </label>
-                    <input name="amountOfRooms" id="amountOfRooms" onkeyup="spoiler()" class="form-control"
-                           placeholder="${amountOfRoom}" value="0"/>
+                    <input id="previousAmountOfRooms" style="display: none" value="0"/>
+                    <input name="amountOfRooms" id="amountOfRooms" class="form-control" type="number"
+                           placeholder="${amountOfRoom}"/>
                 </div>
             </div>
         </div>
@@ -134,7 +138,6 @@
                     <div class="tab-content" id="Content">
 
                         <div id="data" style="display: none">
-
                             <div class="form-group">
                                 <s:message var="position" code="calculate.room.position"/>
                                 <s:message var="name" code="calculate.room.name"/>
@@ -150,7 +153,8 @@
                                 <input name="heightOfRoom" class="form-control" placeholder="${height}"/>
                                 <input name="perimeterOfRoom" class="form-control" placeholder="${perimeter}"/>
                                 <input name="volumeOfRoom" class="form-control" placeholder="${volume}"/>
-                                <input name="squareOfConstruction" class="form-control" placeholder="${squareOfWall}"/>
+                                <input name="squareOfConstruction" class="form-control"
+                                       placeholder="${squareOfWall}"/>
                             </div>
                             <div class="row">
                                 <c:forEach var="k" begin="0" end="1">
@@ -162,9 +166,12 @@
 
                                                     <s:message var="aperture" code="calculate.aperture"/>
                                                     <s:message var="apertureWidth" code="calculate.aperture.width"/>
-                                                    <s:message var="apertureHeight" code="calculate.aperture.height"/>
-                                                    <s:message var="apertureAmount" code="calculate.aperture.amount"/>
-                                                    <s:message var="apertureSquare" code="calculate.aperture.square"/>
+                                                    <s:message var="apertureHeight"
+                                                               code="calculate.aperture.height"/>
+                                                    <s:message var="apertureAmount"
+                                                               code="calculate.aperture.amount"/>
+                                                    <s:message var="apertureSquare"
+                                                               code="calculate.aperture.square"/>
 
                                                     <input name="typeOfAperture" class="form-control"
                                                            placeholder="${aperture}"/>
@@ -288,3 +295,38 @@
     <br/>
 
 </form>
+<script>
+    var file = document.getElementById('data').innerHTML;
+
+    $('#amountOfRooms').change(function () {
+
+        var checker = parseInt(document.getElementById('previousAmountOfRooms').value);
+        var value = parseInt(document.getElementById('amountOfRooms').value);
+
+        if (value.length > 2)
+            return false;
+
+        if (value > checker) {
+            var str1 = "";
+            var str2 = "";
+
+            for (var i = checker + 1; i < parseInt(value) + 1; i++) {
+                str1 = '<div class="tab-pane fade" id="tab-' + i + '" >' + file + '</div>';
+                str2 = '<li class="link"><a href="#tab-' + i + '" data-toggle="tab">${room} ' + i + '</a></li>';
+                $("#Content").append(str1);
+                $("#Vkladka").append(str2);
+            }
+            document.getElementById('previousAmountOfRooms').value = value;
+        }
+
+        if (value < checker) {
+            var raznica = checker - value;
+            for (var k = 0; k < raznica; k++) {
+                $("li.link").remove(":last-child");
+                $("div.tab-pane").remove(":last-child");
+            }
+            document.getElementById('previousAmountOfRooms').value = value;
+        }
+
+    });
+</script>

@@ -198,6 +198,7 @@
                     <label>
                         ${amountOfRoom}
                     </label>
+                    <input id="previousAmountOfRooms" style="display: none" value="<%=rooms.size()%>"/>
                     <input name="amountOfRooms" id="amountOfRooms" class="form-control"
                            placeholder="${amountOfRoom}" value="<%=rooms.size()%>">
                 </div>
@@ -209,7 +210,7 @@
                 <div class="tabs">
                     <ul class="nav nav-tabs" id="Vkladka">
                         <c:forEach var="i" begin="1" end="<%=rooms.size()%>">
-                            <li><a href="#tab-${i}" data-toggle="tab">${room} ${i}</a></li>
+                            <li class="link"><a href="#tab-${i}" data-toggle="tab">${room} ${i}</a></li>
                         </c:forEach>
                     </ul>
                     <div class="tab-content" id="Content">
@@ -484,3 +485,176 @@
 
 
 </form>
+
+<div id="data" style="display: none">
+    <div class="form-group">
+        <s:message var="position" code="calculate.room.position"/>
+        <s:message var="name" code="calculate.room.name"/>
+        <s:message var="square" code="calculate.room.square"/>
+        <s:message var="height" code="calculate.room.height"/>
+        <s:message var="perimeter" code="calculate.room.perimeter"/>
+        <s:message var="volume" code="calculate.room.volume"/>
+        <s:message var="squareOfWall" code="calculate.room.squareOfWall"/>
+
+        <input name="positionOfRoom" class="form-control" placeholder="${position}"/>
+        <input name="nameOfRoom" class="form-control" placeholder="${name}"/>
+        <input name="squareOfRoom" class="form-control" placeholder="${square}"/>
+        <input name="heightOfRoom" class="form-control" placeholder="${height}"/>
+        <input name="perimeterOfRoom" class="form-control" placeholder="${perimeter}"/>
+        <input name="volumeOfRoom" class="form-control" placeholder="${volume}"/>
+        <input name="squareOfConstruction" class="form-control"
+               placeholder="${squareOfWall}"/>
+    </div>
+    <div class="row">
+        <c:forEach var="k" begin="0" end="1">
+            <div class="col-md-6">
+                <c:forEach var="i" begin="1" end="3">
+                    <div class="form-group">
+                        <label><s:message code="calculate.aperture.aper"/> ${i+k*3}</label>
+                        <div class="parametresOfAperture">
+
+                            <s:message var="aperture" code="calculate.aperture"/>
+                            <s:message var="apertureWidth" code="calculate.aperture.width"/>
+                            <s:message var="apertureHeight"
+                                       code="calculate.aperture.height"/>
+                            <s:message var="apertureAmount"
+                                       code="calculate.aperture.amount"/>
+                            <s:message var="apertureSquare"
+                                       code="calculate.aperture.square"/>
+
+                            <input name="typeOfAperture" class="form-control"
+                                   placeholder="${aperture}"/>
+                            <input name="widthOfAperture" class="form-control"
+                                   placeholder="${apertureWidth}"/>
+                            <input name="heightOfAperture" class="form-control"
+                                   placeholder="${apertureHeight}"/>
+                            <input name="countOfAperture" class="form-control"
+                                   placeholder="${apertureAmount}"/>
+                            <input name="squareOfAperture" class="form-control"
+                                   placeholder="${apertureSquare}"/>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </c:forEach>
+    </div>
+    <div class="form-group">
+        <label><s:message code="calculate.room.coefficient"/></label>
+
+        <s:message var="s1" code="calculate.room.s1"/>
+        <s:message var="s15" code="calculate.room.s1.5"/>
+        <select name="s1" class="selectpicker form-control select-lg">
+            <optgroup label="${s1}"/>
+            <option value="0.59"><s:message code="calculate.room.s1.1"/></option>
+            <option value="0.57"><s:message code="calculate.room.s1.2"/></option>
+            <option value="0.59"><s:message code="calculate.room.s1.3"/></option>
+            <option value="1.0"><s:message code="calculate.room.s1.4"/></option>
+            <optgroup label="${s15}"/>
+            <option value="0.63"><s:message code="calculate.room.s1.6"/></option>
+            <option value="0.61"><s:message code="calculate.room.s1.7"/></option>
+        </select>
+
+        <s:message var="s4" code="calculate.room.s4"/>
+        <select name="s4" class="selectpicker form-control select-lg">
+            <optgroup label="${s4}"/>
+            <option value="1.5"><s:message code="calculate.room.s4.1"/></option>
+            <option value="0.73"><s:message code="calculate.room.s4.2"/></option>
+            <option value="0.87"><s:message code="calculate.room.s4.3"/></option>
+            <!--<option value=""><s:message code="calculate.room.s4.4"/>${s44}</option> -->
+            <option value="1.0"><s:message code="calculate.room.s4.5"/></option>
+        </select>
+
+        <s:message var="s7" code="calculate.room.s7"/>
+        <select name="s7" class="selectpicker form-control select-lg">
+            <optgroup label="${s7}"/>
+            <option value="1"><s:message code="calculate.room.s7.1"/></option>
+            <option value="0.9"><s:message code="calculate.room.s7.2"/></option>
+        </select>
+
+        <s:message var="s8" code="calculate.room.s8"/>
+        <select name="s8" class="selectpicker form-control select-lg">
+            <optgroup label="${s8}"/>
+            <option value="1"><s:message code="calculate.room.s8.1"/></option>
+            <option value="0.9"><s:message code="calculate.room.s8.2"/></option>
+        </select>
+
+        <s:message var="s9" code="calculate.room.s9"/>
+        <select name="s9" class="selectpicker form-control select-lg">
+            <optgroup label="${s9}"/>
+            <option value="1.5"><s:message code="calculate.room.s9.1"/></option>
+            <option value="1.0"><s:message code="calculate.room.s9.2"/></option>
+        </select>
+
+        <s:message var="s10" code="calculate.room.s10"/>
+        <select name="s10" class="selectpicker form-control select-lg">
+            <optgroup label="${s10}"/>
+            <option value="0.9"><s:message code="calculate.room.s10.1"/></option>
+            <option value="1.0"><s:message code="calculate.room.s10.2"/></option>
+        </select>
+    </div>
+    <div class="row">
+        <s:message var="material" code="calculate.material.mat"/>
+        <s:message var="typeOfMaterial" code="calculate.material"/>
+        <s:message var="weightOfMaterial" code="calculate.material.weight"/>
+        <c:forEach var="k" begin="0" end="1">
+            <div class="col-md-6">
+                <c:forEach var="i" begin="1" end="3">
+                    <div class="form-group">
+                        <label>${material} ${i+k*3}</label>
+                        <select name="nameOfSubstance"
+                                class="selectpicker form-control select-lg">
+                            <optgroup label="${typeOfMaterial}"/>
+                            <c:forEach items="${substances}" var="substance">
+                                <option value="${substance.id}">${substance.nameOfSubstance}</option>
+                            </c:forEach>
+                        </select>
+                        <input name="weight" class="form-control"
+                               placeholder="${weightOfMaterial}"/>
+                    </div>
+                </c:forEach>
+            </div>
+        </c:forEach>
+    </div>
+    <s:message var="specificFireLoad" code="calculate.room.specificFireLoad"/>
+    <div class="form-group">
+        <label>${specificFireLoad}</label>
+        <input name="specificFireLoadZVEZDOCHKA" class="form-control"
+               placeholder="${specificFireLoad}"/>
+    </div>
+</div>
+
+<script>
+    var file = document.getElementById('data').innerHTML;
+
+    $('#amountOfRooms').change(function () {
+
+        var checker = parseInt(document.getElementById('previousAmountOfRooms').value);
+        var value = parseInt(document.getElementById('amountOfRooms').value);
+
+        if (value.length > 2)
+            return false;
+
+        if (value > checker) {
+            var str1 = "";
+            var str2 = "";
+
+            for (var i = checker + 1; i < parseInt(value) + 1; i++) {
+                str1 = '<div class="tab-pane fade" id="tab-' + i + '" >' + file + '</div>';
+                str2 = '<li class="link"><a href="#tab-' + i + '" data-toggle="tab">${room} ' + i + '</a></li>';
+                $("#Content").append(str1);
+                $("#Vkladka").append(str2);
+            }
+            document.getElementById('previousAmountOfRooms').value = value;
+        }
+
+        if (value < checker) {
+            var raznica = checker - value;
+            for (var k = 0; k < raznica; k++) {
+                $("li.link").remove(":last-child");
+                $("div.tab-pane").remove(":last-child");
+            }
+            document.getElementById('previousAmountOfRooms').value = value;
+        }
+
+    });
+</script>

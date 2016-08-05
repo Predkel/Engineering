@@ -62,9 +62,6 @@
     <beans profile="heroku">
         <context:property-placeholder location="classpath:/db/heroku.properties" system-properties-mode="OVERRIDE"/>
 
-        <bean class="java.net.URI" id="dbUrl">
-            <constructor-arg value="${database.url}"/>
-        </bean>
         <bean id="dataSource"
               class="org.apache.commons.dbcp2.BasicDataSource"
               p:url="${database.url}"
