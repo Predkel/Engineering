@@ -1,10 +1,10 @@
-package by.pvt.predkel.utils;
+package by.pvt.predkel.utils.rounding;
 
 import by.pvt.predkel.entities.Aperture;
 import by.pvt.predkel.entities.Building;
 import by.pvt.predkel.entities.Room;
 
-import static by.pvt.predkel.utils.Rounding.myRound;
+import static by.pvt.predkel.utils.rounding.Rounding.myRound;
 
 /**
  * Created by Admin on 23.05.2016.
@@ -12,10 +12,10 @@ import static by.pvt.predkel.utils.Rounding.myRound;
 public class RoundBuilding {
     public void roundBuilding(Building building) {
         for (Room temp : building.getRoom()) {
-            for (Aperture aperure : temp.getAperture()) {
-                aperure.setHeight(myRound(aperure.getHeight()));
-                aperure.setWidth(myRound(aperure.getWidth()));
-                aperure.setSquareOfAperture(myRound(aperure.getSquareOfAperture()));
+            for (Aperture aperture : temp.getAperture()) {
+                aperture.setHeight(myRound(aperture.getHeight()));
+                aperture.setWidth(myRound(aperture.getWidth()));
+                aperture.setSquareOfAperture(myRound(aperture.getSquareOfAperture()));
             }
             temp.getCommonParameters().setHeight(myRound(temp.getCommonParameters().getHeight()));
             temp.getCommonParameters().setPerimeter(myRound(temp.getCommonParameters().getPerimeter()));

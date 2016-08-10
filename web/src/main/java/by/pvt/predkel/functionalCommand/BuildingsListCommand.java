@@ -11,8 +11,8 @@ import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Parameters;
 import by.pvt.predkel.parameters.Path;
 import by.pvt.predkel.serviceForDao.IBuildingService;
-import by.pvt.predkel.utils.CreateReport;
-import by.pvt.predkel.utils.Transliterator;
+import by.pvt.predkel.utils.report.CreateReport;
+import by.pvt.predkel.utils.optional.Transliterator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;

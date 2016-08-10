@@ -28,9 +28,11 @@ public class FlammableSubstanceService extends AbstractService<FlammableSubstanc
     }
 
     //save
-//    public void createSubstance(FlammableSubstance substance) throws DaoException {
-//        flammableSubstanceDao.create(substance);
-//    }
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void createSubstance(FlammableSubstance substance) throws DaoException {
+        flammableSubstanceDao.create(substance);
+    }
     //delete
 //    public void deleteSubstance(FlammableSubstance substance) throws DaoException {
 //        flammableSubstanceDao.delete(substance);

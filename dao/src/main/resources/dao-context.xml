@@ -17,7 +17,7 @@
     <!--Translate exceptions to Spring exceptions-->
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
-    <!--<bean id="dataSourceLocal" class="org.apache.commons.dbcp2.BasicDataSource"-->
+    <!--<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"-->
     <!--p:url="jdbc:mysql://localhost/test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8"-->
     <!--p:driverClassName="com.mysql.jdbc.Driver"-->
     <!--p:username="root"-->
@@ -28,6 +28,7 @@
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <!--<property name="configLocation" value="mapping/hibernate.cfg.xml"/>-->
         <property name="mappingResources">
             <list>
                 <value>mapping/User.hbm.xml</value>
@@ -42,7 +43,7 @@
                 <value>mapping/SubstanceOfRoom.hbm.xml</value>
             </list>
         </property>
-        
+
     </bean>
 
     <beans profile="local">
@@ -58,7 +59,6 @@
               p:maxTotal="10"/>
     </beans>
 
-
     <beans profile="heroku">
         <context:property-placeholder location="classpath:/db/heroku.properties" system-properties-mode="OVERRIDE"/>
 
@@ -71,6 +71,5 @@
               p:initialSize="5"
               p:maxTotal="10"/>
     </beans>
-
 
 </beans>

@@ -479,10 +479,10 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `id`       BIGINT(20) NOT NULL,
-  `login`    VARCHAR(255) DEFAULT NULL,
-  `password` VARCHAR(255) DEFAULT NULL,
-  `role`     INT(11)      DEFAULT NULL,
+  `id`              BIGINT(20) NOT NULL,
+  `login`           VARCHAR(255) DEFAULT NULL,
+  `password`        VARCHAR(255) DEFAULT NULL,
+  `accessLevelType` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -496,7 +496,7 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user`
   DISABLE KEYS */;
-INSERT INTO `user` VALUES (1, 'henk', 'guevara333', 1), (2, 'Admin', '8827', 1);
+INSERT INTO `user` VALUES (1, 'henk', 'guevara333', 'SUPER_ADMIN');
 /*!40000 ALTER TABLE `user`
   ENABLE KEYS */;
 UNLOCK TABLES;
@@ -510,4 +510,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES = @OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-17 23:49:00
+-- Dump completed on 2016-08-11  0:30:07

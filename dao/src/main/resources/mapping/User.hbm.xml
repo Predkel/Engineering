@@ -14,6 +14,14 @@
         </bag>
         <property name="login" type="java.lang.String"/>
         <property name="password" type="java.lang.String"/>
-        <property name="role" type="java.lang.Integer"/>
+
+        <property name="accessLevelType">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">by.pvt.predkel.entities.access.AccessLevelType</param>
+                <param name="type">12</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
+
     </class>
 </hibernate-mapping>

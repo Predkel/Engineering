@@ -1,6 +1,7 @@
-package by.pvt.predkel.utils;
+package by.pvt.predkel.utils.report;
 
 import by.pvt.predkel.entities.Building;
+import by.pvt.predkel.utils.optional.Transliterator;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 
 import java.util.List;

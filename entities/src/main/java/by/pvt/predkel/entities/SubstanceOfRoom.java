@@ -1,7 +1,5 @@
 package by.pvt.predkel.entities;
 
-import by.pvt.predkel.factory.MyEntityObjectFactory;
-
 /**
  * <p>Java class for SubstanceOfRoom complex type.
  * <p>
@@ -44,7 +42,7 @@ public class SubstanceOfRoom extends Entity {
      */
     public FlammableSubstance getFlammableSubstance() {
         if (flammableSubstance == null)
-            this.flammableSubstance = new MyEntityObjectFactory().createFlammableSubstance();
+            this.flammableSubstance = new FlammableSubstance();
         return flammableSubstance;
     }
 

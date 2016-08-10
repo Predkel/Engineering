@@ -1,4 +1,4 @@
-package by.pvt.predkel.utils;
+package by.pvt.predkel.utils.report;
 
 import org.docx4j.dml.wordprocessingDrawing.Inline;
 import org.docx4j.jaxb.Context;

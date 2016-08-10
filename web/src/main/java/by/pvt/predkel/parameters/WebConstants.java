@@ -1,10 +1,5 @@
 package by.pvt.predkel.parameters;
 
-/**
- * Created by: khudnitsky
- * Date: 03.03.2016
- * Time: 10:14
- */
 public class WebConstants {
     public static final String ANONYMOUS_USER = "anonymousUser";
     public static final String USER_NOT_FOUND = "User not found";

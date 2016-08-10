@@ -9,6 +9,8 @@ import java.util.List;
  * Created by Admin on 02.07.2016.
  */
 public interface IFlammableSubstanceService extends IService<FlammableSubstance> {
+    public void createSubstance(FlammableSubstance substance) throws DaoException;
+
     Long getCountOfSubstances() throws DaoException;
 
     List<FlammableSubstance> getSubstancesForPage(int page, int maxResult) throws DaoException;

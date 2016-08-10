@@ -1,7 +1,8 @@
-package by.pvt.predkel.utils;
+package by.pvt.predkel.utils.report;
 
 import by.pvt.predkel.entities.Building;
 import by.pvt.predkel.entities.Room;
+import by.pvt.predkel.utils.rounding.RoundBuilding;
 import org.docx4j.jaxb.Context;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;

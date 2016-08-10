@@ -1,4 +1,4 @@
-package by.pvt.predkel.entities.temperatureSettings;
+package by.pvt.predkel.entities.settings;
 
 import by.pvt.predkel.entities.Entity;
 
@@ -7,13 +7,12 @@ import java.util.List;
 
 
 /**
- * <p>Java class for ChangeInTemperatureOfWalls complex type.
+ * <p>Java class for ChangeInMeanBulkTemperature complex type.
  * <p>
  * <p>The following schema fragment specifies the expected content contained within this class.
  */
 
-public class ChangeInTemperatureOfWalls extends Entity {
-
+public class ChangeInMeanBulkTemperature extends Entity {
     private static final long serialVersionUID = 1L;
 
     private List<Double> changes;
@@ -21,10 +20,10 @@ public class ChangeInTemperatureOfWalls extends Entity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ChangeInTemperatureOfWalls)) return false;
+        if (!(o instanceof ChangeInMeanBulkTemperature)) return false;
         if (!super.equals(o)) return false;
 
-        ChangeInTemperatureOfWalls that = (ChangeInTemperatureOfWalls) o;
+        ChangeInMeanBulkTemperature that = (ChangeInMeanBulkTemperature) o;
 
         return getChanges().equals(that.getChanges());
 

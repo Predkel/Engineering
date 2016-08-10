@@ -1,4 +1,4 @@
-package by.pvt.predkel.utils;
+package by.pvt.predkel.utils.rounding;
 
 import java.math.BigDecimal;
 

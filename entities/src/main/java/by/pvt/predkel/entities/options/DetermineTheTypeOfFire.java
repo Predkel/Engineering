@@ -1,4 +1,4 @@
-package by.pvt.predkel.entities.methodologicalOptions;
+package by.pvt.predkel.entities.options;
 
 
 import by.pvt.predkel.entities.Entity;

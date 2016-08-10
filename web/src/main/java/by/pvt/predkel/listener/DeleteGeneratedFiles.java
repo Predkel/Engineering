@@ -3,7 +3,7 @@ package by.pvt.predkel.listener;
 import by.pvt.predkel.entities.User;
 import by.pvt.predkel.logger.MyLogger;
 import by.pvt.predkel.parameters.Attributes;
-import by.pvt.predkel.utils.DeleteFiles;
+import by.pvt.predkel.utils.optional.DeleteFiles;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
@@ -28,7 +28,7 @@ public class DeleteGeneratedFiles implements HttpSessionListener {
             User user = (User) session.getAttribute(Attributes.USER);
             DeleteFiles.deleteDir(new File((session.getServletContext().getRealPath("/") + "jsp/reports/" + user.getLogin() + "/")));
         } catch (NullPointerException e) {
-            MyLogger.INSTANCE.logError(getClass(), e.getMessage() + " Папка не была создана");
+            MyLogger.INSTANCE.logError(getClass(), e.getMessage() + " Package did not created");
         }
 
     }

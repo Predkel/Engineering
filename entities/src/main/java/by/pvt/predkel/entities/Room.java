@@ -1,11 +1,10 @@
 package by.pvt.predkel.entities;
 
 
-import by.pvt.predkel.entities.methodologicalOptions.CommonParameters;
-import by.pvt.predkel.entities.methodologicalOptions.DetermineTheTypeOfFire;
-import by.pvt.predkel.entities.methodologicalOptions.IntegratedThermalAndTechnicalParameters;
-import by.pvt.predkel.entities.methodologicalOptions.ParametersCalculatedFireLoad;
-import by.pvt.predkel.factory.MyEntityObjectFactory;
+import by.pvt.predkel.entities.options.CommonParameters;
+import by.pvt.predkel.entities.options.DetermineTheTypeOfFire;
+import by.pvt.predkel.entities.options.IntegratedThermalAndTechnicalParameters;
+import by.pvt.predkel.entities.options.ParametersCalculatedFireLoad;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +36,6 @@ public class Room extends Entity {
     private List<Double> changeInTemperatureOfWalls;
 
     private List<Double> changeInTemperatureOfSlab;
-
-    private MyEntityObjectFactory factory = new MyEntityObjectFactory();
-
 
     @Override
     public boolean equals(Object o) {
@@ -87,7 +83,7 @@ public class Room extends Entity {
      */
     public CommonParameters getCommonParameters() {
         if (commonParameters == null)
-            this.commonParameters = factory.createCommonParameters();
+            this.commonParameters = new CommonParameters();
         return commonParameters;
     }
 
@@ -162,7 +158,7 @@ public class Room extends Entity {
      */
     public ParametersCalculatedFireLoad getParametersCalculatedFireLoad() {
         if (parametersCalculatedFireLoad == null)
-            this.parametersCalculatedFireLoad = factory.createParametersCalculatedFireLoad();
+            this.parametersCalculatedFireLoad = new ParametersCalculatedFireLoad();
         return parametersCalculatedFireLoad;
     }
 
@@ -215,7 +211,7 @@ public class Room extends Entity {
      */
     public DetermineTheTypeOfFire getDetermineTheTypeOfFire() {
         if (determineTheTypeOfFire == null)
-            this.determineTheTypeOfFire = factory.createDetermineTheTypeOfFire();
+            this.determineTheTypeOfFire = new DetermineTheTypeOfFire();
         return determineTheTypeOfFire;
     }
 
@@ -237,7 +233,7 @@ public class Room extends Entity {
      */
     public IntegratedThermalAndTechnicalParameters getIntegratedThermalAndTechnicalParameters() {
         if (integratedThermalAndTechnicalParameters == null)
-            this.integratedThermalAndTechnicalParameters = factory.createIntegratedThermalAndTechnicalParameters();
+            this.integratedThermalAndTechnicalParameters = new IntegratedThermalAndTechnicalParameters();
         return integratedThermalAndTechnicalParameters;
     }
 

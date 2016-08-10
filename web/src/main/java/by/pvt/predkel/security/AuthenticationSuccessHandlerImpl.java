@@ -49,6 +49,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
     protected String determineTargetUrl(Authentication authentication) {
         boolean isClient = false;
         boolean isAdmin = false;
+        boolean isSuperAdmin = false;
         String pagePath;
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
@@ -59,10 +60,13 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
             } else if (grantedAuthority.getAuthority().equals(WebConstants.ROLE_ADMIN)) {
                 isAdmin = true;
                 break;
+            } else if (grantedAuthority.getAuthority().equals(WebConstants.ROLE_SUPER_ADMIN)) {
+                isSuperAdmin = true;
+                break;
             }
-
         }
-        if (isClient || isAdmin) {
+
+        if (isClient || isAdmin || isSuperAdmin) {
             pagePath = "/" + Path.FUNCTIONS_PATH;
         } else {
             pagePath = /*"/" + */Path.INDEX_PATH;

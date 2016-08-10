@@ -5,7 +5,6 @@ import by.pvt.predkel.calculateParameters.AllDefinition;
 import by.pvt.predkel.command.AbstractCommand;
 import by.pvt.predkel.entities.*;
 import by.pvt.predkel.exceptions.ServiceException;
-import by.pvt.predkel.factory.MyEntityObjectFactory;
 import by.pvt.predkel.logger.MyLogger;
 import by.pvt.predkel.navigateCommand.GoToCalculate;
 import by.pvt.predkel.parameters.Attributes;
@@ -13,8 +12,8 @@ import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Parameters;
 import by.pvt.predkel.parameters.Path;
 import by.pvt.predkel.serviceForDao.IFlammableSubstanceService;
-import by.pvt.predkel.utils.CreateReport;
-import by.pvt.predkel.utils.Transliterator;
+import by.pvt.predkel.utils.optional.Transliterator;
+import by.pvt.predkel.utils.report.CreateReport;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -26,7 +25,6 @@ public class CalculateCommand extends AbstractCommand {
 
     public String execute(HttpServletRequest request, IFlammableSubstanceService flammableSubstanceService, User user) {
         GoToCalculate go = new GoToCalculate();
-        MyEntityObjectFactory factory = new MyEntityObjectFactory();
 
         if ((request.getParameter(Parameters.AMOUNT_OF_ROOMS)).isEmpty()
                 || (Integer.parseInt(request.getParameter(Parameters.AMOUNT_OF_ROOMS)) == 0)) {
@@ -38,7 +36,7 @@ public class CalculateCommand extends AbstractCommand {
         Integer amountOfApertures = 6;
         Integer amountOfSubstances = 6;
 
-        Building build = factory.createBuilding();
+        Building build = new Building();
         Integer currentAmountOfApertures = 0;
         Integer currentAmountOfSubstances = 0;
 
@@ -54,7 +52,7 @@ public class CalculateCommand extends AbstractCommand {
             build.setSpecifyingCoefficientS5(Double.parseDouble(request.getParameter(Parameters.BUILDING_SPECIFYING_COEFFICIENT_C5)));
 
             for (int i = 0; i < amountOfRooms; i++) {
-                Room room = factory.createRoom();
+                Room room = new Room();
                 if (request.getParameterValues(Parameters.POSITION_OF_ROOM)[i].isEmpty())
                     continue;
                 room.getCommonParameters().setPositionOfRoom(request.getParameterValues(Parameters.POSITION_OF_ROOM)[i]);
@@ -75,7 +73,7 @@ public class CalculateCommand extends AbstractCommand {
 
 
                 for (int j = 0; j < amountOfApertures; j++) {
-                    Aperture aperture = factory.createAperture();
+                    Aperture aperture = new Aperture();
                     if (request.getParameterValues(Parameters.TYPE_OF_APERTURE)[currentAmountOfApertures].isEmpty()) {
                         currentAmountOfApertures++;
                         continue;
@@ -116,7 +114,7 @@ public class CalculateCommand extends AbstractCommand {
                         return go.execute(request, flammableSubstanceService);//Path.CALCULATE_PATH;
                     }
 
-                    SubstanceOfRoom subOfRoom = factory.createSubstanceOfRoom();
+                    SubstanceOfRoom subOfRoom = new SubstanceOfRoom();
                     subOfRoom.setFlammableSubstance(substance);
 //                    subOfRoom.setSubstanceId(substance.getId());
                     subOfRoom.setWeight(Double.parseDouble(request.getParameterValues(Parameters.WEIGHT_OF_SUBSTANCE)[currentAmountOfSubstances]));

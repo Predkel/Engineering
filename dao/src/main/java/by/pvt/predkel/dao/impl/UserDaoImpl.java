@@ -4,7 +4,6 @@ import by.pvt.predkel.dao.DaoGeneral;
 import by.pvt.predkel.dao.IUserDao;
 import by.pvt.predkel.entities.User;
 import by.pvt.predkel.exceptions.DaoException;
-import by.pvt.predkel.factory.MyEntityObjectFactory;
 import by.pvt.predkel.settings.ColumnName;
 import by.pvt.predkel.utils.Logger;
 import org.hibernate.Criteria;
@@ -14,13 +13,10 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-/**
- * Created by Admin on 29.05.2016.
- */
 @Repository
 public class UserDaoImpl extends DaoGeneral<User> implements IUserDao {
     private String message;
-    private User user = new MyEntityObjectFactory().createUser();
+    private User user = new User();
 
     @Autowired
     public UserDaoImpl(SessionFactory sessionFactory) {

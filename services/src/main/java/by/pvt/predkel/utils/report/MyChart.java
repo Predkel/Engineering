@@ -1,7 +1,8 @@
-package by.pvt.predkel.utils;
+package by.pvt.predkel.utils.report;
 
 import by.pvt.predkel.entities.Building;
 import by.pvt.predkel.entities.Room;
+import by.pvt.predkel.utils.optional.Transliterator;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartRenderingInfo;

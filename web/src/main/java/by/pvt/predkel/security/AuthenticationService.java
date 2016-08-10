@@ -38,10 +38,8 @@ public class AuthenticationService implements UserDetailsService {
 
     private List<GrantedAuthority> getGrantedAuthorities(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if (user.getRole() == 1)
-            authorities.add(new SimpleGrantedAuthority(WebConstants.ROLE_ADMIN));
-        else
-            authorities.add(new SimpleGrantedAuthority(WebConstants.ROLE_USER));
+
+        authorities.add(new SimpleGrantedAuthority(WebConstants.ROLE_PREFIX + user.getAccessLevelType().toString()));
 
 //        for (AccessLevel access : user.getAccessLevels()) {
 //            authorities.add(new SimpleGrantedAuthority(WebConstants.ROLE_PREFIX + access.getAccessLevelType().toString()));

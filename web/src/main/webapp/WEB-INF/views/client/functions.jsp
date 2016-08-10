@@ -38,18 +38,7 @@
             </div>
         </div>
 
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <div class="item">
-                <div class="thumbnail">
-                    <a href="${pageContext.request.contextPath}/admin/registration"><img
-                            src="${pageContext.request.contextPath}/asserts/images/register.png" alt=""/></a>
-                    <div class="caption">
-                        <h3><a href="${pageContext.request.contextPath}/admin/registration"><s:message
-                                code="functions.register"/></a></h3>
-                        <p><s:message code="functions.register.discription"/></p>
-                    </div>
-                </div>
-            </div>
+        <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER_ADMIN')">
             <div class="item">
                 <div class="thumbnail">
                     <a href="${pageContext.request.contextPath}/admin/materials"><img
@@ -58,6 +47,19 @@
                         <h3><a href="${pageContext.request.contextPath}/admin/materials"><s:message
                                 code="functions.substances"/></a></h3>
                         <p><s:message code="functions.substances.discription"/></p>
+                    </div>
+                </div>
+            </div>
+        </sec:authorize>
+        <sec:authorize access="hasRole('ROLE_SUPER_ADMIN')">
+            <div class="item">
+                <div class="thumbnail">
+                    <a href="${pageContext.request.contextPath}/moder/registration"><img
+                            src="${pageContext.request.contextPath}/asserts/images/register.png" alt=""/></a>
+                    <div class="caption">
+                        <h3><a href="${pageContext.request.contextPath}/moder/registration"><s:message
+                                code="functions.register"/></a></h3>
+                        <p><s:message code="functions.register.discription"/></p>
                     </div>
                 </div>
             </div>

@@ -12,8 +12,9 @@
 
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/home" access="permitAll"/>
-        <intercept-url pattern="/client/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/client/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN')"/>
+        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER_ADMIN')"/>
+        <intercept-url pattern="/moder/**" access="hasRole('ROLE_SUPER_ADMIN')"/>
 
         <form-login login-page="/home"
                     username-parameter="login"

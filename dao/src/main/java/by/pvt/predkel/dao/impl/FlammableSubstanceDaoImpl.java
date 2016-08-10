@@ -3,7 +3,6 @@ package by.pvt.predkel.dao.impl;
 import by.pvt.predkel.dao.DaoGeneral;
 import by.pvt.predkel.dao.IFlammableSubstanceDao;
 import by.pvt.predkel.entities.FlammableSubstance;
-import by.pvt.predkel.factory.MyEntityObjectFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class FlammableSubstanceDaoImpl extends DaoGeneral<FlammableSubstance> implements IFlammableSubstanceDao {
-    private FlammableSubstance substance = new MyEntityObjectFactory().createFlammableSubstance();
+    private FlammableSubstance substance = new FlammableSubstance();
 
     @Autowired
     public FlammableSubstanceDaoImpl(SessionFactory sessionFactory) {

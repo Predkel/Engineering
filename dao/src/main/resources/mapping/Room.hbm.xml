@@ -25,16 +25,16 @@
         </bag>
 
         <many-to-one name="commonParameters" column="commonParameters"
-                     class="by.pvt.predkel.entities.methodologicalOptions.CommonParameters"
+                     class="by.pvt.predkel.entities.options.CommonParameters"
                      not-null="true" cascade="all" lazy="false"/>
         <many-to-one name="determineTheTypeOfFire" column="determineTheTypeOfFire"
-                     class="by.pvt.predkel.entities.methodologicalOptions.DetermineTheTypeOfFire"
+                     class="by.pvt.predkel.entities.options.DetermineTheTypeOfFire"
                      not-null="true" cascade="all" lazy="false"/>
         <many-to-one name="integratedThermalAndTechnicalParameters" column="integratedThermalAndTechnicalParameters"
-                     class="by.pvt.predkel.entities.methodologicalOptions.IntegratedThermalAndTechnicalParameters"
+                     class="by.pvt.predkel.entities.options.IntegratedThermalAndTechnicalParameters"
                      not-null="true" cascade="all" lazy="false"/>
         <many-to-one name="parametersCalculatedFireLoad" column="parametersCalculatedFireLoad"
-                     class="by.pvt.predkel.entities.methodologicalOptions.ParametersCalculatedFireLoad"
+                     class="by.pvt.predkel.entities.options.ParametersCalculatedFireLoad"
                      not-null="true" cascade="all" lazy="false"/>
 
         <list name="changeInMeanBulkTemperature" table="changeInMeanBulkTemperature" cascade="all" lazy="false">

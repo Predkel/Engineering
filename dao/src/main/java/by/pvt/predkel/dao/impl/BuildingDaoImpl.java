@@ -5,7 +5,6 @@ import by.pvt.predkel.dao.IBuildingDao;
 import by.pvt.predkel.entities.Building;
 import by.pvt.predkel.entities.User;
 import by.pvt.predkel.exceptions.DaoException;
-import by.pvt.predkel.factory.MyEntityObjectFactory;
 import by.pvt.predkel.settings.ColumnName;
 import by.pvt.predkel.utils.Logger;
 import org.hibernate.Criteria;
@@ -24,7 +23,7 @@ import java.util.List;
 @Repository
 public class BuildingDaoImpl extends DaoGeneral<Building> implements IBuildingDao {
     private String message;
-    private Building building = new MyEntityObjectFactory().createBuilding();
+    private Building building = new Building();
 
     @Autowired
     public BuildingDaoImpl(SessionFactory sessionFactory) {

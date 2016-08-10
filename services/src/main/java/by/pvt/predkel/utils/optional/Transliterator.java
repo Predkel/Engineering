@@ -1,4 +1,4 @@
-package by.pvt.predkel.utils;
+package by.pvt.predkel.utils.optional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class Transliterator {
 
-    private static final Map<Character, String> charMap = new HashMap<Character, String>();
+    private static final Map<Character, String> charMap = new HashMap<>();
 
     static {
         charMap.put('А', "A");

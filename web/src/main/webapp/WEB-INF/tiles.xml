@@ -24,7 +24,7 @@
     <!-- ADMIN PAGES -->
     <definition name="admin/registration" extends="default">
         <put-attribute name="title" value="registration"/>
-        <put-attribute name="body" value="/WEB-INF/views/admin/registration.jspx"/>
+        <put-attribute name="body" value="/WEB-INF/views/moder/registration.jspx"/>
     </definition>
 
     <definition name="admin/materials" extends="default">
