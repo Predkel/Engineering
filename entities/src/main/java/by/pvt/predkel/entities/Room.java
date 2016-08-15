@@ -255,7 +255,7 @@ public class Room extends Entity {
      */
     public List<Double> getChangeInMeanBulkTemperature() {
         if (changeInMeanBulkTemperature == null) {
-            changeInMeanBulkTemperature = new ArrayList<Double>();
+            changeInMeanBulkTemperature = new ArrayList<>(121);
         }
         return this.changeInMeanBulkTemperature;
     }
@@ -268,7 +268,7 @@ public class Room extends Entity {
      */
     public List<Double> getChangeInTemperatureOfWalls() {
         if (changeInTemperatureOfWalls == null)
-            this.changeInTemperatureOfWalls = new ArrayList<Double>();
+            this.changeInTemperatureOfWalls = new ArrayList<>(121);
         return changeInTemperatureOfWalls;
     }
 
@@ -280,7 +280,7 @@ public class Room extends Entity {
      */
     public List<Double> getChangeInTemperatureOfSlab() {
         if (changeInTemperatureOfSlab == null)
-            this.changeInTemperatureOfSlab = new ArrayList<Double>();
+            this.changeInTemperatureOfSlab = new ArrayList<>(121);
         return changeInTemperatureOfSlab;
     }
 
