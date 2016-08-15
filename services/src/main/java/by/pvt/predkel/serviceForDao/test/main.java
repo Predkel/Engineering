@@ -3,8 +3,6 @@ package by.pvt.predkel.serviceForDao.test;
 import by.pvt.predkel.exceptions.DaoException;
 import by.pvt.predkel.exceptions.ServiceException;
 
-import java.util.ArrayList;
-
 /**
  * Created by Admin on 14.06.2016.
  */
@@ -182,70 +180,7 @@ public class main {
 ////        Building building=buildingService.getById((long)1);
 ////        String name=building.getNameOfBuilding();
 ////        System.out.print(name);
-//        1
-//        Integer a=new Integer(2);
-//        Integer b = new Integer(2);
-//
-//        System.out.println(a.intValue()==b.intValue());
-//        System.out.println(a.compareTo(b));
-//        System.out.println(a.equals(b));
-//        System.out.println(a==b);
-
-        //3
-//        Building b1=new Building();
-//        Building b2=new Warehouse();
-//
-//        try {
-//            Warehouse w1=b2;Warehouse w3 = new SportShop();
-//        }catch (ClassCastException e){
-//            System.out.print("no");
-//        }
-//
-//        Warehouse w2=(Warehouse) b2;
-//
-//        Shop s1=(Shop) b1;
-//        Shop s2=new SportShop();
-
-        //4
-//        Building building=new Building();
-//        int v=2;
-//        building.shift(v,5);
-//        System.out.print(v);
-
-        //5
-//        Set product=new HashSet<>();
-//        product.add(new SportShop("Hat",3));
-//        product.add(new SportShop("Hat",3));
-//        System.out.println(product);
-//
-//         6
-//        List list= new ArrayList<>();
-//        list.add("i1");
-//        list.add("i2");
-//
-//        final List im= list;
-//        im.add("1");
-
-        //7
-        Building building = new Building();
 
 
-        ArrayList product = new ArrayList<>();
-        product.add("1");
-        product.add("3");
-        product.add("5");
-        product.add("7");
-        product.add("9");
-
-        ArrayList product1 = new ArrayList<>();
-        product1.add("2");
-        product1.add("4");
-        product1.add("6");
-        product1.add("8");
-        product1.add("10");
-
-        building.merge(product, product1);
-
-        System.out.println(product);
     }
 }
