@@ -63,6 +63,11 @@
     <jsp:text/>
 </script>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/asserts/js/json.js">
+    <
+    jsp:text / >
+</script>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/asserts/js/calculate_down.js">
     <jsp:text/>
 </script>

@@ -121,9 +121,9 @@
                     <label>
                         ${amountOfRoom}
                     </label>
-                    <input id="previousAmountOfRooms" style="display: none" value="0"/>
+                    <input id="previousAmountOfRooms" style="display: none" value="1"/>
                     <input name="amountOfRooms" id="amountOfRooms" class="form-control" type="number"
-                           placeholder="${amountOfRoom}"/>
+                           value="1" placeholder="${amountOfRoom}"/>
                 </div>
             </div>
         </div>
@@ -132,12 +132,12 @@
             <div class="col-md-12">
                 <div class="tabs">
                     <ul class="nav nav-tabs" id="Vkladka">
-                        <!--<li><a href="#tab-1" data-toggle="tab">Вкладка 1</a></li>-->
+                        <li><a href="#tab-1" data-toggle="tab">${room} 1</a></li>
                         <!--<li><a href="#tab-2" data-toggle="tab">Вкладка 2</a></li>-->
                     </ul>
                     <div class="tab-content" id="Content">
 
-                        <div id="data" style="display: none">
+                        <div class="tab-pane fade" id="tab-1">
                             <div class="form-group">
                                 <s:message var="position" code="calculate.room.position"/>
                                 <s:message var="name" code="calculate.room.name"/>
@@ -296,15 +296,16 @@
 
 </form>
 <script>
-    var file = document.getElementById('data').innerHTML;
-
+    var file = document.getElementById('tab-1').innerHTML;
     $('#amountOfRooms').change(function () {
 
         var checker = parseInt(document.getElementById('previousAmountOfRooms').value);
         var value = parseInt(document.getElementById('amountOfRooms').value);
 
-        if (value.length > 2)
+        if (value < 1 || value > 99) {
+            document.getElementById('amountOfRooms').value = checker;
             return false;
+        }
 
         if (value > checker) {
             var str1 = "";
