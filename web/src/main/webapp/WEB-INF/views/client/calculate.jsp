@@ -302,7 +302,10 @@
         var checker = parseInt(document.getElementById('previousAmountOfRooms').value);
         var value = parseInt(document.getElementById('amountOfRooms').value);
 
-        if (value < 1 || value > 99) {
+        if (value < 1 ||
+                value > 99 ||
+                isNaN(value)    //if input is empty
+        ) {
             document.getElementById('amountOfRooms').value = checker;
             return false;
         }
