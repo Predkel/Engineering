@@ -1,10 +1,10 @@
 package by.pvt.predkel.controllers;
 
 import by.pvt.predkel.entities.User;
-import by.pvt.predkel.functionalCommand.BuildingsListCommand;
-import by.pvt.predkel.functionalCommand.CalculateCommand;
-import by.pvt.predkel.functionalCommand.SaveReportCommand;
-import by.pvt.predkel.navigateCommand.*;
+import by.pvt.predkel.commands.functional.BuildingsListCommand;
+import by.pvt.predkel.commands.functional.CalculateCommand;
+import by.pvt.predkel.commands.functional.SaveReportCommand;
+import by.pvt.predkel.commands.navigate.*;
 import by.pvt.predkel.security.PrincipalUtil;
 import by.pvt.predkel.serviceForDao.IBuildingService;
 import by.pvt.predkel.serviceForDao.IFlammableSubstanceService;

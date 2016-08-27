@@ -1,7 +1,7 @@
 package by.pvt.predkel.controllers;
 
-import by.pvt.predkel.functionalCommand.ChangeLocale;
-import by.pvt.predkel.navigateCommand.SetPaginationSize;
+import by.pvt.predkel.commands.functional.ChangeLocale;
+import by.pvt.predkel.commands.navigate.SetPaginationSize;
 import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Path;

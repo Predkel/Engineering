@@ -1,6 +1,6 @@
-package by.pvt.predkel.navigateCommand;
+package by.pvt.predkel.commands.navigate;
 
-import by.pvt.predkel.command.AbstractCommand;
+import by.pvt.predkel.commands.AbstractCommand;
 import by.pvt.predkel.entities.Building;
 import by.pvt.predkel.entities.User;
 import by.pvt.predkel.exceptions.DaoException;

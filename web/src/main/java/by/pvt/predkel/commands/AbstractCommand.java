@@ -1,4 +1,4 @@
-package by.pvt.predkel.command;
+package by.pvt.predkel.commands;
 
 /**
  *

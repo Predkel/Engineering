@@ -1,6 +1,6 @@
-package by.pvt.predkel.navigateCommand;
+package by.pvt.predkel.commands.navigate;
 
-import by.pvt.predkel.command.AbstractCommand;
+import by.pvt.predkel.commands.AbstractCommand;
 import by.pvt.predkel.entities.FlammableSubstance;
 import by.pvt.predkel.exceptions.DaoException;
 import by.pvt.predkel.logger.MyLogger;

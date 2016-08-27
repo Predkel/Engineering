@@ -1,7 +1,7 @@
 package by.pvt.predkel.controllers;
 
-import by.pvt.predkel.functionalCommand.RegistrationUserCommand;
-import by.pvt.predkel.navigateCommand.GoToRegister;
+import by.pvt.predkel.commands.functional.RegistrationUserCommand;
+import by.pvt.predkel.commands.navigate.GoToRegister;
 import by.pvt.predkel.serviceForDao.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

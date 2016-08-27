@@ -1,6 +1,6 @@
-package by.pvt.predkel.functionalCommand;
+package by.pvt.predkel.commands.functional;
 
-import by.pvt.predkel.command.AbstractCommand;
+import by.pvt.predkel.commands.AbstractCommand;
 import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Path;
 

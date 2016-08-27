@@ -1,12 +1,12 @@
-package by.pvt.predkel.functionalCommand;
+package by.pvt.predkel.commands.functional;
 
 
 import by.pvt.predkel.calculateParameters.AllDefinition;
-import by.pvt.predkel.command.AbstractCommand;
+import by.pvt.predkel.commands.AbstractCommand;
 import by.pvt.predkel.entities.*;
 import by.pvt.predkel.exceptions.ServiceException;
 import by.pvt.predkel.logger.MyLogger;
-import by.pvt.predkel.navigateCommand.GoToCalculate;
+import by.pvt.predkel.commands.navigate.GoToCalculate;
 import by.pvt.predkel.parameters.Attributes;
 import by.pvt.predkel.parameters.Errors;
 import by.pvt.predkel.parameters.Parameters;
