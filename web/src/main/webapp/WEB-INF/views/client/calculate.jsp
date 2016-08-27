@@ -112,7 +112,7 @@
                     <label>
                         ${coefficient5}
                     </label>
-                    <input name="specifyingCoefficientS5" class="form-control" type="number"
+                    <input name="specifyingCoefficientS5" class="form-control float" type="number"
                            placeholder="${coefficient5}" value="1"/>
                 </div>
 
@@ -122,7 +122,7 @@
                         ${amountOfRoom}
                     </label>
                     <input id="previousAmountOfRooms" style="display: none" value="1"/>
-                    <input name="amountOfRooms" id="amountOfRooms" class="form-control" type="number"
+                    <input name="amountOfRooms" id="amountOfRooms" class="form-control num" type="number"
                            value="1" placeholder="${amountOfRoom}"/>
                 </div>
             </div>
@@ -149,11 +149,11 @@
 
                                 <input name="positionOfRoom" class="form-control" placeholder="${position}"/>
                                 <input name="nameOfRoom" class="form-control" placeholder="${name}"/>
-                                <input name="squareOfRoom" class="form-control" placeholder="${square}"/>
-                                <input name="heightOfRoom" class="form-control" placeholder="${height}"/>
-                                <input name="perimeterOfRoom" class="form-control" placeholder="${perimeter}"/>
-                                <input name="volumeOfRoom" class="form-control" placeholder="${volume}"/>
-                                <input name="squareOfConstruction" class="form-control"
+                                <input name="squareOfRoom" class="form-control float" placeholder="${square}"/>
+                                <input name="heightOfRoom" class="form-control float" placeholder="${height}"/>
+                                <input name="perimeterOfRoom" class="form-control float" placeholder="${perimeter}"/>
+                                <input name="volumeOfRoom" class="form-control float" placeholder="${volume}"/>
+                                <input name="squareOfConstruction" class="form-control float"
                                        placeholder="${squareOfWall}"/>
                             </div>
                             <div class="row">
@@ -162,7 +162,7 @@
                                         <c:forEach var="i" begin="1" end="3">
                                             <div class="form-group">
                                                 <label><s:message code="calculate.aperture.aper"/> ${i+k*3}</label>
-                                                <div class="parametresOfAperture">
+                                                <div class="parametersOfAperture">
 
                                                     <s:message var="aperture" code="calculate.aperture"/>
                                                     <s:message var="apertureWidth" code="calculate.aperture.width"/>
@@ -175,13 +175,13 @@
 
                                                     <input name="typeOfAperture" class="form-control"
                                                            placeholder="${aperture}"/>
-                                                    <input name="widthOfAperture" class="form-control"
+                                                    <input name="widthOfAperture" class="form-control float"
                                                            placeholder="${apertureWidth}"/>
-                                                    <input name="heightOfAperture" class="form-control"
+                                                    <input name="heightOfAperture" class="form-control float"
                                                            placeholder="${apertureHeight}"/>
-                                                    <input name="countOfAperture" class="form-control"
+                                                    <input name="countOfAperture" class="form-control num"
                                                            placeholder="${apertureAmount}"/>
-                                                    <input name="squareOfAperture" class="form-control"
+                                                    <input name="squareOfAperture" class="form-control float"
                                                            placeholder="${apertureSquare}"/>
                                                 </div>
                                             </div>
@@ -211,7 +211,7 @@
                                     <option value="1.5"><s:message code="calculate.room.s4.1"/></option>
                                     <option value="0.73"><s:message code="calculate.room.s4.2"/></option>
                                     <option value="0.87"><s:message code="calculate.room.s4.3"/></option>
-                                    <!--<option value=""><s:message code="calculate.room.s4.4"/>${s44}</option> -->
+                                    <!--<option value=""><s:message code="calculate.room.s4.4"/></option> -->
                                     <option value="1.0"><s:message code="calculate.room.s4.5"/></option>
                                 </select>
 
@@ -252,14 +252,14 @@
                                         <c:forEach var="i" begin="1" end="3">
                                             <div class="form-group">
                                                 <label>${material} ${i+k*3}</label>
-                                                <select name="nameOfSubstance"
+                                                <select name="idOfSubstance"
                                                         class="selectpicker form-control select-lg">
                                                     <optgroup label="${typeOfMaterial}"/>
                                                     <c:forEach items="${substances}" var="substance">
                                                         <option value="${substance.id}">${substance.nameOfSubstance}</option>
                                                     </c:forEach>
                                                 </select>
-                                                <input name="weight" class="form-control"
+                                                <input name="weight" class="form-control float"
                                                        placeholder="${weightOfMaterial}"/>
                                             </div>
                                         </c:forEach>
@@ -269,7 +269,7 @@
                             <s:message var="specificFireLoad" code="calculate.room.specificFireLoad"/>
                             <div class="form-group">
                                 <label>${specificFireLoad}</label>
-                                <input name="specificFireLoadZVEZDOCHKA" class="form-control"
+                                <input name="specificFireLoadZVEZDOCHKA" class="form-control float"
                                        placeholder="${specificFireLoad}"/>
                             </div>
                         </div>
@@ -283,7 +283,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <s:message var="send" code="calculate.send"/>
-                    <input class="btn btn-primary btn-block" value="${send}" type="submit"/>
+                    <input class="btn btn-primary btn-block" value="${send}" type="submit" onclick="calculateValid()"/>
                 </div>
             </div>
         </div>

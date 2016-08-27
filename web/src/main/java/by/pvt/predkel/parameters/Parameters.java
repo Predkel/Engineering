@@ -17,8 +17,8 @@ public class Parameters {
     public static final String AMOUNT_OF_SUBSTANCES = "amountOfSubstances";
     public static final String PAGINATION_SIZE = "paginationSize";
     public static final String PAGE = "page";
-    public static final String ID_SUBSTANCE = "idSubstance";
-    public static final String NAME_OF_SUBSTANCE = "nameOfSubstance";
+    public static final String ID_SUBSTANCE = "idSubstance";//in list of substances
+    public static final String NAME_OF_SUBSTANCE = "idOfSubstance";//in calculate
     public static final String AMOUNT_OF_COMBUSTION_AIR = "amountOfCombustionAir";
     public static final String COMBUSTION_HEAT = "combustionHeat";
     public static final String AVERAGE_SPEED_BURNOUT = "averageSpeedBurnout";
