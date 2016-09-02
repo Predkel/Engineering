@@ -131,12 +131,16 @@ function calculateValid() {
 
         var zvezdochka = parseFloat(document.getElementsByName('specificFireLoadZVEZDOCHKA')[i].value);
 
+        var sub = document.getElementsByName('weight')[currentAmountOfSubstances - 6];
+        var star = document.getElementsByName('specificFireLoadZVEZDOCHKA')[i];
+        resetError(star.parentNode);
+        resetError(star.parentNode.parentNode);
         if (isNaN(zvezdochka) && substances.length == 0) {
             //mark only the first substance in room and specificFireLoad
-            var sub = document.getElementsByName('weight')[currentAmountOfSubstances - 6];
-            var star = document.getElementsByName('specificFireLoadZVEZDOCHKA')[i];
             elements = [sub, star];
             checkFloatInput(elements);
+            showError(star.parentNode, "Необходимо ввести либо один материал, либо удельную пожарную нагрузку");
+            showError(star.parentNode.parentNode, "* Все выделенные поля должны быть заполнены");
         }
 
         if (isNaN(zvezdochka))
@@ -193,44 +197,79 @@ function calculateValid() {
     //     }
     // });
 }
+function validateSubstance() {
+
+    checker = true;
+    var amountOfSubstances = parseInt(document.getElementsByName('amountOfSubstances')[0].value);
+
+    for (var i = 0; i < amountOfSubstances; i++) {
+        var id = document.getElementsByName('idSubstance');
+        var name = document.getElementsByName('nameOfSubstance');
+        var amountOfCombustionAir = document.getElementsByName('amountOfCombustionAir');
+        var combustionHeat = document.getElementsByName('combustionHeat');
+        var averageSpeedBurnout = document.getElementsByName('averageSpeedBurnout');
+        if (id.value = "") {
+            if (name.value != "" || !isNaN(amountOfCombustionAir.value) || !isNaN(combustionHeat.value) || !isNaN(averageSpeedBurnout.value)) {
+                checkStringInput([name]);
+                checkFloatInput([amountOfCombustionAir, combustionHeat, averageSpeedBurnout])
+            }
+        } else {
+            checkStringInput([name]);
+            checkFloatInput([amountOfCombustionAir, combustionHeat, averageSpeedBurnout])
+        }
+    }
+    if (!checker) {
+        return false;
+    }
+}
 function checkStringInput(arr) {
     arr.forEach(function (element, i, arr) {
-        if (element.value == "") {
-            element.style.background = "red";
+        var elemVal = element.value.replace(/^\s+/, "").replace(/\s+$/, "");//delete spaces before and after text
+        if (elemVal == "") {
+            element.style.background = "pink";
             if (checker) {
                 checker = false;
                 event.preventDefault();
                 scrollToElement(element);
             }
-        } else returnElementStyle(element);
+        } else {
+            returnElementStyle(element);
+            resetError(element.parentNode);
+        }
     });
 }
 function checkFloatInput(arr) {
     arr.forEach(function (element, i, arr) {
         if (isNaN(parseFloat(element.value)) || element.value == 0) {
-            element.style.background = "red";
+            element.style.background = "pink";
             if (checker) {
                 checker = false;
                 event.preventDefault();
                 scrollToElement(element);
             }
-        } else returnElementStyle(element);
+        } else {
+            returnElementStyle(element);
+            resetError(element.parentNode);
+        }
     });
 }
 function checkIntInput(arr) {
     arr.forEach(function (element, i, arr) {
         if (isNaN(parseInt(element.value)) || element.value == 0) {
-            element.style.background = "red";
+            element.style.background = "pink";
             if (checker) {
                 checker = false;
                 event.preventDefault();
                 scrollToElement(element);
             }
-        } else returnElementStyle(element);
+        } else {
+            returnElementStyle(element);
+            resetError(element.parentNode);
+        }
     });
 }
 function returnElementStyle(element) {
-    if (element.style.background == "red")
+    if (element.style.background == "pink")
         element.style.background = "#fff";
 }
 function scrollToElement(element) {
@@ -242,6 +281,5 @@ function scrollToElement(element) {
         selectedPosY += element.offsetTop;
         element = element.offsetParent;
     }
-
     window.scrollTo(selectedPosX, selectedPosY - 100);
 }

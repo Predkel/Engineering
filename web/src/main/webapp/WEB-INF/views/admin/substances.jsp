@@ -160,8 +160,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit"
-                    <%--onclick="validateSubstance(this.form)" --%>
+                    <input type="submit" onclick="validateSubstance()"
                            class="btn btn-block btn-primary"
                            value="${send}">
                 </div>

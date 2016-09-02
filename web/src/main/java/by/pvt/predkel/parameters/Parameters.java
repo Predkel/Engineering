@@ -12,6 +12,7 @@ public class Parameters {
     ///////user\\\\\\
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
+    public static final String PASSWORD2 = "password2";
     public static final String ROLE = "role";
     /////flammable substances\\\\\\
     public static final String AMOUNT_OF_SUBSTANCES = "amountOfSubstances";

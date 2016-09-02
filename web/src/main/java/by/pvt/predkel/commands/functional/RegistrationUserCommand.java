@@ -20,9 +20,12 @@ public class RegistrationUserCommand extends AbstractCommand {
         User user = new User();
 
         if (request.getParameter(Parameters.LOGIN).isEmpty() ||
-                request.getParameter(Parameters.PASSWORD).isEmpty()) {
+                request.getParameter(Parameters.PASSWORD).isEmpty() ||
+                request.getParameter(Parameters.PASSWORD2).isEmpty()) {
             request.setAttribute(Attributes.ERROR, Errors.USER_EMPTY_ERROR);
             return Path.REGISTRATION_PATH;
+        } else if (!request.getParameter(Parameters.PASSWORD).equals(request.getParameter(Parameters.PASSWORD2))) {
+            request.setAttribute(Attributes.ERROR, Errors.INCORRECT_PASSWORD);
         } else {
             user.setLogin(request.getParameter(Parameters.LOGIN));
             user.setPassword(request.getParameter(Parameters.PASSWORD));

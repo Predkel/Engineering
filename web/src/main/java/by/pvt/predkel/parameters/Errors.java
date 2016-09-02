@@ -10,6 +10,7 @@ public class Errors {
     public static final String SUBSTANCES_ERROR = "Пустые все поля горючих материалов и удельной пожарной нагрузки (что-то дожно быть заполнено)";
     public static final String USER_EMPTY_ERROR = "Поля не могуг быть пустыми";
     public static final String USER_INCORRECT_ERROR = "Неправильные логин или пароль";
+    public static final String INCORRECT_PASSWORD = "Пароли не совпадают";
     public static final String USER_NOT_EMPTY_LOGIN_ERROR = "Данный логин уже занят";
     public static final String CALCULATE_EMPTY_ERROR = "Минимум одно из ключевых полей пустое";
     public static final String CALCULATE_INCORRECT_ERROR = "Минимум одно из ключевых полей введено некоректно";

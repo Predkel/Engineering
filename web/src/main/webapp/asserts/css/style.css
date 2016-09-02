@@ -29,3 +29,7 @@
 .modal-dialog {
     margin-top: 50%;
 }
+
+.ermessage {
+    color: red;
+}

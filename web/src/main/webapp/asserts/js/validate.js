@@ -1,12 +1,12 @@
 function resetError(block) {
-    block.className = '';
+    // block.className = '';
     if (block.lastChild.className == "ermessage") {
         block.removeChild(block.lastChild);
     }
 }
 
 function showError(block, errorMessage) {
-    block.className = 'form-group';
+    // block.className = 'form-group';
     var errorSpan = document.createElement('span');
     errorSpan.className = "ermessage";
     errorSpan.innerHTML = errorMessage;
@@ -21,50 +21,34 @@ function validateUser(form) {
     var elementsForm = form.elements;
     var checker = true;
     resetError(elementsForm.login.parentNode);
-    if ((trim(elementsForm.login.value)).length == 0) {
-        if ((trim(elementsForm.login.value)).length != (elementsForm.login.value).length) {
-            alert(' Логин не может состоять только из пробелов! ');
-            elementsForm.login.value = "";
-            checker = false;
-        }
-        showError(elementsForm.login.parentNode, ' Укажите логин');
+    if (elementsForm.login.value.length == 0) {
+        showError(elementsForm.login.parentNode, 'Укажите логин');
         checker = false;
     }
-    resetError(elementsForm.password.parentNode);
-    if ((trim(elementsForm.password.value)).length == 0) {
-        if ((trim(elementsForm.password.value)).length != (elementsForm.login.value).length) {
-            alert(' Пароль не может состоять только из пробелов! ');
-            elementsForm.password.value = "";
-            checker = false;
-        }
-        showError(elementsForm.password.parentNode, ' Укажите пароль');
+    if ((trim(elementsForm.login.value)).length == 0 && elementsForm.login.value.length > 0) {
+        showError(elementsForm.login.parentNode, 'Логин не может состоять только из пробелов!');
+        elementsForm.login.value = "";
         checker = false;
     }
-    if (!checker)
-        event.preventDefault()
-}
-function validateSubstance(form) {
-    var elementsForm = form.elements;
-    var checker = true;
-    var air = elementsForm.amountOfCombustionAir.value;
-    var heat = elementsForm.combustionHeat.value;
-    var speed = elementsForm.averageSpeedBurnout.value;
 
-    resetError(elementsForm.amountOfCombustionAir.parentNode);
-    if (/\D/.test(air)) {
-        showError(elementsForm.amountOfCombustionAir.parentNode, ' Нельзя использовать строковые значения');
+    resetError(elementsForm.password.parentNode);
+    if (elementsForm.password.value.length == 0) {
+        showError(elementsForm.password.parentNode, 'Укажите логин');
         checker = false;
     }
-    resetError(elementsForm.combustionHeat.parentNode);
-    if (/\D/.test(heat)) {
-        showError(elementsForm.combustionHeat.parentNode, ' Нельзя использовать строковые значения');
+    if ((trim(elementsForm.password.value)).length == 0 && elementsForm.password.value.length > 0) {
+        showError(elementsForm.password.parentNode, 'Логин не может состоять только из пробелов!');
+        elementsForm.password.value = "";
         checker = false;
     }
-    resetError(elementsForm.averageSpeedBurnout.parentNode);
-    if (/\D/.test(speed)) {
-        showError(elementsForm.averageSpeedBurnout.parentNode, ' Нельзя использовать строковые значения');
+
+    resetError(elementsForm.password2.parentNode);
+    if (elementsForm.password2.value != elementsForm.password.value) {
+        showError(elementsForm.password2.parentNode, 'Пароли не совпадают');
+        elementsForm.password2.value = "";
         checker = false;
     }
+
     if (!checker)
         event.preventDefault()
 }
