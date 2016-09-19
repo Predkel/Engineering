@@ -27,8 +27,8 @@ public class GoToCalculate extends AbstractCommand {
         }
 
         request.setAttribute(Attributes.ALL_SUBSTANCES, substances);
-        Object str = request.getAttribute("building");
-        String str1 = request.getParameter("building");
+//        Object str = request.getAttribute("building");
+//        String str1 = request.getParameter("building");
         return Path.CALCULATE_PATH;
     }
 }

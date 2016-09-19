@@ -32,6 +32,11 @@ public class CalculateCommand extends AbstractCommand {
             return go.execute(request, flammableSubstanceService);
         }
 
+        if (request.getParameter(Parameters.NAME_OF_BUILDING).isEmpty()) {
+            request.setAttribute(Attributes.ERROR, Errors.CALCULATE_EMPTY_ERROR);
+            return go.execute(request, flammableSubstanceService);
+        }
+
         Integer amountOfRooms = Integer.parseInt(request.getParameter(Parameters.AMOUNT_OF_ROOMS));
         Integer amountOfApertures = 6;
         Integer amountOfSubstances = 6;
@@ -53,7 +58,8 @@ public class CalculateCommand extends AbstractCommand {
 
             for (int i = 0; i < amountOfRooms; i++) {
                 Room room = new Room();
-                if (request.getParameterValues(Parameters.POSITION_OF_ROOM)[i].isEmpty())
+                if (request.getParameterValues(Parameters.POSITION_OF_ROOM)[i].isEmpty() ||
+                        request.getParameterValues(Parameters.NAME_OF_ROOM)[i].isEmpty())
                     continue;
                 room.getCommonParameters().setPositionOfRoom(request.getParameterValues(Parameters.POSITION_OF_ROOM)[i]);
                 room.getCommonParameters().setNameOfRoom(request.getParameterValues(Parameters.NAME_OF_ROOM)[i]);
@@ -141,6 +147,11 @@ public class CalculateCommand extends AbstractCommand {
         } catch (IllegalArgumentException e2) {
             MyLogger.INSTANCE.logError(getClass(), e2.getMessage());
             request.setAttribute(Attributes.ERROR, Errors.CALCULATE_INCORRECT_ERROR);
+            return go.execute(request, flammableSubstanceService);//Path.CALCULATE_PATH;
+        }
+
+        if (build.getRoom().size() == 0) {
+            request.setAttribute(Attributes.ERROR, Errors.CALCULATE_NULL_ROOMS);
             return go.execute(request, flammableSubstanceService);//Path.CALCULATE_PATH;
         }
 

@@ -13,6 +13,7 @@ public class Errors {
     public static final String INCORRECT_PASSWORD = "Пароли не совпадают";
     public static final String USER_NOT_EMPTY_LOGIN_ERROR = "Данный логин уже занят";
     public static final String CALCULATE_EMPTY_ERROR = "Минимум одно из ключевых полей пустое";
+    public static final String CALCULATE_NULL_ROOMS = "Необходимо заполнение минимум одного помещения";
     public static final String CALCULATE_INCORRECT_ERROR = "Минимум одно из ключевых полей введено некоректно";
     public static final String ROOM_AMOUNT_ERROR = "Должно быть минимум одно помещение";
 }
