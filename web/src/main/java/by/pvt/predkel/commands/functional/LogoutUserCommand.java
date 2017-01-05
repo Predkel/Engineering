@@ -7,9 +7,6 @@ import by.pvt.predkel.parameters.Path;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- */
 public class LogoutUserCommand extends AbstractCommand {
 
     public String execute(HttpServletRequest request, HttpServletResponse response) {

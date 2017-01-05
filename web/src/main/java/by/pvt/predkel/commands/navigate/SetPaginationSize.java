@@ -7,9 +7,6 @@ import by.pvt.predkel.serviceForDao.IFlammableSubstanceService;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- */
 public class SetPaginationSize extends AbstractCommand {
 
     public String execute(HttpServletRequest request, IFlammableSubstanceService flammableSubstanceService) {

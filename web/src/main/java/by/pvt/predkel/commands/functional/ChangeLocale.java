@@ -7,9 +7,6 @@ import by.pvt.predkel.parameters.Path;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Admin on 05.06.2016.
- */
 public class ChangeLocale extends AbstractCommand {
 
     public String execute(HttpServletRequest request) {

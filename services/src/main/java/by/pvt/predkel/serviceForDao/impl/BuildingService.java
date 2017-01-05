@@ -13,9 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-/**
- * Created by Admin on 14.05.2016.
- */
 @Service
 @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = DaoException.class)
 public class BuildingService extends AbstractService<Building> implements IBuildingService {

@@ -1,8 +1,5 @@
 package by.pvt.predkel.parameters;
 
-/**
- * Created by Admin on 03.06.2016.
- */
 public class Attributes {
     public static final String ANONYMOUS_USER = "anonymousUser";
 

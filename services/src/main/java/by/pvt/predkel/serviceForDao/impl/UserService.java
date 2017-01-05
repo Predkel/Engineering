@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by Admin on 13.05.2016.
- */
 @Service
 @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = DaoException.class)
 public class UserService extends AbstractService<User> implements IUserService {

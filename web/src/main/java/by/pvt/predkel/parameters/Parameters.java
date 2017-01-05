@@ -1,8 +1,5 @@
 package by.pvt.predkel.parameters;
 
-/**
- * Created by Admin on 07.05.2016.
- */
 public class Parameters {
 
     public static final String LANGUAGE = "language";

@@ -7,9 +7,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-/**
- * Created by Admin on 02.06.2016.
- */
 @Repository
 public class FlammableSubstanceDaoImpl extends DaoGeneral<FlammableSubstance> implements IFlammableSubstanceDao {
     private FlammableSubstance substance = new FlammableSubstance();

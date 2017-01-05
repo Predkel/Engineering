@@ -17,9 +17,6 @@ import by.pvt.predkel.utils.optional.Transliterator;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 
-/**
- *
- */
 public class BuildingsListCommand extends AbstractCommand {
 
     public String execute(HttpServletRequest request, IBuildingService buildingService, User user) {

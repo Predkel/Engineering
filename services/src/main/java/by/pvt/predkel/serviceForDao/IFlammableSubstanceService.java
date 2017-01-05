@@ -5,9 +5,6 @@ import by.pvt.predkel.exceptions.DaoException;
 
 import java.util.List;
 
-/**
- * Created by Admin on 02.07.2016.
- */
 public interface IFlammableSubstanceService extends IService<FlammableSubstance> {
     public void createSubstance(FlammableSubstance substance) throws DaoException;
 

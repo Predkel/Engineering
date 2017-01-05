@@ -13,9 +13,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Admin on 29.05.2016.
- */
 public abstract class DaoGeneral<T extends Entity> implements DaoI<T> {
     private String message;
     private T entity;

@@ -7,17 +7,15 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface DaoI<T extends Entity> {
-    //READ чтение отдельной сущности
+
     T getById(long id) throws DaoException;
 
-    //CREATE,UPDATE,DELETE обновление сущности
     Serializable create(T entity) throws DaoException;
 
     void update(T entity) throws DaoException;
 
     void delete(T entity) throws DaoException;
 
-    //READ - чтение всех элементов по условию
     List<T> getAll() throws DaoException;
 
     Long getCountOfRows() throws DaoException;

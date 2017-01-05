@@ -6,9 +6,6 @@ import by.pvt.predkel.parameters.Parameters;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- */
 public enum CommandFactory {
     INSTANCE;
 

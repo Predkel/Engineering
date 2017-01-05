@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс для создания таблиц и записи их в отчёт
+ * Class to create tables and import them in docx-file
  */
 public class TableWithMergedCells {
     private WordprocessingMLPackage wordMLPackage;

@@ -5,9 +5,6 @@ import by.pvt.predkel.commands.Command;
 import by.pvt.predkel.commands.functional.*;
 import by.pvt.predkel.commands.navigate.*;
 
-/**
- *
- */
 public enum CommandType {
     //functional commands
     LOGIN, LOGOUT, REGISTRATION, CALCULATE, SUBSTANCES, BUILDINGS, SAVEREPORT,

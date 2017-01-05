@@ -18,9 +18,6 @@ import by.pvt.predkel.utils.report.CreateReport;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 
-/**
- *
- */
 public class CalculateCommand extends AbstractCommand {
 
     public String execute(HttpServletRequest request, IFlammableSubstanceService flammableSubstanceService, User user) {

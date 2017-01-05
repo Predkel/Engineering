@@ -12,9 +12,6 @@ import by.pvt.predkel.serviceForDao.IFlammableSubstanceService;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- */
 public class SubstancesListCommand extends AbstractCommand {
 
     public String execute(HttpServletRequest request, IFlammableSubstanceService flammableSubstanceService) {

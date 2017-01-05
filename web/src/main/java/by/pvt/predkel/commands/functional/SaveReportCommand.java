@@ -11,9 +11,6 @@ import by.pvt.predkel.serviceForDao.IBuildingService;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by Admin on 02.06.2016.
- */
 public class SaveReportCommand extends AbstractCommand {
 
     public String execute(HttpServletRequest request, IBuildingService buildingService) {

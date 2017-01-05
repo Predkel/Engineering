@@ -16,14 +16,11 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- */
 public class GoToListOfSubstances extends AbstractCommand {
 
     public String execute(HttpServletRequest request, IFlammableSubstanceService flammableSubstanceService) {
         Integer page;
-        try {//тут схитрил маленько
+        try {
             page = Integer.valueOf(request.getParameter(Parameters.PAGE));//если заходим в первый раз
         } catch (NumberFormatException e) {// то выкинет null и попадем на первую
             page = 1;//а если просто переходим на след. страницу

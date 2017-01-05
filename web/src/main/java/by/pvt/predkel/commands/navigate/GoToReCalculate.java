@@ -12,9 +12,6 @@ import by.pvt.predkel.serviceForDao.IFlammableSubstanceService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- * Created by Admin on 04.06.2016.
- */
 public class GoToReCalculate extends AbstractCommand {
 
     public String execute(HttpServletRequest request, IFlammableSubstanceService flammableSubstanceService) {

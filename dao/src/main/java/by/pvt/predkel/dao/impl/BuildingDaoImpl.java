@@ -17,9 +17,6 @@ import org.springframework.stereotype.Repository;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Admin on 29.05.2016.
- */
 @Repository
 public class BuildingDaoImpl extends DaoGeneral<Building> implements IBuildingDao {
     private String message;

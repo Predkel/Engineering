@@ -6,9 +6,6 @@ import by.pvt.predkel.exceptions.DaoException;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Admin on 02.07.2016.
- */
 public interface IBuildingDao extends DaoI<Building> {
     @Override
     void delete(Building building) throws DaoException;

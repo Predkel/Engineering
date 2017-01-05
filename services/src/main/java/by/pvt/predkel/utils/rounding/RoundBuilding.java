@@ -6,9 +6,6 @@ import by.pvt.predkel.entities.Room;
 
 import static by.pvt.predkel.utils.rounding.Rounding.myRound;
 
-/**
- * Created by Admin on 23.05.2016.
- */
 public class RoundBuilding {
     public void roundBuilding(Building building) {
         for (Room temp : building.getRoom()) {

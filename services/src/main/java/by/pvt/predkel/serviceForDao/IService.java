@@ -5,9 +5,6 @@ import by.pvt.predkel.exceptions.ServiceException;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Admin on 02.07.2016.
- */
 public interface IService<T> {
     void delete(T entity) throws ServiceException;
 

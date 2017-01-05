@@ -12,9 +12,6 @@ import by.pvt.predkel.serviceForDao.IFlammableSubstanceService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- *
- */
 public class GoToCalculate extends AbstractCommand {
 
     public String execute(HttpServletRequest request, IFlammableSubstanceService flammableSubstanceService) {
@@ -27,8 +24,6 @@ public class GoToCalculate extends AbstractCommand {
         }
 
         request.setAttribute(Attributes.ALL_SUBSTANCES, substances);
-//        Object str = request.getAttribute("building");
-//        String str1 = request.getParameter("building");
         return Path.CALCULATE_PATH;
     }
 }

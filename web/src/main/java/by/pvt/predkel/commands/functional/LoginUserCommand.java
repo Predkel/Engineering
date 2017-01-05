@@ -12,9 +12,6 @@ import by.pvt.predkel.serviceForDao.IUserService;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- */
 public class LoginUserCommand extends AbstractCommand {
 
     public String execute(HttpServletRequest request, IUserService userService) {
